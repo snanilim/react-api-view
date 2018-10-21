@@ -6133,7 +6133,7 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_universal_cookie__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_universal_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_universal_cookie__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_router_dom__ = __webpack_require__(7);
-var _jsxFileName = '/home/nilim/Documents/programmer/node-react-boilerplate/app/Auth/authAction.js';
+var _jsxFileName = '/home/nilim/Documents/programmer/react-api-view/app/Auth/authAction.js';
 
 
 
@@ -7142,9 +7142,9 @@ module.exports = defaults;
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = facebookLogin;
-/* harmony export (immutable) */ __webpack_exports__["c"] = googleLogin;
-/* harmony export (immutable) */ __webpack_exports__["d"] = link;
-/* harmony export (immutable) */ __webpack_exports__["f"] = unlink;
+/* harmony export (immutable) */ __webpack_exports__["b"] = googleLogin;
+/* harmony export (immutable) */ __webpack_exports__["c"] = link;
+/* harmony export (immutable) */ __webpack_exports__["d"] = unlink;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_url__ = __webpack_require__(297);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_url___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_url__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_querystring__ = __webpack_require__(191);
@@ -7427,7 +7427,7 @@ function closePopup(_ref6) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(7);
-var _jsxFileName = '/home/nilim/Documents/programmer/node-react-boilerplate/app/Others/Messages.js';
+var _jsxFileName = '/home/nilim/Documents/programmer/react-api-view/app/Others/Messages.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -9895,7 +9895,7 @@ module.exports = isArguments;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_css__ = __webpack_require__(264);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__home_css__);
-var _jsxFileName = "/home/nilim/Documents/programmer/node-react-boilerplate/app/Home/Home.js";
+var _jsxFileName = "/home/nilim/Documents/programmer/react-api-view/app/Home/Home.js";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -22106,7 +22106,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store_configureStore__ = __webpack_require__(250);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__App__ = __webpack_require__(262);
-var _jsxFileName = "/home/nilim/Documents/programmer/node-react-boilerplate/app/shared/main.js";
+var _jsxFileName = "/home/nilim/Documents/programmer/react-api-view/app/shared/main.js";
 
 
 
@@ -44435,7 +44435,7 @@ function auth() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__app_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Header_Header__ = __webpack_require__(307);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Others_Footer__ = __webpack_require__(309);
-var _jsxFileName = "/home/nilim/Documents/programmer/node-react-boilerplate/app/shared/App.js";
+var _jsxFileName = "/home/nilim/Documents/programmer/react-api-view/app/shared/App.js";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -44518,17 +44518,31 @@ var App = function (_Component) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Home_Home__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Auth_components_Login__ = __webpack_require__(266);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Auth_components_Signup__ = __webpack_require__(304);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Auth_components_Account__ = __webpack_require__(305);
+
+
 
 
 var routes = [{
-  path: "/",
+  path: "/login",
   exact: true,
-  component: __WEBPACK_IMPORTED_MODULE_0__Home_Home__["a" /* default */],
+  component: __WEBPACK_IMPORTED_MODULE_0__Auth_components_Login__["a" /* default */],
+  isAuthenticated: false
+}, {
+  path: "/signup",
+  exact: true,
+  component: __WEBPACK_IMPORTED_MODULE_1__Auth_components_Signup__["a" /* default */],
+  isAuthenticated: false
+}, {
+  path: "/account",
+  exact: true,
+  component: __WEBPACK_IMPORTED_MODULE_2__Auth_components_Account__["a" /* default */],
   isAuthenticated: true
 }];
 
-/* unused harmony default export */ var _unused_webpack_default_export = (routes);
+/* harmony default export */ __webpack_exports__["a"] = (routes);
 
 /***/ }),
 /* 264 */
@@ -44545,11 +44559,9 @@ var routes = [{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Home_Home__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Auth_components_Login__ = __webpack_require__(266);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Auth_components_Signup__ = __webpack_require__(304);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Auth_components_Account__ = __webpack_require__(305);
-var _jsxFileName = "/home/nilim/Documents/programmer/node-react-boilerplate/app/newRoutes.js";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__routes__ = __webpack_require__(263);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Home_Home__ = __webpack_require__(62);
+var _jsxFileName = "/home/nilim/Documents/programmer/react-api-view/app/newRoutes.js";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -44560,8 +44572,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
 
 
 
@@ -44604,7 +44614,7 @@ var NewRoutes = function (_Component) {
             return _this2.isAuthenticated() ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Component, Object.assign({}, props, {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 32
+                lineNumber: 27
               },
               __self: _this2
             })) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["d" /* Redirect */], { to: {
@@ -44612,13 +44622,13 @@ var NewRoutes = function (_Component) {
                 state: { from: props.location }
               }, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 34
+                lineNumber: 29
               },
               __self: _this2
             });
           }, __source: {
             fileName: _jsxFileName,
-            lineNumber: 30
+            lineNumber: 25
           },
           __self: _this2
         }));
@@ -44634,57 +44644,65 @@ var NewRoutes = function (_Component) {
                 state: { from: props.location }
               }, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 45
+                lineNumber: 40
               },
               __self: _this2
             }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Component, Object.assign({}, props, {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 51
+                lineNumber: 46
               },
               __self: _this2
             }));
           }, __source: {
             fileName: _jsxFileName,
-            lineNumber: 43
+            lineNumber: 38
           },
           __self: _this2
         }));
       };
+
+      // const AppRoute = ()
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["f" /* Switch */],
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 57
+            lineNumber: 54
           },
           __self: this
         },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["e" /* Route */], { exact: true, path: "/", component: __WEBPACK_IMPORTED_MODULE_3__Home_Home__["a" /* default */], __source: {
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["e" /* Route */], { exact: true, path: "/", component: __WEBPACK_IMPORTED_MODULE_4__Home_Home__["a" /* default */], __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 55
           },
           __self: this
         }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SkipRoute, { path: "/login", component: __WEBPACK_IMPORTED_MODULE_4__Auth_components_Login__["a" /* default */], __source: {
-            fileName: _jsxFileName,
-            lineNumber: 59
-          },
-          __self: this
+        __WEBPACK_IMPORTED_MODULE_3__routes__["a" /* default */].map(function (route, index) {
+          return route.isAuthenticated ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(PrivateRoute, {
+            key: index,
+            path: route.path,
+            exact: route.exact,
+            component: route.component,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 58
+            },
+            __self: _this2
+          }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SkipRoute, {
+            key: index,
+            path: route.path,
+            exact: route.exact,
+            component: route.component,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 65
+            },
+            __self: _this2
+          });
         }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SkipRoute, { path: "/signup", component: __WEBPACK_IMPORTED_MODULE_5__Auth_components_Signup__["a" /* default */], __source: {
-            fileName: _jsxFileName,
-            lineNumber: 60
-          },
-          __self: this
-        }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(PrivateRoute, { path: "/account", component: __WEBPACK_IMPORTED_MODULE_6__Auth_components_Account__["a" /* default */], __source: {
-            fileName: _jsxFileName,
-            lineNumber: 61
-          },
-          __self: this
-        })
+        console.log('asd')
       );
     }
   }]);
@@ -44716,7 +44734,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Others_Messages__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__auth_css__ = __webpack_require__(303);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__auth_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__auth_css__);
-var _jsxFileName = '/home/nilim/Documents/programmer/node-react-boilerplate/app/Auth/components/Login.js';
+var _jsxFileName = '/home/nilim/Documents/programmer/react-api-view/app/Auth/components/Login.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -44766,24 +44784,9 @@ var Login = function (_React$Component) {
       this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["a" /* facebookLogin */])(this.props));
     }
   }, {
-    key: 'handleTwitter',
-    value: function handleTwitter() {
-      this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["twitterLogin"])());
-    }
-  }, {
     key: 'handleGoogle',
     value: function handleGoogle() {
-      this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["c" /* googleLogin */])(this.props));
-    }
-  }, {
-    key: 'handleVk',
-    value: function handleVk() {
-      this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["vkLogin"])());
-    }
-  }, {
-    key: 'handleGithub',
-    value: function handleGithub() {
-      this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["githubLogin"])());
+      this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["b" /* googleLogin */])(this.props));
     }
   }, {
     key: 'render',
@@ -44792,7 +44795,7 @@ var Login = function (_React$Component) {
         'div',
         { className: 'login-container container', __source: {
             fileName: _jsxFileName,
-            lineNumber: 47
+            lineNumber: 35
           },
           __self: this
         },
@@ -44800,7 +44803,7 @@ var Login = function (_React$Component) {
           'div',
           { className: 'card', style: { padding: '30px' }, __source: {
               fileName: _jsxFileName,
-              lineNumber: 48
+              lineNumber: 36
             },
             __self: this
           },
@@ -44808,13 +44811,13 @@ var Login = function (_React$Component) {
             'div',
             { className: 'card-body', __source: {
                 fileName: _jsxFileName,
-                lineNumber: 49
+                lineNumber: 37
               },
               __self: this
             },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Others_Messages__["a" /* default */], { messages: this.props.messages, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 50
+                lineNumber: 38
               },
               __self: this
             }),
@@ -44822,7 +44825,7 @@ var Login = function (_React$Component) {
               'form',
               { onSubmit: this.handleLogin.bind(this), __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 51
+                  lineNumber: 39
                 },
                 __self: this
               },
@@ -44830,7 +44833,7 @@ var Login = function (_React$Component) {
                 'p',
                 { className: 'h2 text-center', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 52
+                    lineNumber: 40
                   },
                   __self: this
                 },
@@ -44840,13 +44843,13 @@ var Login = function (_React$Component) {
                 'div',
                 { className: 'form-group', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 53
+                    lineNumber: 41
                   },
                   __self: this
                 },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'email', name: 'email', id: 'email', placeholder: 'Email', autoFocus: true, className: 'form-control form-control-lg', value: this.state.email, onChange: this.handleChange.bind(this), __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 54
+                    lineNumber: 42
                   },
                   __self: this
                 })
@@ -44855,13 +44858,13 @@ var Login = function (_React$Component) {
                 'div',
                 { className: 'form-group', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 56
+                    lineNumber: 44
                   },
                   __self: this
                 },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'password', name: 'password', id: 'password', placeholder: 'Password', className: 'form-control form-control-lg', value: this.state.password, onChange: this.handleChange.bind(this), __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 57
+                    lineNumber: 45
                   },
                   __self: this
                 })
@@ -44870,7 +44873,7 @@ var Login = function (_React$Component) {
                 'button',
                 { type: 'submit', className: 'btn btn-success btn-block btn-lg', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 60
+                    lineNumber: 48
                   },
                   __self: this
                 },
@@ -44880,7 +44883,7 @@ var Login = function (_React$Component) {
                 'div',
                 { className: 'form-group text-center', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 62
+                    lineNumber: 50
                   },
                   __self: this
                 },
@@ -44888,7 +44891,7 @@ var Login = function (_React$Component) {
                   __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
                   { to: '/forgot', __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 62
+                      lineNumber: 50
                     },
                     __self: this
                   },
@@ -44897,7 +44900,7 @@ var Login = function (_React$Component) {
                     {
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 62
+                        lineNumber: 50
                       },
                       __self: this
                     },
@@ -44910,7 +44913,7 @@ var Login = function (_React$Component) {
               'div',
               { className: 'hr-title text-center', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 64
+                  lineNumber: 52
                 },
                 __self: this
               },
@@ -44919,7 +44922,7 @@ var Login = function (_React$Component) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 64
+                    lineNumber: 52
                   },
                   __self: this
                 },
@@ -44930,7 +44933,7 @@ var Login = function (_React$Component) {
               'div',
               { style: { width: '376px', margin: '0 auto' }, className: 'btn-group btn-toolbar text-center', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 65
+                  lineNumber: 53
                 },
                 __self: this
               },
@@ -44938,7 +44941,7 @@ var Login = function (_React$Component) {
                 'button',
                 { onClick: this.handleFacebook.bind(this), className: 'btn btn-facebook', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 66
+                    lineNumber: 54
                   },
                   __self: this
                 },
@@ -44948,7 +44951,7 @@ var Login = function (_React$Component) {
                 'button',
                 { onClick: this.handleGoogle.bind(this), className: 'btn btn-google', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 67
+                    lineNumber: 55
                   },
                   __self: this
                 },
@@ -44961,7 +44964,7 @@ var Login = function (_React$Component) {
           'p',
           { className: 'text-center mastfoot', __source: {
               fileName: _jsxFileName,
-              lineNumber: 71
+              lineNumber: 59
             },
             __self: this
           },
@@ -44970,7 +44973,7 @@ var Login = function (_React$Component) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 72
+                lineNumber: 60
               },
               __self: this
             },
@@ -44981,7 +44984,7 @@ var Login = function (_React$Component) {
             __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
             { to: '/signup', __source: {
                 fileName: _jsxFileName,
-                lineNumber: 72
+                lineNumber: 60
               },
               __self: this
             },
@@ -48571,7 +48574,7 @@ var objectKeys = Object.keys || function (obj) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__authAction__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__oauthAction__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Others_Messages__ = __webpack_require__(34);
-var _jsxFileName = '/home/nilim/Documents/programmer/node-react-boilerplate/app/Auth/components/Signup.js';
+var _jsxFileName = '/home/nilim/Documents/programmer/react-api-view/app/Auth/components/Signup.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -48619,24 +48622,9 @@ var Signup = function (_React$Component) {
       this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["a" /* facebookLogin */])(this.props));
     }
   }, {
-    key: 'handleTwitter',
-    value: function handleTwitter() {
-      this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["twitterLogin"])());
-    }
-  }, {
     key: 'handleGoogle',
     value: function handleGoogle() {
-      this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["c" /* googleLogin */])(this.props));
-    }
-  }, {
-    key: 'handleVk',
-    value: function handleVk() {
-      this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["vkLogin"])());
-    }
-  }, {
-    key: 'handleGithub',
-    value: function handleGithub() {
-      this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["githubLogin"])());
+      this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["b" /* googleLogin */])(this.props));
     }
   }, {
     key: 'render',
@@ -48645,7 +48633,7 @@ var Signup = function (_React$Component) {
         'div',
         { className: 'login-container container', __source: {
             fileName: _jsxFileName,
-            lineNumber: 45
+            lineNumber: 33
           },
           __self: this
         },
@@ -48653,7 +48641,7 @@ var Signup = function (_React$Component) {
           'div',
           { className: 'card', style: { padding: '30px' }, __source: {
               fileName: _jsxFileName,
-              lineNumber: 46
+              lineNumber: 34
             },
             __self: this
           },
@@ -48661,13 +48649,13 @@ var Signup = function (_React$Component) {
             'div',
             { className: 'card-body', __source: {
                 fileName: _jsxFileName,
-                lineNumber: 47
+                lineNumber: 35
               },
               __self: this
             },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Others_Messages__["a" /* default */], { messages: this.props.messages, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 49
+                lineNumber: 37
               },
               __self: this
             }),
@@ -48675,7 +48663,7 @@ var Signup = function (_React$Component) {
               'form',
               { onSubmit: this.handleSignup.bind(this), __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 51
+                  lineNumber: 39
                 },
                 __self: this
               },
@@ -48683,7 +48671,7 @@ var Signup = function (_React$Component) {
                 'p',
                 { className: 'h2 text-center', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 52
+                    lineNumber: 40
                   },
                   __self: this
                 },
@@ -48693,13 +48681,13 @@ var Signup = function (_React$Component) {
                 'div',
                 { className: 'form-group', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 53
+                    lineNumber: 41
                   },
                   __self: this
                 },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'name', id: 'name', placeholder: 'Name', autoFocus: true, className: 'form-control form-control-lg', value: this.state.name, onChange: this.handleChange.bind(this), __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 54
+                    lineNumber: 42
                   },
                   __self: this
                 })
@@ -48708,13 +48696,13 @@ var Signup = function (_React$Component) {
                 'div',
                 { className: 'form-group', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 56
+                    lineNumber: 44
                   },
                   __self: this
                 },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'email', name: 'email', id: 'email', placeholder: 'Email', className: 'form-control form-control-lg', value: this.state.email, onChange: this.handleChange.bind(this), __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 57
+                    lineNumber: 45
                   },
                   __self: this
                 })
@@ -48723,13 +48711,13 @@ var Signup = function (_React$Component) {
                 'div',
                 { className: 'form-group', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 59
+                    lineNumber: 47
                   },
                   __self: this
                 },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'password', name: 'password', id: 'password', placeholder: 'Password', className: 'form-control form-control-lg', value: this.state.password, onChange: this.handleChange.bind(this), __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 60
+                    lineNumber: 48
                   },
                   __self: this
                 })
@@ -48738,7 +48726,7 @@ var Signup = function (_React$Component) {
                 'button',
                 { type: 'submit', className: 'btn btn-success btn-block btn-lg', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 63
+                    lineNumber: 51
                   },
                   __self: this
                 },
@@ -48748,7 +48736,7 @@ var Signup = function (_React$Component) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 66
+                lineNumber: 54
               },
               __self: this
             }),
@@ -48756,7 +48744,7 @@ var Signup = function (_React$Component) {
               'div',
               { className: 'hr-title text-center', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 68
+                  lineNumber: 56
                 },
                 __self: this
               },
@@ -48765,7 +48753,7 @@ var Signup = function (_React$Component) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 68
+                    lineNumber: 56
                   },
                   __self: this
                 },
@@ -48776,7 +48764,7 @@ var Signup = function (_React$Component) {
               'div',
               { style: { width: '376px', margin: '0 auto' }, className: 'btn-group btn-toolbar text-center', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 69
+                  lineNumber: 57
                 },
                 __self: this
               },
@@ -48784,7 +48772,7 @@ var Signup = function (_React$Component) {
                 'button',
                 { onClick: this.handleFacebook.bind(this), className: 'btn btn-facebook', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 70
+                    lineNumber: 58
                   },
                   __self: this
                 },
@@ -48794,7 +48782,7 @@ var Signup = function (_React$Component) {
                 'button',
                 { onClick: this.handleGoogle.bind(this), className: 'btn btn-google', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 71
+                    lineNumber: 59
                   },
                   __self: this
                 },
@@ -48804,7 +48792,7 @@ var Signup = function (_React$Component) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 73
+                lineNumber: 61
               },
               __self: this
             }),
@@ -48812,7 +48800,7 @@ var Signup = function (_React$Component) {
               'div',
               { className: 'text-center', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 74
+                  lineNumber: 62
                 },
                 __self: this
               },
@@ -48820,7 +48808,7 @@ var Signup = function (_React$Component) {
                 'small',
                 { className: 'text-muted', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 75
+                    lineNumber: 63
                   },
                   __self: this
                 },
@@ -48829,7 +48817,7 @@ var Signup = function (_React$Component) {
                   __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
                   { to: '/', __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 75
+                      lineNumber: 63
                     },
                     __self: this
                   },
@@ -48844,7 +48832,7 @@ var Signup = function (_React$Component) {
           'p',
           { className: 'text-center mastfoot', __source: {
               fileName: _jsxFileName,
-              lineNumber: 80
+              lineNumber: 68
             },
             __self: this
           },
@@ -48853,7 +48841,7 @@ var Signup = function (_React$Component) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 81
+                lineNumber: 69
               },
               __self: this
             },
@@ -48864,7 +48852,7 @@ var Signup = function (_React$Component) {
             __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
             { to: '/login', __source: {
                 fileName: _jsxFileName,
-                lineNumber: 81
+                lineNumber: 69
               },
               __self: this
             },
@@ -48873,7 +48861,7 @@ var Signup = function (_React$Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 81
+                  lineNumber: 69
                 },
                 __self: this
               },
@@ -48910,7 +48898,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__authAction__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__oauthAction__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Others_Messages__ = __webpack_require__(34);
-var _jsxFileName = '/home/nilim/Documents/programmer/node-react-boilerplate/app/Auth/components/Account.js';
+var _jsxFileName = '/home/nilim/Documents/programmer/react-api-view/app/Auth/components/Account.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -48976,12 +48964,12 @@ var Profile = function (_React$Component) {
   }, {
     key: 'handleLink',
     value: function handleLink(provider) {
-      this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["d" /* link */])(provider));
+      this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["c" /* link */])(provider));
     }
   }, {
     key: 'handleUnlink',
     value: function handleUnlink(provider) {
-      this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["f" /* unlink */])(provider));
+      this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__oauthAction__["d" /* unlink */])(provider));
     }
   }, {
     key: 'render',
@@ -49615,7 +49603,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Auth_authAction__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__header_css__ = __webpack_require__(308);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__header_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__header_css__);
-var _jsxFileName = "/home/nilim/Documents/programmer/node-react-boilerplate/app/Header/Header.js";
+var _jsxFileName = "/home/nilim/Documents/programmer/react-api-view/app/Header/Header.js";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -49795,7 +49783,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__others_css__ = __webpack_require__(310);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__others_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__others_css__);
-var _jsxFileName = "/home/nilim/Documents/programmer/node-react-boilerplate/app/Others/Footer.js";
+var _jsxFileName = "/home/nilim/Documents/programmer/react-api-view/app/Others/Footer.js";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 

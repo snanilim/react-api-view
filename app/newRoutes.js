@@ -2,13 +2,8 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect, withRouter} from "react-router-dom";
 
+import routes from './routes'
 import Home from './Home/Home';
-import Login from './Auth/components/Login';
-import Signup from './Auth/components/Signup';
-import Account from './Auth/components/Account';
-
-
-
 
 class NewRoutes extends Component {
   constructor(props) {
@@ -53,12 +48,30 @@ class NewRoutes extends Component {
       )}/>
     )
 
+    // const AppRoute = ()
+
     return (
       <Switch>
         <Route exact path="/" component={Home} />
-        <SkipRoute path="/login" component={Login} />
-        <SkipRoute path="/signup" component={Signup} />
-        <PrivateRoute path="/account" component={Account}/>
+        {routes.map((route, index) => (
+          route.isAuthenticated ?
+            <PrivateRoute
+            key={index}
+            path={route.path}
+            exact={route.exact}
+            component={route.component}
+          />
+          :
+            <SkipRoute
+            key={index}
+            path={route.path}
+            exact={route.exact}
+            component={route.component}
+          />
+          
+          
+        ))}
+        {console.log('asd')}
       </Switch>
     );
   }

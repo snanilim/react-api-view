@@ -8,16 +8,12 @@ import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
 import dotenv from 'dotenv';
 import exphbs from'express-handlebars';
-import mongoose from'mongoose';
 import jwt from'jsonwebtoken';
-import moment from'moment';
-import request from'request';
 
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { Provider } from "react-redux";
 import { StaticRouter, matchPath } from "react-router-dom";
-import serialize from "serialize-javascript";
 import routes from "../app/routes";
 import configureStore from "../app/shared/store/configureStore";
 import App from "../app/shared/App";
@@ -27,15 +23,6 @@ import "source-map-support/register";
 dotenv.load();
 
 const app = express();
-
-
-// Connect With Mongodb
-mongoose.connect(process.env.MONGODB);
-mongoose.connection.on('error', function() {
-  console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
-  process.exit(1);
-});
-
 
 
 var hbs = exphbs.create({
