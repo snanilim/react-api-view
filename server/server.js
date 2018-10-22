@@ -60,14 +60,6 @@ app.use(express.static(path.join('public')));
 
 
 
-
-
-
-
-
-
-
-
 app.use(function(req, res, next) {
   var initialState = {
     auth: { token: req.cookies.token, user: req.user },

@@ -36,6 +36,7 @@ class Login extends React.Component {
         <div className="card" style={{padding: '30px'}}>
           <div className="card-body">
             <Messages messages={this.props.messages}/>
+            
             <form onSubmit={this.handleLogin.bind(this)}>
               <p className="h2 text-center">Log In</p>
               <div className="form-group">

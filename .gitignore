@@ -31,3 +31,6 @@ Thumbs.db
 
 # server
 server.*
+
+# bundle
+public/bundle.*
