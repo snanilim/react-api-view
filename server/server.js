@@ -52,34 +52,10 @@ app.use(cookieParser());
 app.use(express.static(path.join('public')));
 // app.use(express.static("public"));
 
-// Models
-import User from '../app/Auth/userModel';
-
-app.use(function(req, res, next) {
-  req.isAuthenticated = function() {
-    var token = (req.headers.authorization && req.headers.authorization.split(' ')[1]) || req.cookies.token;
-    try {
-      return jwt.verify(token, process.env.TOKEN_SECRET);
-    } catch (err) {
-      return false;
-    }
-  };
-
-  if (req.isAuthenticated()) {
-    var payload = req.isAuthenticated();
-    User.findById(payload.sub, function(err, user) {
-      req.user = user;
-      next();
-    });
-  } else {
-    next();
-  }
-});
 
 
 // --------------------------- User ---------------------------
-var userRoutes = require("../app/Auth/userRoutes");
-app.use("/", userRoutes);
+
 // --------------------------- User ---------------------------
 
 

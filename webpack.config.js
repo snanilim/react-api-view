@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const autoprefixer = require("autoprefixer");
+const nodeExternals = require('webpack-node-externals');
 
 const browserConfig = {
   entry: "./app/shared/main.js",
@@ -8,7 +9,7 @@ const browserConfig = {
     path: __dirname,
     filename: "./public/bundle.js"
   },
-  devtool: "cheap-module-source-map",
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
@@ -52,12 +53,13 @@ const browserConfig = {
 const serverConfig = {
   entry: "./server/server.js",
   target: "node",
+  externals: [nodeExternals()],
   output: {
     path: __dirname,
     filename: "server.js",
     libraryTarget: "commonjs2"
   },
-  devtool: "cheap-module-source-map",
+  devtool: "inline-source-map",
   module: {
     rules: [
       {

@@ -10,10 +10,8 @@
 .btn-facebook {
     color: #fff;
     border-color: #335190;
-    background: #3b5998 -webkit-gradient(linear, left top, left bottom, from(#4263a9), to(#3b5998));
     background: #3b5998 linear-gradient(to bottom, #4263a9, #3b5998);
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(59, 89, 152, 0.3);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(59, 89, 152, 0.3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(59, 89, 152, 0.3);
 
 } 
 
@@ -26,10 +24,8 @@
 .btn-google {
     color: #fff;
     border-color: #d54331;
-    background: #dd4b39 -webkit-gradient(linear, left top, left bottom, from(#e05d4d), to(#dd4b39));
     background: #dd4b39 linear-gradient(to bottom, #e05d4d, #dd4b39);
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(221, 75, 57, 0.3);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(221, 75, 57, 0.3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(221, 75, 57, 0.3);
 }  
 
 .btn-google:hover,
@@ -111,14 +107,9 @@ body {
 }
 
 body {
-  display: -ms-flexbox;
-  display: -webkit-box;
   display: flex;
-  -ms-flex-pack: center;
-  -webkit-box-pack: center;
   justify-content: center;
-  -webkit-box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
-          box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
 }
 
 /* site-container */
@@ -177,4 +168,4 @@ body {
     top: 10px;
     width: 500px;
 }
-/*# sourceMappingURL=main.css.map*/
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwdWJsaWMvY3NzL21haW4uY3NzIiwic291cmNlUm9vdCI6IiJ9*/
