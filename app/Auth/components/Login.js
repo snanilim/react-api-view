@@ -57,7 +57,7 @@ class Login extends React.Component {
           </div>
         </div>
         <p className="text-center mastfoot">
-        <small>Don't have an account?</small> <Link to="/signup">Sign up</Link>
+        <small>Dont have an account?</small> <Link to="/signup">Sign up</Link>
         </p>
       </div>
     );
