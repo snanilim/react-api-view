@@ -30,4 +30,4 @@ bower_components
 Thumbs.db
 
 # server
-server.js
+server.*
