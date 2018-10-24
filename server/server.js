@@ -41,8 +41,6 @@ var hbs = exphbs.create({
 
 
 app.use(cors());
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
 app.set('port', process.env.PORT || 3000);
 app.use(compression());
 app.use(logger('dev'));
@@ -58,51 +56,8 @@ app.use(express.static(path.join('public')));
 
 // --------------------------- User ---------------------------
 
+app.get('*', pageRendering);
 
-app.use(function(req, res, next) {
-  var initialState = {
-    auth: { token: req.cookies.token, user: req.user },
-    messages: {}
-  };
-
-  var store = configureStore(initialState);
-
-  const promises = routes.reduce((acc, route) => {
-    if (matchPath(req.url, route) && route.component && route.component.initialAction) {
-      acc.push(Promise.resolve(store.dispatch(route.component.initialAction())));
-    }
-    return acc;
-  }, []);
-
-  Promise.all(promises)
-    .then(() => {
-      const context = {};
-      const markup = renderToString(
-        <Provider store={store}>
-          <StaticRouter location={req.url} context={context}>
-            <App />
-          </StaticRouter>
-        </Provider>
-      );
-
-      var initialData = store.getState();
-
-      res.render('layouts/main', {
-        markup: markup,
-        initialData: initialData
-      });
-
-    })
-    .catch(next);
-});
-
-// Production error handler
-if (app.get('env') === 'production') {
-  app.use(function(err, req, res, next) {
-    console.error(err.stack);
-    res.sendStatus(err.status || 500);
-  });
-}
 
 app.listen(app.get('port'), function() {
   console.log('Server Start On Port ' + app.get('port'));
