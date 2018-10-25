@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import routes from "../routes";
-import NewRoutes from "../newRoutes";
+import Routes from "../routes";
 
 import "./app.css";
 
@@ -30,7 +29,7 @@ class App extends Component {
       <div className="container-fluid site-container d-flex h-100 p-3 mx-auto flex-column">
         <Header />
 
-        <NewRoutes />
+        <Routes />
 
         <Footer />
  

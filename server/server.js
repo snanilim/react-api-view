@@ -13,7 +13,6 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import { Provider } from "react-redux";
 import { StaticRouter, matchPath } from "react-router-dom";
-import routes from "../app/routes";
 import configureStore from "../app/shared/store/configureStore";
 import App from "../app/shared/App";
 import "source-map-support/register";
@@ -66,34 +65,21 @@ app.use(function(req, res, next) {
   };
 
   var store = configureStore(initialState);
+    const context = {};
+    const markup = renderToString(
+      <Provider store={store}>
+        <StaticRouter location={req.url} context={context}>
+          <App />
+        </StaticRouter>
+      </Provider>
+    );
 
-  const promises = routes.reduce((acc, route) => {
-    if (matchPath(req.url, route) && route.component && route.component.initialAction) {
-      acc.push(Promise.resolve(store.dispatch(route.component.initialAction())));
-    }
-    return acc;
-  }, []);
+    var initialData = store.getState();
 
-  Promise.all(promises)
-    .then(() => {
-      const context = {};
-      const markup = renderToString(
-        <Provider store={store}>
-          <StaticRouter location={req.url} context={context}>
-            <App />
-          </StaticRouter>
-        </Provider>
-      );
-
-      var initialData = store.getState();
-
-      res.render('layouts/main', {
-        markup: markup,
-        initialData: initialData
-      });
-
-    })
-    .catch(next);
+    res.render('layouts/main', {
+      markup: markup,
+      initialData: initialData
+    });
 });
 
 // Production error handler
