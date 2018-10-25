@@ -24,7 +24,6 @@ dotenv.load();
 const app = express();
 
 
-
 var hbs = exphbs.create({
   defaultLayout: 'main',
   helpers: {
