@@ -6,6 +6,8 @@ import Home from './Home/Home';
 import Login from './Auth/components/Login';
 import Signup from './Auth/components/Signup';
 import Account from './Auth/components/Account';
+import AuthLayout from './shared/AuthLayout';
+import DashboardLayout from './shared/DashboardLayout';
 
 class Routes extends Component {
   constructor(props) {
@@ -23,10 +25,12 @@ class Routes extends Component {
   }
   
   render() {
-    const PrivateRoute = ({ component: Component, ...rest }) => (
+    const PrivateRoute = ({ layout:Layout, component: Component, ...rest }) => (
       <Route {...rest} render={props => (
         this.isAuthenticated() ? (
-          <Component {...props}/>
+          <Layout>
+            <Component {...props}/>
+          </Layout>
         ) : (
           <Redirect to={{
             pathname: '/login',
@@ -36,7 +40,7 @@ class Routes extends Component {
       )}/>
     )
 
-    const SkipRoute = ({ component: Component, ...rest }) => (
+    const SkipRoute = ({ layout:Layout, component: Component, ...rest }) => (
       <Route {...rest} render={props => (
         this.isAuthenticated() ? (
           <Redirect to={{
@@ -45,7 +49,9 @@ class Routes extends Component {
           }}/>
           
         ) : (
-          <Component {...props}/>
+          <Layout>
+            <Component {...props}/>
+          </Layout>
         )
       )}/>
     )
@@ -55,9 +61,9 @@ class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/" component={Home} />
-        <SkipRoute path="/login" component={Login} />
-        <SkipRoute path="/signup" component={Signup} />
-        <PrivateRoute path="/account" component={Account}/>
+        <SkipRoute path="/login" exact layout={AuthLayout} component={Login} />
+        <SkipRoute path="/signup" exact layout={AuthLayout} component={Signup} />
+        <PrivateRoute exact path="/account" layout={DashboardLayout} component={Account}/>
       </Switch>
     );
   }

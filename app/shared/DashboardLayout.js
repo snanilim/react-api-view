@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-// import "antd/dist/antd.css";
+
 import Routes from "../routes";
 
 import "./app.css";
@@ -13,7 +13,7 @@ function isAuthenticated(){
   return false;
 }
 
-class App extends Component {
+class DashboardLayout extends Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -26,11 +26,11 @@ class App extends Component {
   
   render() {
     return (
-      <div className="">
-        <Routes />
+      <div className="container-fluid site-container d-flex h-100 p-3 mx-auto flex-column">
+        <Header />
       </div>
     );
   }
 }
 
-export default App;
+export default DashboardLayout;
