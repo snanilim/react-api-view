@@ -7,7 +7,7 @@ const browserConfig = {
   entry: "./app/shared/main.js",
   output: {
     path: __dirname,
-    filename: "./public/bundle.js"
+    filename: "./dist/bundle.js"
   },
   devtool: "inline-source-map",
   module: {
@@ -22,6 +22,7 @@ const browserConfig = {
       },
       {
         test: /\.css$/,
+        exclude: /(node_modules)/,
         use: ExtractTextPlugin.extract({
           use: [
             {
@@ -38,8 +39,9 @@ const browserConfig = {
       {
         test: /js$/,
         exclude: /(node_modules)/,
-        loader: "babel-loader",
-        query: { presets: ["react-app"] }
+        use: {
+          loader: 'babel-loader'
+        }
       }
     ]
   },
@@ -82,8 +84,9 @@ const serverConfig = {
       {
         test: /js$/,
         exclude: /(node_modules)/,
-        loader: "babel-loader",
-        query: { presets: ["react-app"] }
+        use: {
+          loader: 'babel-loader'
+        }
       }
     ]
   }

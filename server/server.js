@@ -49,6 +49,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join('public')));
+app.use(express.static(path.join('dist')));
 // app.use(express.static("public"));
 
 
