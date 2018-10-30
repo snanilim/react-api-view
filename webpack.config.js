@@ -3,6 +3,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const autoprefixer = require("autoprefixer");
 const nodeExternals = require('webpack-node-externals');
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const browserConfig = {
   entry: "./app/shared/main.js",
   output: {
@@ -10,6 +12,9 @@ const browserConfig = {
     filename: "./dist/bundle.js"
   },
   devtool: "inline-source-map",
+  devServer: {
+    historyApiFallback: true
+            },
   module: {
     rules: [
       {
@@ -52,44 +57,5 @@ const browserConfig = {
   ]
 };
 
-const serverConfig = {
-  entry: "./server/server.js",
-  target: "node",
-  externals: [nodeExternals()],
-  output: {
-    path: __dirname,
-    filename: "server.js",
-    libraryTarget: "commonjs2"
-  },
-  devtool: "inline-source-map",
-  module: {
-    rules: [
-      {
-        test: [/\.svg$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-        loader: "file-loader",
-        options: {
-          name: "public/media/[name].[ext]",
-          publicPath: url => url.replace(/public/, ""),
-          emit: false
-        }
-      },
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: "css-loader/locals"
-          }
-        ]
-      },
-      {
-        test: /js$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader'
-        }
-      }
-    ]
-  }
-};
 
-module.exports = [browserConfig, serverConfig];
+module.exports = browserConfig;

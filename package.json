@@ -2,12 +2,12 @@
   "name": "es6express",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server/server.js",
   "scripts": {
     "watch": "",
     "predev": "webpack --mode production",
-    "dev": "nodemon server.js",
-    "start": "node server.js",
+    "dev": "DEBUG=log:* nodemon server/server.js",
+    "start": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,14 +19,18 @@
   "license": "ISC",
   "dependencies": {
     "antd": "^3.10.1",
+    "app-root-path": "^2.1.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
+    "config": "^2.0.1",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
+    "debug": "^4.1.0",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
+    "helmet": "^3.14.0",
     "jsonwebtoken": "^8.3.0",
     "moment": "^2.22.2",
     "morgan": "^1.9.1",
@@ -42,7 +46,8 @@
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
     "source-map-support": "^0.5.9",
-    "universal-cookie": "^3.0.4"
+    "universal-cookie": "^3.0.4",
+    "winston": "^3.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -62,6 +67,7 @@
     "eslint": "^5.8.0",
     "esm": "^3.0.84",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-webpack-plugin": "^3.2.0",
     "nodemon": "^1.18.4",
     "postcss-loader": "^3.0.0",
     "redux-logger": "^3.0.6",
