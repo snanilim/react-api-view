@@ -54,6 +54,7 @@ class Login extends React.Component {
               <button onClick={this.handleFacebook.bind(this)} className="btn btn-facebook">Sign in with Facebook</button>
               <button onClick={this.handleGoogle.bind(this)} className="btn btn-google">Sign in with Google</button>
             </div>
+            
           </div>
         </div>
         <p className="text-center mastfoot">
