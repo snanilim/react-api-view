@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { login } from '../authAction';
-import { facebookLogin, twitterLogin, googleLogin, vkLogin, githubLogin } from '../oauthAction';
+import { facebookLogin, googleLogin } from '../oauthAction';
 import Messages from '../../Others/Messages';
 
 import '../auth.css';
@@ -33,7 +33,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className="">
-        <div className="" style={{padding: '30px'}}>
+        <div className="" style={{ padding: '30px' }}>
           <div className="">
             <Messages messages={this.props.messages}/>
             <form onSubmit={this.handleLogin.bind(this)}>
