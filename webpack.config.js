@@ -1,29 +1,25 @@
-const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const autoprefixer = require("autoprefixer");
-const nodeExternals = require('webpack-node-externals');
-
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 const browserConfig = {
-  entry: "./app/shared/main.js",
+  entry: './src/Main.js',
   output: {
     path: __dirname,
-    filename: "./dist/bundle.js"
+    filename: './dist/bundle.js',
   },
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
   devServer: {
-    historyApiFallback: true
-            },
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
         test: [/\.svg$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-        loader: "file-loader",
+        loader: 'file-loader',
         options: {
-          name: "public/media/[name].[ext]",
-          publicPath: url => url.replace(/public/, "")
-        }
+          name: 'public/media/[name].[ext]',
+          publicPath: url => url.replace(/public/, ''),
+        },
       },
       {
         test: /\.css$/,
@@ -31,30 +27,30 @@ const browserConfig = {
         use: ExtractTextPlugin.extract({
           use: [
             {
-              loader: "css-loader",
-              options: { importLoaders: 1 }
+              loader: 'css-loader',
+              options: { importLoaders: 1 },
             },
             {
-              loader: "postcss-loader",
-              options: { plugins: [autoprefixer()] }
-            }
-          ]
-        })
+              loader: 'postcss-loader',
+              options: { plugins: [autoprefixer()] },
+            },
+          ],
+        }),
       },
       {
         test: /js$/,
         exclude: /(node_modules)/,
         use: {
-          loader: 'babel-loader'
-        }
-      }
-    ]
+          loader: 'babel-loader',
+        },
+      },
+    ],
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: "public/css/[name].css"
-    })
-  ]
+      filename: 'public/css/[name].css',
+    }),
+  ],
 };
 
 
