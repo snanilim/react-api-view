@@ -5,7 +5,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import isAuthenticated from './isAuthenticated';
+// import isAuthenticated from './isAuthenticated';
 
 import Home from '../Home/Home';
 import Login from '../Auth/components/Login';
@@ -14,11 +14,13 @@ import Account from '../Auth/components/Account';
 import AuthLayout from '../shared/AuthLayout';
 import DashboardLayout from '../shared/DashboardLayout';
 
+const isAuthenticated = false;
+
 const PrivateRoute = ({ layout: Layout, component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props => (
-      isAuthenticated() ? (
+      isAuthenticated ? (
         <Layout>
           <Component {...props} />
         </Layout>
@@ -37,7 +39,7 @@ const SkipRoute = ({ layout: Layout, component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props => (
-      isAuthenticated() ? (
+      isAuthenticated ? (
         <Redirect to={{
           pathname: '/',
           state: { from: props.location },
