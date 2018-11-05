@@ -7,14 +7,16 @@ import {
 
 // import isAuthenticated from './isAuthenticated';
 
-import Home from '../Home/Home';
+
 import Login from '../Auth/components/Login';
 import Signup from '../Auth/components/Signup';
 import Account from '../Auth/components/Account';
 import AuthLayout from '../shared/AuthLayout';
 import DashboardLayout from '../shared/DashboardLayout';
+import Home from '../Home/Home';
+import User from '../User/components/User';
 
-const isAuthenticated = true;
+const isAuthenticated = false;
 
 const PrivateRoute = ({ layout: Layout, component: Component, ...rest }) => (
   <Route
@@ -61,6 +63,7 @@ const Routes = () => {
       <SkipRoute path="/login" exact layout={AuthLayout} component={Login} />
       <SkipRoute path="/signup" exact layout={AuthLayout} component={Signup} />
       <PrivateRoute exact path="/dashboard" layout={DashboardLayout} component={Account} />
+      <PrivateRoute exact path="/user" layout={DashboardLayout} component={User} />
     </Switch>
   );
 };

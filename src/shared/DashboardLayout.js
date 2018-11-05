@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Layout,
   Row,
@@ -33,7 +34,7 @@ class DashboardLayout extends React.Component {
               <Col xs={24} sm={24} md={24} lg={6} xl={5} xxl={4}>
                 <img alt="" src="" />
               </Col>
-              <Col xs={24} sm={24} md={24} lg={18} xl={9} xxl={20}>
+              <Col xs={24} sm={24} md={24} lg={18} xl={19} xxl={20}>
                 <Menu
                   mode="horizontal"
                 >
@@ -57,7 +58,7 @@ class DashboardLayout extends React.Component {
                   </Menu.Item>
                   <Menu.Item key="user">
                     <Icon type="user" />
-                    User
+                    <Link to="/user">User</Link>
                   </Menu.Item>
                   <Menu.Item key="role">
                     <Icon type="mail" />
@@ -77,7 +78,7 @@ class DashboardLayout extends React.Component {
                   </Menu.Item>
                 </Menu>
               </Col>
-              <Col xs={24} sm={24} md={24} lg={18} xl={9} xxl={20}>
+              <Col xs={24} sm={24} md={24} lg={18} xl={19} xxl={20}>
                 {children}
               </Col>
             </Row>

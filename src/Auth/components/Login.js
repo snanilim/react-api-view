@@ -1,13 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import {
+  Form,
+  Icon,
+  Input,
+  Button,
+  Checkbox,
+  Divider,
+  Card,
+} from 'antd';
 import { login } from '../authAction';
 import { facebookLogin, googleLogin } from '../oauthAction';
 import Messages from '../../Others/Messages';
+const FormItem = Form.Item;
 
-import '../auth.css';
-
-class Login extends React.Component {
+class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = { email: '', password: '' };
@@ -34,38 +42,54 @@ class Login extends React.Component {
     dispatch(googleLogin(this.props));
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  }
+
   render() {
     const { email, password } = this.state;
     const { messages } = this.props;
+    const { getFieldDecorator } = this.props.form;
     return (
-      <div className="">
-        <div className="" style={{ padding: '30px' }}>
-          <div className="">
-            <Messages messages={messages} />
-            <form onSubmit={this.handleLogin.bind(this)}>
-              <p className="h2 text-center">Log In</p>
-              <div className="form-group">
-                <input type="email" name="email" id="email" placeholder="Email" className="form-control" value={email} onChange={this.handleChange.bind(this)} />
-              </div>
-              <div className="form-group">
-                <input type="password" name="password" id="password" placeholder="Password" className="form-control" value={password} onChange={this.handleChange.bind(this)} />
-              </div>
-              <button type="submit" className="btn btn-success btn-block btn-lg">Log in</button>
-
-              <div className="form-group text-center"><Link to="/forgot"><small>Forgot your password?</small></Link></div>
-            </form>
-            <div className="hr-title text-center"><span>or</span></div>
-            <div className="btn-group btn-toolbar text-center">
-              <button type="button" onClick={this.handleFacebook.bind(this)} className="btn btn-facebook">Sign in with Facebook</button>
-              <button type="button" onClick={this.handleGoogle.bind(this)} className="btn btn-google">Sign in with Google</button>
-            </div>
-          </div>
-        </div>
-        <p className="text-center mastfoot">
-          <small>Dont have an account?</small>
-          <Link to="/signup">Sign up</Link>
-        </p>
-      </div>
+      <Card style={{ height: '100vh' }} className="">
+        <Form onSubmit={this.handleSubmit} className="login-form">
+          <FormItem>
+            {getFieldDecorator('userName', {
+              rules: [{ required: true, message: 'Please input your username!' }],
+            })(
+              <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+            )}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('password', {
+              rules: [{ required: true, message: 'Please input your Password!' }],
+            })(
+              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+            )}
+          </FormItem>
+          <Button type="primary" htmlType="submit" className="login-form-button ant-btn-block">
+            Log in
+          </Button>
+          <FormItem>
+            {getFieldDecorator('remember', {
+              valuePropName: 'checked',
+              initialValue: true,
+            })(
+              <Checkbox>Remember me</Checkbox>,
+            )}
+            <a className="login-form-forgot" href="">Forgot password</a>
+            <Divider>
+              or
+              <Link to="/signup"> SignUp </Link>
+            </Divider>
+          </FormItem>
+        </Form>
+      </Card>
     );
   }
 }
@@ -75,5 +99,5 @@ const mapStateToProps = (state) => {
     messages: state.messages,
   };
 };
-
+const Login = Form.create()(LoginForm);
 export default connect(mapStateToProps)(Login);
