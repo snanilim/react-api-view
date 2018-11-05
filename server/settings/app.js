@@ -4,8 +4,6 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
-const config = require('config');
-const log = require('debug')('log:app');
 
 const resError = require('../helper/resError');
 const winston = require('./winston');
@@ -19,6 +17,7 @@ app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static(path.join('public')));
 app.use(express.static(path.join('dist')));
 
 app.use(cors());
@@ -28,10 +27,10 @@ app.use(cors());
 // app.use('/dist', express.static(path.join(__dirname, '..', 'dist')));
 
 
-app.use(function(req, res, next) {
-    const route = path.join(__dirname, '..', '..', 'public', 'index.html');
-    res.sendFile(route);
-})
+app.use((req, res) => {
+  const route = path.join(__dirname, '..', '..', 'public', 'index.html');
+  res.sendFile(route);
+});
 
 
 app.use(resError.notFound);

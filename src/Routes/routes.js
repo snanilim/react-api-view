@@ -14,7 +14,7 @@ import Account from '../Auth/components/Account';
 import AuthLayout from '../shared/AuthLayout';
 import DashboardLayout from '../shared/DashboardLayout';
 
-const isAuthenticated = false;
+const isAuthenticated = true;
 
 const PrivateRoute = ({ layout: Layout, component: Component, ...rest }) => (
   <Route
@@ -57,10 +57,10 @@ const SkipRoute = ({ layout: Layout, component: Component, ...rest }) => (
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/" component={Home} />
+      <PrivateRoute exact path="/" layout={DashboardLayout} component={Home} />
       <SkipRoute path="/login" exact layout={AuthLayout} component={Login} />
       <SkipRoute path="/signup" exact layout={AuthLayout} component={Signup} />
-      <PrivateRoute exact path="/account" layout={DashboardLayout} component={Account} />
+      <PrivateRoute exact path="/dashboard" layout={DashboardLayout} component={Account} />
     </Switch>
   );
 };
