@@ -11,7 +11,7 @@ const AuthLayout = ({ children = null }) => {
       <Layout style={{ minHeight: '100vh' }}>
         <Row>
           <Col lg={18}>
-            <img alt="" src="" />
+            <img src="/img/bg-11.jpg" className="img-fluid" alt="Responsive" />
           </Col>
           <Col lg={6}>
             {children}

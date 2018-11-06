@@ -22,22 +22,6 @@ const browserConfig = {
         },
       },
       {
-        test: /\.css$/,
-        exclude: /(node_modules)/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: { importLoaders: 1 },
-            },
-            {
-              loader: 'postcss-loader',
-              options: { plugins: [autoprefixer()] },
-            },
-          ],
-        }),
-      },
-      {
         test: /js$/,
         exclude: /(node_modules)/,
         use: {
