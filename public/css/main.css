@@ -2,4 +2,13 @@
 .ctm-100-vh{
     height: 100vh;
 }
+.ctm-overflow-hide{
+    overflow: hidden;
+}
+.ant-input{
+    height: 50px;
+}
+.ctm-h-50{
+    height: 50px;
+}
 /* Custom Common CSS end */

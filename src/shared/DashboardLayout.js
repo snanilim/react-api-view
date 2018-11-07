@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Layout,
   Row,
@@ -88,5 +89,10 @@ class DashboardLayout extends React.Component {
     );
   }
 }
-
+DashboardLayout.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+  ]).isRequired,
+};
 export default DashboardLayout;

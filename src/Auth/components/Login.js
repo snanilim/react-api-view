@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import {
   Form,
   Icon,
@@ -11,96 +11,79 @@ import {
   Card,
 } from 'antd';
 import { login } from '../authAction';
-import { facebookLogin, googleLogin } from '../oauthAction';
-import Messages from '../../Others/Messages';
+
 const FormItem = Form.Item;
 
 class LoginForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { email: '', password: '' };
-  }
-
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  handleLogin(event) {
-    event.preventDefault();
-    const { dispatch } = this.props;
-    const { email, password } = this.state;
-    dispatch(login(email, password, this.props));
-  }
-
-  handleFacebook() {
-    const { dispatch } = this.props;
-    dispatch(facebookLogin(this.props));
-  }
-
-  handleGoogle() {
-    const { dispatch } = this.props;
-    dispatch(googleLogin(this.props));
+  static propTypes = {
+    form: PropTypes.isRequired,
+    dispatch: PropTypes.isRequired,
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    const { form, dispatch } = this.props;
+    form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        dispatch(login(values.email, values.password, this.props));
       }
     });
   }
 
   render() {
-    const { email, password } = this.state;
-    const { messages } = this.props;
-    const { getFieldDecorator } = this.props.form;
+    const { form } = this.props;
     return (
       <div>
         <Card className="ctm-100-vh border-0">
-          <h3> Login </h3>
+          <h2 className="text-center"> Admin Panel </h2>
+          <h4> Login </h4>
+
           <Form onSubmit={this.handleSubmit} className="login-form">
-            <FormItem>
-              {getFieldDecorator('userName', {
-                rules: [{ required: true, message: 'Please input your username!' }],
+
+            <FormItem label="E-mail">
+              {form.getFieldDecorator('email', {
+                rules: [
+                  { type: 'email', message: 'The input is not valid E-mail!' },
+                  { required: true, message: 'Please input your E-mail!' },
+                ],
               })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />,
               )}
             </FormItem>
-            <FormItem>
-              {getFieldDecorator('password', {
+
+            <FormItem label="Password">
+              {form.getFieldDecorator('password', {
                 rules: [{ required: true, message: 'Please input your Password!' }],
               })(
-                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />,
               )}
             </FormItem>
-            <Button type="primary" htmlType="submit" className="login-form-button ant-btn-block">
+
+            <Button type="primary" htmlType="submit" className="login-form-button ant-btn-block ctm-h-50">
               Log in
             </Button>
+
             <FormItem>
-              {getFieldDecorator('remember', {
+              {form.getFieldDecorator('remember', {
                 valuePropName: 'checked',
                 initialValue: true,
               })(
                 <Checkbox>Remember me</Checkbox>,
               )}
-              <a className="login-form-forgot" href="/">Forgot password</a>
+              <a className="login-form-forgot float-right" href="/">Forgot password</a>
               <Divider>
                 or
                 <Link to="/signup"> SignUp </Link>
               </Divider>
             </FormItem>
+
           </Form>
+
         </Card>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    messages: state.messages,
-  };
-};
 const Login = Form.create()(LoginForm);
-export default connect(mapStateToProps)(Login);
+export default Login;

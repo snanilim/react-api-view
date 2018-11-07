@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Layout,
   Row,
@@ -8,10 +9,10 @@ import {
 const AuthLayout = ({ children = null }) => {
   return (
     <div>
-      <Layout style={{ minHeight: '100vh' }}>
+      <Layout className="ctm-100-vh">
         <Row>
-          <Col lg={18}>
-            <img src="/img/bg-11.jpg" className="img-fluid" alt="Responsive" />
+          <Col lg={18} className="ctm-100-vh ctm-overflow-hide">
+            <img src="/img/bg-19.jpg" className="img-fluid" alt="Responsive" />
           </Col>
           <Col lg={6}>
             {children}
@@ -22,4 +23,10 @@ const AuthLayout = ({ children = null }) => {
   );
 };
 
+AuthLayout.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+  ]).isRequired,
+};
 export default AuthLayout;

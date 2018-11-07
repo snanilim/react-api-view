@@ -1,25 +1,18 @@
 import React from 'react';
-import axios from 'axios';
 import moment from 'moment';
-import push from 'react-router-redux';
-import { cookie } from 'react-cookie';
 import Cookies from 'universal-cookie';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const cookies = new Cookies();
 
-export function login(email, password, props) {
+export const login = (email, password, props) => {
   return (dispatch) => {
-    dispatch({
-      type: 'CLEAR_MESSAGES'
-    });
+    dispatch({ type: 'CLEAR_MESSAGES' });
+
     return fetch('/login', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
+      body: JSON.stringify({ email, password }),
     }).then((response) => {
       if (response.ok) {
         return response.json().then((json) => {
@@ -27,53 +20,49 @@ export function login(email, password, props) {
             type: 'LOGIN_SUCCESS',
             token: json.token,
             user: json.user,
-            messages: Array.isArray(json.msg) ? json.msg : [json.msg]
+            messages: Array.isArray(json.msg) ? json.msg : [json.msg],
           });
           cookies.set('token', json.token, { expires: moment().add(1, 'hour').toDate() });
-          props.history.push('/account')
-        });
-      } else {
-        return response.json().then((json) => {
-          dispatch({
-            type: 'LOGIN_FAILURE',
-            messages: Array.isArray(json) ? json : [json]
-          });
+          props.history.push('/dashboard');
         });
       }
+      return response.json().then((json) => {
+        dispatch({
+          type: 'LOGIN_FAILURE',
+          messages: Array.isArray(json) ? json : [json]
+        });
+      });
     });
   };
-}
+};
 
 export function signup(name, email, password, props) {
   return (dispatch) => {
     dispatch({
-      type: 'CLEAR_MESSAGES'
+      type: 'CLEAR_MESSAGES',
     });
     return fetch('/signup', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: name, email: email, password: password })
+      body: JSON.stringify({ name, email, password }),
     }).then((response) => {
-
-      return response.json().then((json) => {
-        if (response.ok) {
+      if (response.ok) {
+        return response.json().then((json) => {
           dispatch({
             type: 'SIGNUP_SUCCESS',
             token: json.token,
             user: json.user,
             messages: Array.isArray(json.msg) ? json.msg : [json.msg]
           });
-
           cookies.set('token', json.token, { expires: moment().add(1, 'hour').toDate() });
-          props.history.push('/account')
-          
-        } else {
-          
-          dispatch({
-            type: 'SIGNUP_FAILURE',
-            messages: Array.isArray(json) ? json : [json]
-          });
-        }
+          props.history.push('/account');
+        });
+      }
+      return response.json().then((json) => {
+        dispatch({
+          type: 'SIGNUP_FAILURE',
+          messages: Array.isArray(json) ? json : [json]
+        });
       });
     });
   };
@@ -83,7 +72,7 @@ export function logout() {
   cookies.remove('token');
   <Redirect to="/"/>
   return {
-    type: 'LOGOUT_SUCCESS'
+    type: 'LOGOUT_SUCCESS',
   };
 }
 
@@ -95,23 +84,22 @@ export function forgotPassword(email) {
     return fetch('/forgot', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email })
+      body: JSON.stringify({ email }),
     }).then((response) => {
       if (response.ok) {
         return response.json().then((json) => {
           dispatch({
             type: 'FORGOT_PASSWORD_SUCCESS',
-            messages: [json]
-          });
-        });
-      } else {
-        return response.json().then((json) => {
-          dispatch({
-            type: 'FORGOT_PASSWORD_FAILURE',
-            messages: Array.isArray(json) ? json : [json]
+            messages: [json],
           });
         });
       }
+      return response.json().then((json) => {
+        dispatch({
+          type: 'FORGOT_PASSWORD_FAILURE',
+          messages: Array.isArray(json) ? json : [json],
+        });
+      });
     });
   };
 }
@@ -119,22 +107,22 @@ export function forgotPassword(email) {
 export function resetPassword(password, confirm, pathToken) {
   return (dispatch) => {
     dispatch({
-      type: 'CLEAR_MESSAGES'
+      type: 'CLEAR_MESSAGES',
     });
     return fetch(`/reset/${pathToken}`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        password: password,
-        confirm: confirm
-      })
+        password,
+        confirm,
+      }),
     }).then((response) => {
       if (response.ok) {
         return response.json().then((json) => {
           <Redirect to="/login"/>
           dispatch({
             type: 'RESET_PASSWORD_SUCCESS',
-            messages: [json]
+            messages: [json],
           });
         });
       } else {
