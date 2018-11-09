@@ -5,7 +5,7 @@ import {
   Tag,
   Card,
 } from 'antd';
-import AddUser from './AddUser';
+import AddUser from './AddMaterial';
 
 const columns = [{
   title: 'Name',

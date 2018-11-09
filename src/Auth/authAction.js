@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import Cookies from 'universal-cookie';
+import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 const cookies = new Cookies();
@@ -8,31 +9,28 @@ const cookies = new Cookies();
 export const login = (email, password, props) => {
   return (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
-
-    return fetch('/login', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    }).then((response) => {
-      if (response.ok) {
-        return response.json().then((json) => {
-          dispatch({
-            type: 'LOGIN_SUCCESS',
-            token: json.token,
-            user: json.user,
-            messages: Array.isArray(json.msg) ? json.msg : [json.msg],
-          });
-          cookies.set('token', json.token, { expires: moment().add(1, 'hour').toDate() });
-          props.history.push('/dashboard');
-        });
-      }
-      return response.json().then((json) => {
-        dispatch({
-          type: 'LOGIN_FAILURE',
-          messages: Array.isArray(json) ? json : [json]
-        });
+    try {
+      const response = axios({
+        method: 'post',
+        url: '/login',
+        headers: { 'Content-Type': 'application/json' },
+        data: JSON.stringify({ email, password }),
       });
-    });
+
+      dispatch({
+        type: 'LOGIN_SUCCESS',
+        token: response.token,
+        user: response.user,
+        messages: Array.isArray(response.msg) ? response.msg : [response.msg],
+      });
+      cookies.set('token', response.token, { expires: moment().add(1, 'hour').toDate() });
+      props.history.push('/dashboard');
+    } catch (error) {
+      dispatch({
+        type: 'LOGIN_FAILURE',
+        messages: error,
+      });
+    }
   };
 };
 
@@ -61,7 +59,7 @@ export function signup(name, email, password, props) {
       return response.json().then((json) => {
         dispatch({
           type: 'SIGNUP_FAILURE',
-          messages: Array.isArray(json) ? json : [json]
+          messages: Array.isArray(json) ? json : [json],
         });
       });
     });
@@ -70,16 +68,16 @@ export function signup(name, email, password, props) {
 
 export function logout() {
   cookies.remove('token');
-  <Redirect to="/"/>
-  return {
-    type: 'LOGOUT_SUCCESS',
-  };
+    <Redirect to="/"/>
+    return {
+      type: 'LOGOUT_SUCCESS',
+    };
 }
 
 export function forgotPassword(email) {
   return (dispatch) => {
     dispatch({
-      type: 'CLEAR_MESSAGES'
+      type: 'CLEAR_MESSAGES',
     });
     return fetch('/forgot', {
       method: 'post',

@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import {
   Form,
   Icon,
@@ -85,5 +86,12 @@ class LoginForm extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    messages: state.messages,
+    user: state.auth,
+  };
+};
+
 const Login = Form.create()(LoginForm);
-export default Login;
+export default withRouter(connect(mapStateToProps)(Login));

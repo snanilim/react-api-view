@@ -1,57 +1,55 @@
-import React, { Component } from "react";
+import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink, Link, withRouter } from "react-router-dom";
-import { logout } from "../Auth/authAction";
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import {
+  Row,
+  Col,
+  Menu,
+  Icon,
+} from 'antd';
+import { logout } from '../Auth/authAction';
 
 
-import "./header.css";
+class Header extends React.Component {
+  static propTypes = {
+    dispatch: PropTypes.isRequired,
+  }
 
+  handleLogout(event) {
+    event.preventDefault();
+    const { dispatch } = this.props;
+    dispatch(logout(this.props));
+  }
 
-class Header extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
-
-    handleLogout(event) {
-        event.preventDefault();
-        this.props.dispatch(logout(this.props));
-    }    
   render() {
-    const rightNav = this.props.token ? (
-        <nav className="nav nav-masthead justify-content-center">
-            <NavLink exact to="/" activeClassName="active" className="nav-link">Home</NavLink>
-            <NavLink to="/account" activeClassName="active" className="nav-link">Account</NavLink>
-            <a href="#" className="nav-link" onClick={this.handleLogout.bind(this)}>Logout</a>
-        </nav>
-    ) : (
-        <nav className="nav nav-masthead justify-content-center">
-            <NavLink exact to="/" activeClassName="active" className="nav-link">Home</NavLink>
-            <NavLink to="/login" activeClassName="active" className="nav-link">Login</NavLink>
-            <NavLink to="/signup" activeClassName="active" className="nav-link">Sign Up</NavLink>
-        </nav>
-    )
     return (
-        <header className="masthead mb-auto">
-        <div className="inner">
-        <a className=" masthead-brand navbar-brand" href="#">
-            <img src="/img/logo.png" width="45" alt="" />
-        </a>
-        {rightNav}
-
-        </div>
-        </header>
-
+      <div>
+        <Row>
+          <Col xs={24} sm={24} md={24} lg={6} xl={5} xxl={4}>
+            <img alt="" src="" />
+          </Col>
+          <Col xs={24} sm={24} md={24} lg={18} xl={19} xxl={20}>
+            <Menu
+              mode="horizontal"
+            >
+              <Menu.Item key="mail">
+                <Icon type="mail" />
+                Dashboard
+              </Menu.Item>
+            </Menu>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-    return {
-      token: state.auth.token,
-      user: state.auth.user
-    };
+  return {
+    token: state.auth.token,
+    user: state.auth.user,
   };
+};
 
-  export default withRouter(connect(mapStateToProps)(Header));
+export default withRouter(connect(mapStateToProps)(Header));

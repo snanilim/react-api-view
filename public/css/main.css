@@ -5,10 +5,16 @@
 .ctm-overflow-hide{
     overflow: hidden;
 }
-.ant-input{
+.ant-input, .ant-select-selection--single{
     height: 50px;
 }
 .ctm-h-50{
     height: 50px;
+}
+.ant-menu-item > a {
+    display: inline-block;
+    color: rgba(0, 0, 0, 0.65);
+    position: relative;
+    top: 3px;
 }
 /* Custom Common CSS end */

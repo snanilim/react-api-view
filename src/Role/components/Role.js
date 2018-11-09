@@ -5,7 +5,7 @@ import {
   Tag,
   Card,
 } from 'antd';
-import AddUser from './AddUser';
+import AddRole from './AddRole';
 
 const columns = [{
   title: 'Name',
@@ -68,7 +68,7 @@ const data = [{
   status: 'Disable',
 }];
 
-class User extends React.Component {
+class Role extends React.Component {
   constructor(props) {
     super(props);
     this.state = { visible: false };
@@ -77,10 +77,10 @@ class User extends React.Component {
   render() {
     return (
       <Card className="ctm-100-vh">
-        <AddUser />
+        <AddRole />
         <Table columns={columns} dataSource={data} />
       </Card>
     );
   }
 }
-export default User;
+export default Role;

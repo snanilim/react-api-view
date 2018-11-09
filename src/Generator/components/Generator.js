@@ -5,7 +5,7 @@ import {
   Tag,
   Card,
 } from 'antd';
-import AddUser from './AddUser';
+import AddGenerator from './AddGenerator';
 
 const columns = [{
   title: 'Name',
@@ -68,7 +68,7 @@ const data = [{
   status: 'Disable',
 }];
 
-class User extends React.Component {
+class Generator extends React.Component {
   constructor(props) {
     super(props);
     this.state = { visible: false };
@@ -77,10 +77,10 @@ class User extends React.Component {
   render() {
     return (
       <Card className="ctm-100-vh">
-        <AddUser />
+        <AddGenerator />
         <Table columns={columns} dataSource={data} />
       </Card>
     );
   }
 }
-export default User;
+export default Generator;
