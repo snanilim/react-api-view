@@ -28,6 +28,22 @@ app.use(cors());
 // app.use('/', express.static(path.join(__dirname, '..', 'dist')));
 // app.use('/dist', express.static(path.join(__dirname, '..', 'dist')));
 
+app.get('/api/download/', (req, res, next) => {
+  console.log('call');
+  return res.download('mypdf.pdf', (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(404).json({
+        error: {
+          message: "File not found"
+        },
+      });
+    }
+    console.log("File is downloaded.");
+  });
+});
+
+
 app.use(`/${config.get('version')}`, route);
 
 app.use((req, res) => {
