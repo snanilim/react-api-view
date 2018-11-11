@@ -24,7 +24,7 @@ const PrivateRoute = ({ layout: Layout, component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props => (
-      isAuthenticated ? (
+      isAuthenticated() ? (
         <Layout>
           <Component {...props} />
         </Layout>
@@ -43,7 +43,7 @@ const SkipRoute = ({ layout: Layout, component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props => (
-      isAuthenticated ? (
+      isAuthenticated() ? (
         <Redirect to={{
           pathname: '/',
           state: { from: props.location },

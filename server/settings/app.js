@@ -4,9 +4,11 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
+const config = require('config');
 
 const resError = require('../helper/resError');
 const winston = require('./winston');
+const route = require('../routes/routes');
 
 const app = express();
 
@@ -26,12 +28,12 @@ app.use(cors());
 // app.use('/', express.static(path.join(__dirname, '..', 'dist')));
 // app.use('/dist', express.static(path.join(__dirname, '..', 'dist')));
 
+app.use(`/${config.get('version')}`, route);
 
 app.use((req, res) => {
   const route = path.join(__dirname, '..', '..', 'public', 'index.html');
   res.sendFile(route);
 });
-
 
 app.use(resError.notFound);
 app.use(resError.errorHandler);

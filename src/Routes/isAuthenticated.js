@@ -2,7 +2,7 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 const isAuthenticated = () => {
-  cookies.get('token');
+  // cookies.get('token');
   return false;
 };
 
