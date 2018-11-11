@@ -6,27 +6,35 @@ import { Redirect } from 'react-router-dom';
 
 const cookies = new Cookies();
 
+const cookieSet = (response) => {
+  if (response.token.accessToken) {
+    cookies.set('token', response.token.accessToken, { expires: moment().add(1, 'hour').toDate() });
+  }
+  return true;
+};
+
 export const login = (email, password, props) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
+
     try {
-      const response = axios({
+      const response = await axios({
         method: 'post',
-        url: '/login',
+        url: '/v1/auth/login',
         headers: { 'Content-Type': 'application/json' },
         data: JSON.stringify({ email, password }),
       });
-
+      console.log('response', response.data.token.accessToken);
+      await cookieSet(response.data);
       dispatch({
         type: 'LOGIN_SUCCESS',
         token: response.token,
         user: response.user,
         messages: Array.isArray(response.msg) ? response.msg : [response.msg],
       });
-      cookies.set('token', response.token, { expires: moment().add(1, 'hour').toDate() });
-      props.history.push('/dashboard');
+      return props.history.push('/dashboard');
     } catch (error) {
-      dispatch({
+      return dispatch({
         type: 'LOGIN_FAILURE',
         messages: error,
       });

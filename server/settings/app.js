@@ -31,8 +31,8 @@ app.use(cors());
 app.use(`/${config.get('version')}`, route);
 
 app.use((req, res) => {
-  const route = path.join(__dirname, '..', '..', 'public', 'index.html');
-  res.sendFile(route);
+  const view = path.join(__dirname, '..', '..', 'public', 'index.html');
+  res.sendFile(view);
 });
 
 app.use(resError.notFound);

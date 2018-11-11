@@ -2,7 +2,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 const browserConfig = {
-  entry: './src/Main.js',
+  entry: ['@babel/polyfill', './src/Main.js'],
   output: {
     path: __dirname,
     filename: './dist/bundle.js',
