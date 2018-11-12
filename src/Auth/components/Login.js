@@ -38,7 +38,7 @@ class LoginForm extends React.Component {
         <Card className="ctm-100-vh border-0">
           <h2 className="text-center"> Admin Panel </h2>
           <h4> Login </h4>
-          <a href='/api/download/'> Test Download </a>
+          {/* <a href='/api/download/'> Test Download </a> */}
 
           <Form onSubmit={this.handleSubmit} className="login-form">
 

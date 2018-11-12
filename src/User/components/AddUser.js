@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
   Drawer,
   Form,
@@ -9,6 +11,7 @@ import {
   Input,
   Select,
 } from 'antd';
+import { createUser } from '../userAction';
 
 const { Option } = Select;
 
@@ -16,6 +19,24 @@ class DrawerForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = { visible: false };
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { form, dispatch } = this.props;
+    form.validateFields((err, values) => {
+      console.log('values', values);
+      if (!err) {
+        dispatch(createUser(
+          values.name,
+          values.email,
+          values.address,
+          values.password,
+          values.role,
+          values.status,
+        ));
+      }
+    });
   }
 
   showDrawer = () => {
@@ -88,7 +109,7 @@ class DrawerForm extends React.Component {
               </Col>
               <Col span={12}>
                 <Form.Item label="Role">
-                  {form.getFieldDecorator('owner', {
+                  {form.getFieldDecorator('role', {
                     rules: [{ required: true, message: 'Please select an role' }],
                   })(
                     <Select placeholder="Please select an role">
@@ -143,7 +164,7 @@ class DrawerForm extends React.Component {
             >
               Cancel
             </Button>
-            <Button onClick={this.onClose} type="primary">Submit</Button>
+            <Button onClick={this.handleSubmit} type="primary">Submit</Button>
           </div>
         </Drawer>
       </div>
@@ -151,9 +172,17 @@ class DrawerForm extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    messages: state.messages,
+    user: state.auth,
+  };
+};
+
 DrawerForm.propTypes = {
   form: PropTypes.isRequired,
+  dispatch: PropTypes.isRequired,
 };
 
 const AddUser = Form.create()(DrawerForm);
-export default AddUser;
+export default withRouter(connect(mapStateToProps)(AddUser));
