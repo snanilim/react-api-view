@@ -11,16 +11,11 @@ import {
   Input,
   Select,
 } from 'antd';
-import { createUser } from '../userAction';
+import { toogleDrwer, createUser } from '../userAction';
 
 const { Option } = Select;
 
 class DrawerForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { visible: false };
-  }
-
   handleSubmit = (e) => {
     e.preventDefault();
     const { form, dispatch } = this.props;
@@ -39,36 +34,18 @@ class DrawerForm extends React.Component {
     });
   }
 
-  showDrawer = () => {
-    this.setState({
-      visible: true,
-    });
-  };
-
   onClose = () => {
-    this.setState({
-      visible: false,
-    });
+    const { dispatch } = this.props;
+    dispatch(toogleDrwer(false));
   };
 
   render() {
     const { form } = this.props;
-    const { visible } = this.state;
+    const { visible } = this.props;
     return (
       <div>
-        <Row>
-          <Col span={8}>
-            <h4 className="float-left">User List</h4>
-          </Col>
-          <Col span={8} offset={8}>
-            <Button className="float-right" type="primary" onClick={this.showDrawer}>
-              + Add New User
-            </Button>
-          </Col>
-        </Row>
-
         <Drawer
-          title="Create"
+          title="Edit"
           width={720}
           placement="right"
           onClose={this.onClose}
@@ -173,16 +150,19 @@ class DrawerForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('state', state);
   return {
     messages: state.messages,
     user: state.auth,
+    visible: state.user.visible,
   };
 };
 
 DrawerForm.propTypes = {
   form: PropTypes.isRequired,
   dispatch: PropTypes.isRequired,
+  visible: PropTypes.isRequired,
 };
 
-const AddUser = Form.create()(DrawerForm);
-export default withRouter(connect(mapStateToProps)(AddUser));
+const EditUser = Form.create()(DrawerForm);
+export default withRouter(connect(mapStateToProps)(EditUser));

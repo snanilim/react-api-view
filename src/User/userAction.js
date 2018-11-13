@@ -2,11 +2,36 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
+const cookieValue = cookies.get('token');
+
+export const users = () => {
+  return async (dispatch) => {
+    dispatch({ type: 'CLEAR_MESSAGES' });
+    try {
+      const response = await axios({
+        method: 'get',
+        url: '/v1/user',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookieValue}`,
+        },
+      });
+      return dispatch({
+        type: 'USERS_SUCCESS',
+        data: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: 'USERS_FAILURE',
+        messages: error,
+      });
+    }
+  };
+};
 
 export const createUser = (name, email, address, password, role, status) => {
   return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
-    const cookieValue = cookies.get('token');
     try {
       const response = await axios({
         method: 'post',
@@ -24,7 +49,7 @@ export const createUser = (name, email, address, password, role, status) => {
           status,
         }),
       });
-      console.log('response', response.data.token.accessToken);
+      // console.log('response', response.data.token.accessToken);
       return dispatch({
         type: 'CREATE_USER_SUCCESS',
         messages: Array.isArray(response.msg) ? response.msg : [response.msg],
@@ -38,29 +63,11 @@ export const createUser = (name, email, address, password, role, status) => {
   };
 };
 
-export const editUser = (email, password, props) => {
+export const toogleDrwer = (value) => {
   return async (dispatch) => {
-    dispatch({ type: 'CLEAR_MESSAGES' });
-
-    try {
-      const response = await axios({
-        method: 'post',
-        url: '/v1/auth/login',
-        headers: { 'Content-Type': 'application/json' },
-        data: JSON.stringify({ email, password }),
-      });
-      dispatch({
-        type: 'LOGIN_SUCCESS',
-        token: response.token,
-        user: response.user,
-        messages: Array.isArray(response.msg) ? response.msg : [response.msg],
-      });
-      return props.history.push('/dashboard');
-    } catch (error) {
-      return dispatch({
-        type: 'LOGIN_FAILURE',
-        messages: error,
-      });
-    }
+    return dispatch({
+      type: 'TOOGLE_DRAWER',
+      visible: value,
+    });
   };
 };
