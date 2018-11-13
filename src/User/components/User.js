@@ -4,8 +4,10 @@ import {
   Divider,
   Tag,
   Card,
+  Column,
 } from 'antd';
 import AddUser from './AddUser';
+import EditUser from './EditUser';
 
 const columns = [{
   title: 'Name',
@@ -78,7 +80,42 @@ class User extends React.Component {
     return (
       <Card className="ctm-100-vh">
         <AddUser />
-        <Table columns={columns} dataSource={data} />
+        <EditUser />
+        <div>
+          <Table dataSource={data}>
+            <Column
+              title="Name"
+              dataIndex="name"
+              key="name"
+            />
+            <Column
+              title="Role"
+              dataIndex="role"
+              key="role"
+            />
+            <Column
+              title="Address"
+              dataIndex="address"
+              key="address"
+            />
+            <Column
+              title="Status"
+              dataIndex="status"
+              key="status"
+            />
+            <Column
+              title="Action"
+              key="action"
+              render={(text, record) => (
+                <span>
+                  <a href="javascript:;">Edit</a>
+                  <Divider type="vertical" />
+                  <a href="javascript:;">Delete</a>
+                </span>
+              )}
+            />
+          </Table>
+        </div>
       </Card>
     );
   }
