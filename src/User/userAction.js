@@ -4,31 +4,6 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 const cookieValue = cookies.get('token');
 
-export const users = () => {
-  return async (dispatch) => {
-    dispatch({ type: 'CLEAR_MESSAGES' });
-    try {
-      const response = await axios({
-        method: 'get',
-        url: '/v1/user',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${cookieValue}`,
-        },
-      });
-      return dispatch({
-        type: 'USERS_SUCCESS',
-        data: response.data,
-      });
-    } catch (error) {
-      return dispatch({
-        type: 'USERS_FAILURE',
-        messages: error,
-      });
-    }
-  };
-};
-
 export const createUser = (name, email, address, password, role, status) => {
   return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
@@ -57,6 +32,56 @@ export const createUser = (name, email, address, password, role, status) => {
     } catch (error) {
       return dispatch({
         type: 'CREATE_USER_FAILURE',
+        messages: error,
+      });
+    }
+  };
+};
+
+export const users = () => {
+  return async (dispatch) => {
+    dispatch({ type: 'CLEAR_MESSAGES' });
+    try {
+      const response = await axios({
+        method: 'get',
+        url: '/v1/user',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookieValue}`,
+        },
+      });
+      return dispatch({
+        type: 'USERS_SUCCESS',
+        data: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: 'USERS_FAILURE',
+        messages: error,
+      });
+    }
+  };
+};
+
+export const oneUser = (userId) => {
+  return async (dispatch) => {
+    dispatch({ type: 'CLEAR_MESSAGES' });
+    try {
+      const response = await axios({
+        method: 'get',
+        url: `/v1/user/${userId}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookieValue}`,
+        },
+      });
+      return dispatch({
+        type: 'ONE_USER_SUCCESS',
+        data: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: 'ONE_USER_FAILURE',
         messages: error,
       });
     }

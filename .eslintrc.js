@@ -30,6 +30,7 @@ module.exports = {
 	// 	},
 	// },
 	rules: {
+		'indent':'off',
         'react/jsx-filename-extension': ['error', { extensions: ['.js'] }], // airbnb is using .jsx
         'arrow-body-style': 'off',
 	},

@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import AddUser from './AddUser';
 import EditUser from './EditUser';
-import { users, toogleDrwer } from '../userAction';
+import { users, toogleDrwer, getOneUser } from '../userAction';
 
 class User extends React.Component {
   static propTypes = {
@@ -23,9 +23,11 @@ class User extends React.Component {
     dispatch(users());
   }
 
-  showDrawer = () => {
+  showDrawer = (e, id) => {
+    console.log('id', id);
     const { dispatch } = this.props;
     dispatch(toogleDrwer(true));
+    dispatch(getOneUser(id));
   };
 
   render() {
@@ -61,7 +63,7 @@ class User extends React.Component {
               key="action"
               render={(text, record) => (
                 <span>
-                  <a href="javascript:;" onClick={ this.showDrawer }>Edit</a>
+                  <a href="javascript:;" onClick={ (e) => this.showDrawer(e, record.id) }>Edit</a>
                   <Divider type="vertical" />
                   <a href="javascript:;">Delete</a>
                 </span>

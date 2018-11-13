@@ -101,12 +101,12 @@ class DrawerForm extends React.Component {
             </Row>
 
             <Row gutter={16}>
-              <Col span={12}>
-                <Form.Item label="Address">
-                  {form.getFieldDecorator('address', {
-                  })(<Input placeholder="please enter user name" />)}
-                </Form.Item>
-              </Col>
+                <Col span={12}>
+                    <Form.Item label="Address">
+                    {form.getFieldDecorator('address', {
+                    })(<Input placeholder="please enter user name" />)}
+                    </Form.Item>
+                </Col>
               <Col span={12}>
                 <Form.Item label="Role">
                   {form.getFieldDecorator('role', {
