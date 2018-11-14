@@ -63,7 +63,7 @@ export const users = () => {
   };
 };
 
-export const oneUser = (userId) => {
+export const getOneUser = (userId) => {
   return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
     try {

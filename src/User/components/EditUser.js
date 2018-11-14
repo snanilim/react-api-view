@@ -11,7 +11,7 @@ import {
   Input,
   Select,
 } from 'antd';
-import { toogleDrwer, createUser } from '../userAction';
+import { toogleDrwer, updateUser } from '../userAction';
 
 const { Option } = Select;
 
@@ -22,7 +22,7 @@ class DrawerForm extends React.Component {
     form.validateFields((err, values) => {
       console.log('values', values);
       if (!err) {
-        dispatch(createUser(
+        dispatch(updateUser(
           values.name,
           values.email,
           values.address,
@@ -40,7 +40,7 @@ class DrawerForm extends React.Component {
   };
 
   render() {
-    const { form } = this.props;
+    const { form, user } = this.props;
     const { visible } = this.props;
     return (
       <div>
@@ -64,15 +64,22 @@ class DrawerForm extends React.Component {
                 <Form.Item label="Name">
                   {form.getFieldDecorator('name', {
                     rules: [{ required: true, message: 'please enter user name' }],
-                  })(<Input placeholder="please enter user name" />)}
+                  })(<Input value="asd" placeholder="please enter user name" />)}
                 </Form.Item>
               </Col>
 
               <Col span={12}>
                 <Form.Item label="Email">
                   {form.getFieldDecorator('email', {
-                    rules: [{ required: true, message: 'please enter user email' }],
-                  })(<Input type="mail" placeholder="please enter user email" />)}
+                      initialValue: user.email,
+                      rules: [{
+                        type: 'email', message: 'The input is not valid E-mail!',
+                      }, {
+                        required: true, message: 'Please input user E-mail!',
+                      }],
+                    })(
+                      <Input placeholder="please enter user email" />,
+                  )}
                 </Form.Item>
               </Col>
             </Row>
@@ -153,7 +160,7 @@ const mapStateToProps = (state) => {
   console.log('state', state);
   return {
     messages: state.messages,
-    user: state.auth,
+    user: state.user.oneUser,
     visible: state.user.visible,
   };
 };
@@ -162,6 +169,7 @@ DrawerForm.propTypes = {
   form: PropTypes.isRequired,
   dispatch: PropTypes.isRequired,
   visible: PropTypes.isRequired,
+  user: PropTypes.isRequired,
 };
 
 const EditUser = Form.create()(DrawerForm);

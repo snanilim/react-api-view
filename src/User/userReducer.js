@@ -1,5 +1,6 @@
 const initialState = {
   user: {},
+  oneUser: {},
 };
 
 export default function auth(state = initialState, action) {
@@ -15,8 +16,10 @@ export default function auth(state = initialState, action) {
       return Object.assign({}, state, {
         visible: action.visible,
       });
-    case 'LOGOUT_SUCCESS':
-      return initialState;
+    case 'ONE_USER_SUCCESS':
+      return Object.assign({}, state, {
+        oneUser: action.data,
+      });
     default:
       return state;
   }
