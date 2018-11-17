@@ -6,13 +6,14 @@ import {
   Button,
   Col,
   Row,
-  Input,
-  Select,
+  Tabs,
 } from 'antd';
+import ProductTab from './ProductTab';
+import MaterialTab from './MaterialTab';
 
-const { Option } = Select;
+const TabPane = Tabs.TabPane;
 
-class DrawerForm extends React.Component {
+class AddGenerator extends React.Component {
   constructor(props) {
     super(props);
     this.state = { visible: false };
@@ -30,8 +31,11 @@ class DrawerForm extends React.Component {
     });
   };
 
+  callback = (key) => {
+    console.log(key);
+  }
+
   render() {
-    const { form } = this.props;
     const { visible } = this.state;
     return (
       <div>
@@ -48,7 +52,7 @@ class DrawerForm extends React.Component {
 
         <Drawer
           title="Create"
-          width={720}
+          width={820}
           placement="right"
           onClose={this.onClose}
           maskClosable={false}
@@ -59,69 +63,10 @@ class DrawerForm extends React.Component {
             paddingBottom: 53,
           }}
         >
-          <Form layout="vertical" hideRequiredMark>
-
-            <Row gutter={16}>
-              <Col span={12}>
-                <Form.Item label="Name">
-                  {form.getFieldDecorator('name', {
-                    rules: [{ required: true, message: 'please enter user name' }],
-                  })(<Input placeholder="please enter user name" />)}
-                </Form.Item>
-              </Col>
-
-              <Col span={12}>
-                <Form.Item label="Email">
-                  {form.getFieldDecorator('email', {
-                    rules: [{ required: true, message: 'please enter user email' }],
-                  })(<Input type="mail" placeholder="please enter user email" />)}
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Row gutter={16}>
-              <Col span={12}>
-                <Form.Item label="Address">
-                  {form.getFieldDecorator('address', {
-                  })(<Input placeholder="please enter user name" />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="Role">
-                  {form.getFieldDecorator('owner', {
-                    rules: [{ required: true, message: 'Please select an role' }],
-                  })(
-                    <Select placeholder="Please select an role">
-                      <Option value="admin">Admin</Option>
-                      <Option value="user">User</Option>
-                    </Select>,
-                  )}
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Row gutter={16}>
-              <Col span={12}>
-                <Form.Item label="Password">
-                  {form.getFieldDecorator('password', {
-                    rules: [{ required: true, message: 'Please select an password' }],
-                  })(<Input type="password" placeholder="please enter user password" />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="Status">
-                  {form.getFieldDecorator('status', {
-                    rules: [{ required: true, message: 'Please choose the status' }],
-                  })(
-                    <Select placeholder="Please choose the status">
-                      <Option value="active">Active</Option>
-                      <Option value="disable">Disable</Option>
-                    </Select>,
-                  )}
-                </Form.Item>
-              </Col>
-            </Row>
-          </Form>
+          <Tabs defaultActiveKey="1" onChange={this.callback}>
+            <TabPane tab="Products" key="1"><ProductTab /></TabPane>
+            <TabPane tab="Materials" key="2"><MaterialTab /></TabPane>
+          </Tabs>
           <div
             style={{
               position: 'absolute',
@@ -151,9 +96,4 @@ class DrawerForm extends React.Component {
   }
 }
 
-DrawerForm.propTypes = {
-  form: PropTypes.isRequired,
-};
-
-const AddGenerator = Form.create()(DrawerForm);
 export default AddGenerator;

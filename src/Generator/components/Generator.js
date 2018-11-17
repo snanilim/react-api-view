@@ -2,83 +2,112 @@ import React from 'react';
 import {
   Table,
   Divider,
-  Tag,
+  Button,
   Card,
 } from 'antd';
 import AddGenerator from './AddGenerator';
 
-const columns = [{
-  title: 'Name',
-  dataIndex: 'name',
-  key: 'name',
-  render: text => <a href="javascript:;">{text}</a>,
-}, {
-  title: 'Role',
-  dataIndex: 'role',
-  key: 'role',
-}, {
-  title: 'Address',
-  dataIndex: 'address',
-  key: 'address',
-}, {
-  title: 'Status',
-  key: 'status',
-  dataIndex: 'status',
-}, {
-  title: 'Action',
-  key: 'action',
-  render: (text, record) => (
-    <span>
-      <a href="javascript:;">Edit</a>
-      <Divider type="vertical" />
-      <a href="javascript:;">Delete</a>
-    </span>
-  ),
-}];
+const { Column } = Table;
 
-const data = [{
-  key: '1',
-  name: 'John Brown',
-  role: 'Admin',
-  address: 'New York No. 1 Lake Park',
-  status: 'Active',
-}, {
-  key: '2',
-  name: 'MR Brown',
-  role: 'User',
-  address: 'New York No. 1 Lake Park',
-  status: 'Active',
-}, {
-  key: '3',
-  name: 'HR Hasan',
-  role: 'Admin',
-  address: 'New York No. 1 Lake Park',
-  status: 'Active',
-}, {
-  key: '4',
-  name: 'MD Rana',
-  role: 'Admin',
-  address: 'New York No. 1 Lake Park',
-  status: 'Active',
-}, {
-  key: '5',
-  name: 'MR Brown',
-  role: 'User',
-  address: 'New York No. 1 Lake Park',
-  status: 'Disable',
-}];
+const data = [];
+for (let i = 0; i < 46; i++) {
+  data.push({
+    key: i,
+    name: `Edward King ${i}`,
+    age: 32,
+    address: `London, Park Lane no. ${i}`,
+  });
+}
 
 class Generator extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { visible: false };
+    this.state = {
+      selectedRowKeys: [], // Check here to configure the default column
+      loading: false,
+    };
+  }
+
+  start = () => {
+    this.setState({ loading: true });
+    // ajax request after empty completing
+    setTimeout(() => {
+      this.setState({
+        selectedRowKeys: [],
+        loading: false,
+      });
+    }, 1000);
+  }
+
+  onSelectChange = (selectedRowKeys) => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    this.setState({ selectedRowKeys });
   }
 
   render() {
+    const { loading, selectedRowKeys } = this.state;
+    const rowSelection = {
+      selectedRowKeys,
+      onChange: this.onSelectChange,
+    };
+    const hasSelected = selectedRowKeys.length > 0;
     return (
       <Card className="ctm-100-vh">
         <AddGenerator />
-        <Table columns={columns} dataSource={data} />
+        <div>
+          <div style={{ marginBottom: 16 }}>
+            <Button
+              type="primary"
+              onClick={this.start}
+              disabled={!hasSelected}
+              loading={loading}
+            >
+              Bulk Download
+            </Button>
+            <span style={{ marginLeft: 8 }}>
+              {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
+            </span>
+          </div>
+          <Table rowSelection={rowSelection} dataSource={data}>
+            <Column
+                title="Name"
+                dataIndex="name"
+                key="name"
+              />
+            <Column
+              title="Age"
+              dataIndex="age"
+              key="age"
+            />
+            <Column
+              title="Address"
+              dataIndex="address"
+              key="address"
+            />
+             <Column
+              title="Action"
+              key="action"
+              render={(text, record) => (
+                <span>
+                  <a href="javascript:;">View</a>
+                  <Divider type="vertical" />
+                  <a href="javascript:;">Download</a>
+                </span>
+              )}
+            />
+            <Column
+              title="Action"
+              key="action"
+              render={(text, record) => (
+                <span>
+                  <a href="javascript:;">Edit</a>
+                  <Divider type="vertical" />
+                  <a href="javascript:;">Delete</a>
+                </span>
+              )}
+            />
+          </Table>
+        </div>
       </Card>
     );
   }
