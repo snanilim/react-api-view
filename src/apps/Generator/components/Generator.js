@@ -52,7 +52,7 @@ class Generator extends React.Component {
     };
     const hasSelected = selectedRowKeys.length > 0;
     return (
-      <Card className="ctm-100-vh">
+      <div>
         <AddGenerator />
         <div>
           <div style={{ marginBottom: 16 }}>
@@ -108,7 +108,7 @@ class Generator extends React.Component {
             />
           </Table>
         </div>
-      </Card>
+      </div>
     );
   }
 }

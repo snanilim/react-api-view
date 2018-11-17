@@ -8,16 +8,17 @@ import {
 import isAuthenticated from './isAuthenticated';
 
 
-import Login from '../Auth/components/Login';
-import Signup from '../Auth/components/Signup';
+import Login from '../apps/Auth/components/Login';
+import Signup from '../apps/Auth/components/Signup';
 import AuthLayout from '../Layout/AuthLayout';
 import DashboardLayout from '../Layout/DashboardLayout';
-import Dashboard from '../Dashboard/Dashboard';
-import User from '../User/components/User';
-import Role from '../Role/components/Role';
-import Product from '../Product/components/Product';
-import Material from '../Material/components/Material';
-import Generator from '../Generator/components/Generator';
+import Dashboard from '../apps/Dashboard/Dashboard';
+import User from '../apps/User/components/User';
+import Role from '../apps/Role/components/Role';
+import Product from '../apps/Product/components/Product';
+import Material from '../apps/Material/components/Material';
+import Generator from '../apps/Generator/components/Generator';
+import Settings from '../apps/Settings/component/Settings';
 
 const PrivateRoute = ({ layout: Layout, component: Component, ...rest }) => (
   <Route
@@ -69,6 +70,7 @@ const Routes = () => {
       <PrivateRoute exact path="/product" layout={DashboardLayout} component={Product} />
       <PrivateRoute exact path="/material" layout={DashboardLayout} component={Material} />
       <PrivateRoute exact path="/generator" layout={DashboardLayout} component={Generator} />
+      <PrivateRoute exact path="/settings" layout={DashboardLayout} component={Settings} />
     </Switch>
   );
 };

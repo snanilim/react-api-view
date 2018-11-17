@@ -33,7 +33,7 @@ class User extends React.Component {
   render() {
     const { users } = this.props;
     return (
-      <Card className="ctm-100-vh">
+      <div>
         <AddUser />
         <EditUser />
         <div>
@@ -71,7 +71,7 @@ class User extends React.Component {
             />
           </Table>
         </div>
-      </Card>
+      </div>
     );
   }
 }

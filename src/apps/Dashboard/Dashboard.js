@@ -8,9 +8,9 @@ function onPanelChange(value, mode) {
 
 const Dashboard = () => {
   return (
-    <Card className="ctm-100-vh">
+    <div>
       <Calendar onPanelChange={onPanelChange} />
-    </Card>
+    </div>
   );
 };
 

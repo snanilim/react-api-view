@@ -76,10 +76,10 @@ class Role extends React.Component {
 
   render() {
     return (
-      <Card className="ctm-100-vh">
+      <div>
         <AddRole />
         <Table columns={columns} dataSource={data} />
-      </Card>
+      </div>
     );
   }
 }

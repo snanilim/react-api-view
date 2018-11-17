@@ -16,21 +16,16 @@ module.exports = {
 	],
 	parser: 'babel-eslint',
 	parserOptions: {
-		ecmaVersion: 6,
+		ecmaVersion: 2018,
 		sourceType: 'module',
 		ecmaFeatures: {
 			jsx: true
 		}
 	},
-	// settings: {
-	// 	'import/resolver': {
-	// 		webpack: {
-	// 			config: path.join(__dirname, 'config', 'webpack.base.config.js'),
-	// 		},
-	// 	},
-	// },
+
 	rules: {
 		'indent':'off',
+		"react/jsx-indent": [4, 4],
         'react/jsx-filename-extension': ['error', { extensions: ['.js'] }], // airbnb is using .jsx
         'arrow-body-style': 'off',
 	},

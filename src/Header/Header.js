@@ -8,7 +8,7 @@ import {
   Menu,
   Icon,
 } from 'antd';
-import { logout } from '../Auth/authAction';
+import { logout } from '../apps/Auth/authAction';
 
 
 class Header extends React.Component {

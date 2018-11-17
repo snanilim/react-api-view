@@ -76,10 +76,10 @@ class User extends React.Component {
 
   render() {
     return (
-      <Card className="ctm-100-vh">
+      <div>
         <AddUser />
         <Table columns={columns} dataSource={data} />
-      </Card>
+      </div>
     );
   }
 }

@@ -53,6 +53,10 @@ class Sidebar extends React.Component {
             <Icon type="mail" />
             <Link to="/generator">Generator</Link>
           </Menu.Item>
+          <Menu.Item key="settings">
+            <Icon type="setting" />
+            <Link to="/settings">Settings</Link>
+          </Menu.Item>
         </Menu>
       </div>
     );

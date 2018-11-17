@@ -76,10 +76,10 @@ class Product extends React.Component {
 
   render() {
     return (
-      <Card className="ctm-100-vh">
+      <div>
         <AddProduct />
         <Table columns={columns} dataSource={data} />
-      </Card>
+      </div>
     );
   }
 }

@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signup } from '../authAction';
 import { facebookLogin, googleLogin } from '../oauthAction';
-import Messages from '../../Others/Messages';
+import Messages from '../../../Others/Messages';
 
 class Signup extends React.Component {
   constructor(props) {

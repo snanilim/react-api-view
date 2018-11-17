@@ -4,6 +4,7 @@ import {
   Layout,
   Row,
   Col,
+  Card,
 } from 'antd';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
@@ -21,7 +22,9 @@ const DashboardLayout = ({ children = null }) => {
               <Sidebar />
             </Col>
             <Col xs={24} sm={24} md={24} lg={18} xl={19} xxl={20}>
-              {children}
+              <Card className="ctm-min-100-vh">
+                {children}
+              </Card>
             </Col>
           </Row>
         </div>

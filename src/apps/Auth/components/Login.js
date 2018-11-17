@@ -31,10 +31,10 @@ class LoginForm extends React.Component {
     });
   }
 
-  render() {
+    render() {
     const { form } = this.props;
-    return (
-      <div>
+        return (
+        <div>
         <Card className="ctm-100-vh border-0">
           <h2 className="text-center"> Admin Panel </h2>
           <h4> Login </h4>
@@ -82,7 +82,7 @@ class LoginForm extends React.Component {
           </Form>
 
         </Card>
-      </div>
+        </div>
     );
   }
 }
