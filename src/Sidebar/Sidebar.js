@@ -34,23 +34,19 @@ class Sidebar extends React.Component {
             <Link to="/dashboard">Dashboard</Link>
           </Menu.Item>
           <Menu.Item key="user">
-            <Icon type="user" />
+            <Icon type="user-add" />
             <Link to="/user">User</Link>
           </Menu.Item>
-          <Menu.Item key="role">
-            <Icon type="mail" />
-            <Link to="/role">Role</Link>
-          </Menu.Item>
-          <Menu.Item key="product">
-            <Icon type="mail" />
-            <Link to="/product">Product</Link>
-          </Menu.Item>
           <Menu.Item key="meterial">
-            <Icon type="mail" />
+            <Icon type="experiment" />
             <Link to="/material">Material</Link>
           </Menu.Item>
+          <Menu.Item key="cost">
+            <Icon type="dollar" />
+            <Link to="/cost">Cost</Link>
+          </Menu.Item>
           <Menu.Item key="generate">
-            <Icon type="mail" />
+            <Icon type="deployment-unit" />
             <Link to="/generator">Generator</Link>
           </Menu.Item>
         </Menu>

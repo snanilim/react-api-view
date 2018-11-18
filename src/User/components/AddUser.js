@@ -25,7 +25,6 @@ class DrawerForm extends React.Component {
     e.preventDefault();
     const { form, dispatch } = this.props;
     form.validateFields((err, values) => {
-      console.log('values', values);
       if (!err) {
         dispatch(createUser(
           values.name,

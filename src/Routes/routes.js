@@ -65,7 +65,6 @@ const Routes = () => {
       <SkipRoute path="/signup" exact layout={AuthLayout} component={Signup} />
       <PrivateRoute exact path="/dashboard" layout={DashboardLayout} component={Dashboard} />
       <PrivateRoute exact path="/user" layout={DashboardLayout} component={User} />
-      <PrivateRoute exact path="/role" layout={DashboardLayout} component={Role} />
       <PrivateRoute exact path="/product" layout={DashboardLayout} component={Product} />
       <PrivateRoute exact path="/material" layout={DashboardLayout} component={Material} />
       <PrivateRoute exact path="/generator" layout={DashboardLayout} component={Generator} />
