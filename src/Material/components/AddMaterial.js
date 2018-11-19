@@ -9,6 +9,7 @@ import {
   Col,
   Row,
   Input,
+  InputNumber,
 } from 'antd';
 import { createMaterial } from '../materialAction';
 
@@ -22,6 +23,7 @@ class DrawerForm extends React.Component {
     e.preventDefault();
     const { form, dispatch } = this.props;
     form.validateFields((err, values) => {
+      console.log(values);
       if (!err) {
         dispatch(createMaterial(
           values.name,
@@ -88,7 +90,7 @@ class DrawerForm extends React.Component {
                 <Form.Item label="Weight">
                   {form.getFieldDecorator('weight', {
                     rules: [{ required: true, message: 'please enter weight' }],
-                  })(<Input placeholder="please enter weight" />)}
+                  })(<InputNumber type="number" placeholder="please enter weight" />)}
                 </Form.Item>
               </Col>
 
@@ -96,7 +98,7 @@ class DrawerForm extends React.Component {
                 <Form.Item label="Value">
                   {form.getFieldDecorator('value', {
                     rules: [{ required: true, message: 'please enter value' }],
-                  })(<Input placeholder="please enter value" />)}
+                  })(<InputNumber type="number" placeholder="please enter value" />)}
                 </Form.Item>
               </Col>
             </Row>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Table,
   Divider,
@@ -8,11 +9,22 @@ import {
   Card,
 } from 'antd';
 import AddMaterial from './AddMaterial';
+import { materials } from '../materialAction';
 
 class Material extends React.Component {
+  static propTypes = {
+    dispatch: PropTypes.isRequired,
+    materials: PropTypes.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = { visible: false };
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(materials());
   }
 
   render() {
