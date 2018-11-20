@@ -14,9 +14,9 @@ import AuthLayout from '../Layout/AuthLayout';
 import DashboardLayout from '../Layout/DashboardLayout';
 import Dashboard from '../Dashboard/Dashboard';
 import User from '../User/components/User';
-import Role from '../Role/components/Role';
 import Product from '../Product/components/Product';
 import Material from '../Material/components/Material';
+import Cost from '../Cost/components/Cost';
 import Generator from '../Generator/components/Generator';
 
 const PrivateRoute = ({ layout: Layout, component: Component, ...rest }) => (
@@ -67,6 +67,7 @@ const Routes = () => {
       <PrivateRoute exact path="/user" layout={DashboardLayout} component={User} />
       <PrivateRoute exact path="/product" layout={DashboardLayout} component={Product} />
       <PrivateRoute exact path="/material" layout={DashboardLayout} component={Material} />
+      <PrivateRoute exact path="/cost" layout={DashboardLayout} component={Cost} />
       <PrivateRoute exact path="/generator" layout={DashboardLayout} component={Generator} />
     </Switch>
   );
