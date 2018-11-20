@@ -5,7 +5,7 @@ exports.createMaterial = async (req, res, next) => {
   const { body: data } = req;
   const { headers: token } = req;
   try {
-    const url = 'http://localhost:4000/v1/material';
+    const url = 'http://localhost:4000/v1/cost';
     const body = JSON.stringify(data);
     const headers = {
       'Content-Type': 'application/json',
@@ -19,10 +19,10 @@ exports.createMaterial = async (req, res, next) => {
   }
 };
 
-exports.materials = async (req, res, next) => {
+exports.costs = async (req, res, next) => {
   const { headers: token } = req;
   try {
-    const url = 'http://localhost:4000/v1/material';
+    const url = 'http://localhost:4000/v1/cost';
     const headers = {
       'Content-Type': 'application/json',
       Authorization: token.authorization,
@@ -39,7 +39,7 @@ exports.getOneMaterial = async (req, res, next) => {
   const { headers: token } = req;
   const { params } = req;
   try {
-    const url = `http://localhost:4000/v1/material/${params.materialID}`;
+    const url = `http://localhost:4000/v1/cost/${params.costID}`;
     const headers = {
       'Content-Type': 'application/json',
       Authorization: token.authorization,
