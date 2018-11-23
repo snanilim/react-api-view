@@ -6,7 +6,7 @@ import {
   Popconfirm,
   Form,
 } from 'antd';
-import AddProduct from './AddProduct';
+import AddMaterial from './AddMaterial';
 
 const data = [];
 for (let i = 0; i < 10; i++) {
@@ -71,7 +71,7 @@ class EditableCell extends React.Component {
   }
 }
 
-class ProductTab extends React.Component {
+class MaterialTab extends React.Component {
   constructor(props) {
     super(props);
     this.state = { data, editingKey: '' };
@@ -190,7 +190,7 @@ class ProductTab extends React.Component {
 
     return (
       <div>
-        <AddProduct />
+        <AddMaterial />
         <Table
           components={components}
           bordered
@@ -202,4 +202,4 @@ class ProductTab extends React.Component {
     );
   }
 }
-export default ProductTab;
+export default MaterialTab;

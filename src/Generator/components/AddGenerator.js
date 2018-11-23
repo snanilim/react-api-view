@@ -8,8 +8,9 @@ import {
   Row,
   Tabs,
 } from 'antd';
-import ProductTab from './ProductTab';
+import BasicInfoTab from './BasicInfoTab';
 import MaterialTab from './MaterialTab';
+import CostTab from './CostTab';
 
 const TabPane = Tabs.TabPane;
 
@@ -64,8 +65,9 @@ class AddGenerator extends React.Component {
           }}
         >
           <Tabs defaultActiveKey="1" onChange={this.callback}>
-            <TabPane tab="Products" key="1"><ProductTab /></TabPane>
+            <TabPane tab="Basic Info" key="1"><BasicInfoTab /></TabPane>
             <TabPane tab="Materials" key="2"><MaterialTab /></TabPane>
+            <TabPane tab="Cost" key="3"><CostTab /></TabPane>
           </Tabs>
           <div
             style={{
@@ -88,7 +90,7 @@ class AddGenerator extends React.Component {
             >
               Cancel
             </Button>
-            <Button onClick={this.onClose} type="primary">Submit</Button>
+            <Button onClick={this.onClose} type="primary">Save</Button>
           </div>
         </Drawer>
       </div>

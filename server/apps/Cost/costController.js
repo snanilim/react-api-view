@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const { resMsg } = require('../../helper/resMsg');
 
-exports.createMaterial = async (req, res, next) => {
+exports.createCost = async (req, res, next) => {
   const { body: data } = req;
   const { headers: token } = req;
   try {
@@ -35,7 +35,7 @@ exports.costs = async (req, res, next) => {
   }
 };
 
-exports.getOneMaterial = async (req, res, next) => {
+exports.getOneCost = async (req, res, next) => {
   const { headers: token } = req;
   const { params } = req;
   try {
