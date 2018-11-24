@@ -1,21 +1,29 @@
 import React from 'react';
-import { Modal, Button, Checkbox, List } from 'antd';
-
-const data = [
-    'Racing car',
-    'Japanese',
-    'Australian walks',
-    'Man charged',
-    'Los Angeles',
-    'Racing car',
-    'Japanese',
-    'Australian walks',
-    'Man charged',
-    'Los Angeles',
-];
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import {
+  Modal,
+  Button,
+  Row,
+  Col,
+} from 'antd';
+import { addMaterial } from '../generatorAction';
 
 class AddMaterial extends React.Component {
-  state = { visible: false }
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false,
+      materials: [],
+    };
+  }
+
+  componentWillReceiveProps(newProps) {
+    console.log('newProps', newProps);
+    this.setState({
+      materials: newProps.materials,
+    });
+  }
 
   showModal = () => {
     this.setState({
@@ -24,42 +32,82 @@ class AddMaterial extends React.Component {
   }
 
   handleOk = (e) => {
-    console.log(e);
+    const { dispatch } = this.props;
+    const { materials } = this.state;
+    dispatch(addMaterial(materials));
+
     this.setState({
       visible: false,
     });
   }
 
   handleCancel = (e) => {
-    console.log(e);
+    e.preventDefault();
     this.setState({
       visible: false,
     });
   }
 
+  handleInputChange = (event) => {
+    const id = event.target.name;
+    const materials = this.state.materials;
+    const index = materials.findIndex(item => item.id === id);
+    console.log('index', materials[index].view);
+    materials[index].view = !materials[index].view;
+    this.setState({
+      materials,
+    });
+  }
+
   render() {
+    const materials = this.state.materials;
+    const checkList = [];
+    for (let i = 0; i < materials.length; i++) {
+      checkList.push(
+        <div className="form-check">
+          <input type="checkbox" className="form-check-input" name={materials[i].id} onChange={this.handleInputChange} checked={materials[i].view} />
+          <label className="form-check-label" for="exampleCheck1">{materials[i].name}</label>
+        </div>,
+      );
+    }
+
     return (
       <div>
-        <Button type="primary" onClick={this.showModal}>
-          + Add Material
-        </Button>
+        <Row>
+          <Col span={8}>
+            <h4 className="float-left">Material List</h4>
+          </Col>
+          <Col span={8} offset={8}>
+            <Button type="primary" onClick={this.showModal}>
+              + Update Material List
+            </Button>
+          </Col>
+        </Row>
         <Modal
           title="Basic Modal"
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
-            <h3 style={{ margin: '16px 0' }}>Select Material</h3>
-            <List
-            size="large"
-            bordered
-            dataSource={data}
-            renderItem={item => (<List.Item><Checkbox>{item}</Checkbox></List.Item>)}
-            />
+          <h3 style={{ margin: '16px 0' }}>Select Material</h3>
+          {/* <List
+          size="large"
+          bordered
+          dataSource={this.props.materials}
+          renderItem={item => (<List.Item><Checkbox>{item}</Checkbox></List.Item>)}
+          /> */}
+          {checkList}
         </Modal>
       </div>
     );
   }
 }
 
-export default AddMaterial;
+const mapStateToProps = (state) => {
+  return {
+    messages: state.messages,
+    materials: state.generator.allData,
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(AddMaterial));

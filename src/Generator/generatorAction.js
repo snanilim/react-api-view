@@ -94,6 +94,15 @@ export const changePCS = (pisces) => {
   };
 };
 
+export const addMaterial = (newMaterials) => {
+  return async (dispatch) => {
+    return dispatch({
+      type: 'ADD_REMOVE_MATERIALS',
+      materials: newMaterials,
+    });
+  };
+};
+
 export const toogleDrwer = (value) => {
   return async (dispatch) => {
     return dispatch({

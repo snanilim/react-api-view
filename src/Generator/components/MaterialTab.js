@@ -39,8 +39,8 @@ class MaterialTab extends React.Component {
             />
             <Column
               title="Weight"
-              dataIndex="weight"
-              key="weight"
+              dataIndex="newWeight"
+              key="newWeight"
             />
             <Column
               title="Wastage"
@@ -49,8 +49,8 @@ class MaterialTab extends React.Component {
             />
             <Column
               title="Value"
-              dataIndex="value"
-              key="value"
+              dataIndex="newValue"
+              key="newValue"
             />
 
           </Table>

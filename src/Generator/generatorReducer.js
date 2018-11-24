@@ -2,14 +2,17 @@ const initialState = {
     cost: {},
     pisces: 1,
     materials: [],
+    allData: [],
 };
 
 const mngMaterial = () => {
-    console.log('materials', initialState.materials);
-    const newMaterial = initialState.materials.map((item) => {
-        item.weight = (item.weight / initialState.pisces).toFixed(4);
-        item.wastage = ((item.weight / 100) * 25).toFixed(4);
-        item.value = (item.value / initialState.pisces).toFixed(4);
+    const materials = initialState.materials;
+    const newMaterial = materials
+    .filter(item => item.view === true)
+    .map((item) => {
+        item.newWeight = (item.weight / initialState.pisces).toFixed(4);
+        item.wastage = ((item.newWeight / 100) * 25).toFixed(4);
+        item.newValue = (item.value / initialState.pisces).toFixed(4);
         console.log('item', item);
         return item;
     });
@@ -27,6 +30,7 @@ export default function auth(state = initialState, action) {
 
             return Object.assign({}, state, {
                 data: value,
+                allData: action.data,
             });
 
         case 'CHANGE_PISCES':
@@ -35,6 +39,15 @@ export default function auth(state = initialState, action) {
 
             return Object.assign({}, state, {
                 data: valuePCS,
+            });
+
+        case 'ADD_REMOVE_MATERIALS':
+            console.log('action.materials', action.materials);
+            initialState.materials = action.materials;
+            const newMaterial = mngMaterial();
+
+            return Object.assign({}, state, {
+                data: newMaterial,
             });
         default:
         return state;
