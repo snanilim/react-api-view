@@ -64,11 +64,11 @@ class AddMaterial extends React.Component {
     const checkList = [];
 
     // eslint-disable-next-line no-restricted-syntax
-    for (const i of materials) {
+    for (const item of materials) {
       checkList.push(
         <div className="form-check">
-          <input type="checkbox" id={materials[i].id} className="form-check-input" name={materials[i].id} onChange={this.handleInputChange} checked={materials[i].view} />
-          <label className="form-check-label" htmlFor={materials[i].id}>{materials[i].name}</label>
+          <input type="checkbox" id={item.id} className="form-check-input" name={item.id} onChange={this.handleInputChange} checked={item.view} />
+          <label className="form-check-label" htmlFor={item.id}>{item.name}</label>
         </div>,
       );
     }

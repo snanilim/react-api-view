@@ -9,7 +9,7 @@ import {
   Card,
 } from 'antd';
 import AddCost from './AddCost';
-import { materials } from '../costAction';
+import { costs } from '../costAction';
 
 class Cost extends React.Component {
   static propTypes = {
@@ -24,7 +24,7 @@ class Cost extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(materials());
+    dispatch(costs());
   }
 
   render() {
@@ -33,16 +33,11 @@ class Cost extends React.Component {
       <Card className="ctm-100-vh">
         <AddCost />
         <div>
-          <Table dataSource={materials}>
+          <Table dataSource={costs}>
             <Column
               title="Name"
               dataIndex="name"
               key="name"
-            />
-            <Column
-              title="Weight"
-              dataIndex="weight"
-              key="weight"
             />
             <Column
               title="Value"

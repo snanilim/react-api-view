@@ -60,6 +60,31 @@ export const materials = () => {
   };
 };
 
+export const costs = () => {
+  return async (dispatch) => {
+    dispatch({ type: 'CLEAR_MESSAGES' });
+    try {
+      const response = await axios({
+        method: 'get',
+        url: '/v1/cost',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookieValue}`,
+        },
+      });
+      return dispatch({
+        type: 'GENERATOR_COSTS_SUCCESS',
+        data: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: 'GENERATOR_COSTS_FAILURE',
+        messages: error,
+      });
+    }
+  };
+};
+
 export const getOneMaterial = (materialId) => {
   return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
@@ -94,11 +119,29 @@ export const changePCS = (pisces) => {
   };
 };
 
+export const changeCostValues = (values) => {
+  return async (dispatch) => {
+    return dispatch({
+      type: 'CHANGE_COST_VALUES',
+      values,
+    });
+  };
+};
+
 export const addMaterial = (newMaterials) => {
   return async (dispatch) => {
     return dispatch({
       type: 'ADD_REMOVE_MATERIALS',
       materials: newMaterials,
+    });
+  };
+};
+
+export const addCost = (newCosts) => {
+  return async (dispatch) => {
+    return dispatch({
+      type: 'UPDATE_COSTS',
+      costs: newCosts,
     });
   };
 };

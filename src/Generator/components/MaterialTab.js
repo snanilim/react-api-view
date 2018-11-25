@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import {
   Table,
   Column,
-  Divider,
 } from 'antd';
 import AddMaterial from './AddMaterial';
 import MaterialcalCulator from './MaterialcalCulator';

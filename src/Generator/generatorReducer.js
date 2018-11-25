@@ -2,7 +2,21 @@ const initialState = {
     cost: {},
     pisces: 1,
     materials: [],
+    costs: [],
+    values: 1000,
     allData: [],
+    allCostData: [],
+};
+
+const mngCost = () => {
+    const costs = initialState.costs;
+    const newCost = costs
+    .filter(item => item.view === true)
+    .map((item) => {
+        item.newValue = (item.value / initialState.values).toFixed(4);
+        return item;
+    });
+    return newCost;
 };
 
 const mngMaterial = () => {
@@ -49,6 +63,32 @@ export default function auth(state = initialState, action) {
             return Object.assign({}, state, {
                 data: newMaterial,
             });
+
+        case 'GENERATOR_COSTS_SUCCESS':
+            initialState.costs = action.data;
+            const CostValue = mngCost();
+            console.log('CostValue', CostValue);
+            return Object.assign({}, state, {
+                costData: CostValue,
+                allCostData: action.data,
+            });
+
+        case 'CHANGE_COST_VALUES':
+            initialState.values = action.values;
+            const CostValuePCS = mngCost();
+
+            return Object.assign({}, state, {
+                costData: CostValuePCS,
+            });
+
+        case 'UPDATE_COSTS':
+            initialState.costs = action.costs;
+            const newCost = mngCost();
+
+            return Object.assign({}, state, {
+                costData: newCost,
+            });
+
         default:
         return state;
     }
