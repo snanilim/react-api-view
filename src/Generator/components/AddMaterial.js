@@ -60,13 +60,15 @@ class AddMaterial extends React.Component {
   }
 
   render() {
-    const materials = this.state.materials;
+    const { materials } = this.state;
     const checkList = [];
-    for (let i = 0; i < materials.length; i++) {
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const i of materials) {
       checkList.push(
         <div className="form-check">
-          <input type="checkbox" className="form-check-input" name={materials[i].id} onChange={this.handleInputChange} checked={materials[i].view} />
-          <label className="form-check-label" for="exampleCheck1">{materials[i].name}</label>
+          <input type="checkbox" id={materials[i].id} className="form-check-input" name={materials[i].id} onChange={this.handleInputChange} checked={materials[i].view} />
+          <label className="form-check-label" htmlFor={materials[i].id}>{materials[i].name}</label>
         </div>,
       );
     }
