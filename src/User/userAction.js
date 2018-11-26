@@ -13,7 +13,6 @@ export const createUser = (name, email, address, password, role, status) => {
         url: '/v1/user',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${cookieValue}`,
         },
         data: JSON.stringify({
           name,
@@ -47,7 +46,6 @@ export const users = () => {
         url: '/v1/user',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${cookieValue}`,
         },
       });
       return dispatch({
@@ -72,7 +70,6 @@ export const getOneUser = (userId) => {
         url: `/v1/user/${userId}`,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${cookieValue}`,
         },
       });
       return dispatch({

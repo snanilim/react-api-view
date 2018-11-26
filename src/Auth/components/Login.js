@@ -65,20 +65,6 @@ class LoginForm extends React.Component {
               Log in
             </Button>
 
-            <FormItem>
-              {form.getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true,
-              })(
-                <Checkbox>Remember me</Checkbox>,
-              )}
-              <a className="login-form-forgot float-right" href="/">Forgot password</a>
-              <Divider>
-                or
-                <Link to="/signup"> SignUp </Link>
-              </Divider>
-            </FormItem>
-
           </Form>
 
         </Card>

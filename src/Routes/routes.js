@@ -5,7 +5,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import isAuthenticated from './isAuthenticated';
+import { isAuthenticated } from './isAuthenticated';
 
 
 import Login from '../Auth/components/Login';
