@@ -32,7 +32,7 @@ class CostTab extends React.Component {
       profit.newValue = +((costSum / 100) * 5).toFixed(2);
       const sumWithProfit = costSum + profit.newValue;
       const roundSumWithProfit = Math.round(sumWithProfit);
-      profit.newValue = profit.newValue + Math.round((roundSumWithProfit - sumWithProfit));
+      profit.newValue = +(profit.newValue + (roundSumWithProfit - sumWithProfit)).toFixed(2);
       costList.push(profit);
 
       this.setState({
