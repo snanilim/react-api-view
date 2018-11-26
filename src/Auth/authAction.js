@@ -3,6 +3,7 @@ import moment from 'moment';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { setAuthTokenToHeader } from '../Routes/isAuthenticated';
 
 const cookies = new Cookies();
 
@@ -26,6 +27,7 @@ export const login = (email, password, props) => {
       });
       console.log('response', response.data.token.accessToken);
       await cookieSet(response.data);
+      await setAuthTokenToHeader(response.data);
       dispatch({
         type: 'LOGIN_SUCCESS',
         token: response.token,

@@ -12,7 +12,7 @@ const AuthLayout = ({ children = null }) => {
       <Layout className="ctm-100-vh">
         <Row>
           <Col lg={18} className="ctm-100-vh ctm-overflow-hide">
-            <img src="/img/bg-19.jpg" className="img-fluid" alt="Responsive" />
+            <img src="/img/fire.jpg" className="img-fluid" alt="Responsive bg-19" /> 
           </Col>
           <Col lg={6}>
             {children}
