@@ -23,8 +23,26 @@ class CostTab extends React.Component {
     dispatch(costs());
   }
 
+  componentWillReceiveProps(newProps) {
+    const costList = newProps.costs;
+    if (costList.length > 0) {
+      const costSum = costList.reduce((a, b) => a.newValue + b.newValue);
+      const profit = {};
+      profit.name = 'profit';
+      profit.newValue = +((costSum / 100) * 5).toFixed(2);
+      const sumWithProfit = costSum + profit.newValue;
+      const roundSumWithProfit = Math.round(sumWithProfit);
+      profit.newValue = profit.newValue + Math.round((roundSumWithProfit - sumWithProfit));
+      costList.push(profit);
+
+      this.setState({
+        costs: costList,
+      });
+    }
+  }
+
   render() {
-    const { costs } = this.props;
+    const { costs } = this.state;
     return (
       <div>
         <CostcalCulator />
@@ -35,16 +53,6 @@ class CostTab extends React.Component {
               title="Name"
               dataIndex="name"
               key="name"
-            />
-            <Column
-              title="Weight"
-              dataIndex="newWeight"
-              key="newWeight"
-            />
-            <Column
-              title="Wastage"
-              dataIndex="wastage"
-              key="wastage"
             />
             <Column
               title="Value"

@@ -6,6 +6,7 @@ const initialState = {
     values: 1000,
     allData: [],
     allCostData: [],
+    costData: [],
 };
 
 const mngCost = () => {
@@ -13,7 +14,9 @@ const mngCost = () => {
     const newCost = costs
     .filter(item => item.view === true)
     .map((item) => {
-        item.newValue = (item.value / initialState.values).toFixed(4);
+        item.newValue = +(item.value / initialState.values).toFixed(2);
+        // console.log('newValue', newValue);
+        // item.newValue = parseFloat(newValue);
         return item;
     });
     return newCost;
