@@ -11,6 +11,7 @@ import {
 import BasicInfoTab from './BasicInfoTab';
 import MaterialTab from './MaterialTab';
 import CostTab from './CostTab';
+import FullTable from './FullTable';
 
 const TabPane = Tabs.TabPane;
 
@@ -53,7 +54,7 @@ class AddGenerator extends React.Component {
 
         <Drawer
           title="Create"
-          width={820}
+          width={1220}
           placement="right"
           onClose={this.onClose}
           maskClosable={false}
@@ -68,6 +69,7 @@ class AddGenerator extends React.Component {
             <TabPane tab="Basic Info" key="1"><BasicInfoTab /></TabPane>
             <TabPane tab="Materials" key="2"><MaterialTab /></TabPane>
             <TabPane tab="Cost" key="3"><CostTab /></TabPane>
+            <TabPane tab="Full Table" key="4"><FullTable /></TabPane>
           </Tabs>
           <div
             style={{
