@@ -7,17 +7,70 @@ import ReactToPrint from "react-to-print";
 class FullTable extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { visible: false };
+    this.state = {
+      materials: [],
+      costs: [],
+     };
+  }
+  componentDidMount() {
+    const { materials, costs } = this.props;
+    this.setState({
+      materials,
+      costs,
+    });
+  }
+
+  componentWillReceiveProps(newProps) {
+    const { materials, costs } = this.props;
+    this.setState({
+      materials,
+      costs,
+    });
   }
 
   render() {
-    const { materials, costs } = this.props;
-    const materialList = [];
+    const { materials, costs } = this.state;
+    const materialName = [];
+    const materialWeight = [];
+    const materialWastage = [];
+    const materialNewValue = [];
+
+    const costName = [];
+    const costValue = [];
     // eslint-disable-next-line no-restricted-syntax
     for (const item of materials) {
-      materialList.push(
+      materialName.push(
         <ul className="form-check">
           <li>{item.name}</li>
+        </ul>,
+      );
+      materialWeight.push(
+        <ul className="form-check">
+          <li>{item.newWeight}</li>
+        </ul>,
+      );
+      materialWastage.push(
+        <ul className="form-check">
+          <li>{item.wastage}</li>
+        </ul>,
+      );
+      materialNewValue.push(
+        <ul className="form-check">
+          <li>{item.newValue}</li>
+        </ul>,
+      );
+    }
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const item of costs) {
+      costName.push(
+        <ul className="form-check">
+          <li>{item.name}</li>
+        </ul>,
+      );
+      costValue.push(
+        <ul className="form-check">
+          <li>{item.newValue}</li>
         </ul>,
       );
     }
@@ -101,23 +154,23 @@ class FullTable extends React.Component {
               <th>16</th>
             </tr>
             <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <th>{materialList}</th>
-
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <th>1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <th>1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
+              <td>1</td>
+              <td></td>
+              <td></td>
+              <td>@</td>
+              <td>{materialName}</td>
+              <td>{materialWeight}</td>
+              <td>{materialWastage}</td>
+              <td>{materialNewValue}</td>
+              <td>{costName}</td>
+              <th>{costValue}</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <th></th>
+              <td></td>
+              <td></td>
+              <td></td>
             </tr>
             <tr>
               <td>Total</td>
@@ -144,19 +197,19 @@ class FullTable extends React.Component {
   }
 }
 
-class Example extends React.Component {
-  render() {
-    return (
-      <div>
-        <ReactToPrint
-          trigger={() => <a>Print this out!</a>}
-          content={() => this.componentRef}
-        />
-        <FullTable ref={el => (this.componentRef = el)} />
-      </div>
-    );
-  }
-}
+// class Example extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <ReactToPrint
+//           trigger={() => <a>Print this out!</a>}
+//           content={() => this.componentRef}
+//         />
+//         <FullTable ref={el => (this.componentRef = el)} />
+//       </div>
+//     );
+//   }
+// }
 
 const mapStateToProps = (state) => {
   return {
@@ -166,4 +219,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(Example));
+export default withRouter(connect(mapStateToProps)(FullTable));

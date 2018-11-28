@@ -17,4 +17,8 @@
     position: relative;
     top: 3px;
 }
+table ul {
+    list-style-type: none;
+    padding: 0 !important;
+}
 /* Custom Common CSS end */
