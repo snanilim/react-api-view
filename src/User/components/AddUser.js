@@ -134,8 +134,8 @@ class DrawerForm extends React.Component {
                     rules: [{ required: true, message: 'Please choose the status' }],
                   })(
                     <Select placeholder="Please choose the status">
-                      <Option value="active">Active</Option>
-                      <Option value="disable">Disable</Option>
+                      <Option value={1}>Active</Option>
+                      <Option value={0}>Disable</Option>
                     </Select>,
                   )}
                 </Form.Item>

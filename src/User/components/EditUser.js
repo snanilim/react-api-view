@@ -18,15 +18,16 @@ const { Option } = Select;
 class DrawerForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
-    const { form, dispatch } = this.props;
+
+    const { form, dispatch, user} = this.props;
     form.validateFields((err, values) => {
       console.log('values', values);
       if (!err) {
         dispatch(updateUser(
+          user.id,
           values.name,
           values.email,
           values.address,
-          values.password,
           values.role,
           values.status,
         ));
@@ -63,6 +64,7 @@ class DrawerForm extends React.Component {
               <Col span={12}>
                 <Form.Item label="Name">
                   {form.getFieldDecorator('name', {
+                    initialValue: user.name,
                     rules: [{ required: true, message: 'please enter user name' }],
                   })(<Input value="asd" placeholder="please enter user name" />)}
                 </Form.Item>
@@ -88,12 +90,14 @@ class DrawerForm extends React.Component {
               <Col span={12}>
                 <Form.Item label="Address">
                   {form.getFieldDecorator('address', {
+                    initialValue: user.address,
                   })(<Input placeholder="please enter user name" />)}
                 </Form.Item>
               </Col>
               <Col span={12}>
                 <Form.Item label="Role">
                   {form.getFieldDecorator('role', {
+                    initialValue: user.role,
                     rules: [{ required: true, message: 'Please select an role' }],
                   })(
                     <Select placeholder="Please select an role">
@@ -107,20 +111,14 @@ class DrawerForm extends React.Component {
 
             <Row gutter={16}>
               <Col span={12}>
-                <Form.Item label="Password">
-                  {form.getFieldDecorator('password', {
-                    rules: [{ required: true, message: 'Please select an password' }],
-                  })(<Input type="password" placeholder="please enter user password" />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
                 <Form.Item label="Status">
                   {form.getFieldDecorator('status', {
+                    initialValue: user.status,
                     rules: [{ required: true, message: 'Please choose the status' }],
                   })(
                     <Select placeholder="Please choose the status">
-                      <Option value="active">Active</Option>
-                      <Option value="disable">Disable</Option>
+                      <Option value={1}>Active</Option>
+                      <Option value={0}>Disable</Option>
                     </Select>,
                   )}
                 </Form.Item>

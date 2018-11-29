@@ -37,6 +37,39 @@ export const createUser = (name, email, address, password, role, status) => {
   };
 };
 
+
+export const updateUser = (userId, name, email, address, role, status) => {
+  return async (dispatch) => {
+    dispatch({ type: 'CLEAR_MESSAGES' });
+    try {
+      const response = await axios({
+        method: 'put',
+        url: `/v1/user/${userId}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: JSON.stringify({
+          name,
+          email,
+          address,
+          role,
+          status,
+        }),
+      });
+      // console.log('response', response.data.token.accessToken);
+      return dispatch({
+        type: 'UPDATE_USER_SUCCESS',
+        messages: Array.isArray(response.msg) ? response.msg : [response.msg],
+      });
+    } catch (error) {
+      return dispatch({
+        type: 'UPDATE_USER_FAILURE',
+        messages: error,
+      });
+    }
+  };
+};
+
 export const users = () => {
   return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
@@ -79,6 +112,30 @@ export const getOneUser = (userId) => {
     } catch (error) {
       return dispatch({
         type: 'ONE_USER_FAILURE',
+        messages: error,
+      });
+    }
+  };
+};
+
+export const deleteUser = (userId) => {
+  return async (dispatch) => {
+    dispatch({ type: 'CLEAR_MESSAGES' });
+    try {
+      const response = await axios({
+        method: 'delete',
+        url: `/v1/user/${userId}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      return dispatch({
+        type: 'DELETE_USER_SUCCESS',
+        data: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: 'DELETE_USER_FAILURE',
         messages: error,
       });
     }
