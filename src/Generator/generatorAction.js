@@ -4,21 +4,22 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 const cookieValue = cookies.get('token');
 
-export const createMaterial = (name, weight, value) => {
+export const createGenerator = (materials, costs, profitPercentage, basicinfo) => {
   return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
     try {
       const response = await axios({
         method: 'post',
-        url: '/v1/material',
+        url: '/v1/generator',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${cookieValue}`,
         },
         data: JSON.stringify({
-          name,
-          weight,
-          value,
+          materials,
+          costs,
+          profitPercentage,
+          basicinfo,
         }),
       });
       // console.log('response', response.data.token.accessToken);
@@ -60,6 +61,31 @@ export const materials = () => {
   };
 };
 
+export const generators = () => {
+  return async (dispatch) => {
+    dispatch({ type: 'CLEAR_MESSAGES' });
+    try {
+      const response = await axios({
+        method: 'get',
+        url: '/v1/generator',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookieValue}`,
+        },
+      });
+      return dispatch({
+        type: 'GENERATOR_SUCCESS',
+        data: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: 'GENERATOR_FAILURE',
+        messages: error,
+      });
+    }
+  };
+};
+
 export const costs = () => {
   return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
@@ -85,28 +111,40 @@ export const costs = () => {
   };
 };
 
-export const getOneMaterial = (materialId) => {
+export const getOneGenerator = (Id) => {
   return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
     try {
       const response = await axios({
         method: 'get',
-        url: `/v1/material/${materialId}`,
+        url: `/v1/generator/${Id}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${cookieValue}`,
         },
       });
       return dispatch({
-        type: 'ONE_MATERIAL_SUCCESS',
+        type: 'ONE_GENERATOR_SUCCESS',
         data: response.data,
       });
     } catch (error) {
       return dispatch({
-        type: 'ONE_MATERIAL_FAILURE',
+        type: 'ONE_GENERATOR_FAILURE',
         messages: error,
       });
     }
+  };
+};
+
+export const basicInfo = (productName, announceNumber, presentValue, dateValue) => {
+  return async (dispatch) => {
+    return dispatch({
+      type: 'CHANGE_BASIC_INFO',
+      productName,
+      announceNumber,
+      presentValue,
+      dateValue,
+    });
   };
 };
 
@@ -119,11 +157,12 @@ export const changePCS = (pisces) => {
   };
 };
 
-export const changeCostValues = (values) => {
+export const changeCostValues = (values, profitPercentage) => {
   return async (dispatch) => {
     return dispatch({
       type: 'CHANGE_COST_VALUES',
       values,
+      profitPercentage,
     });
   };
 };
@@ -149,7 +188,7 @@ export const addCost = (newCosts) => {
 export const toogleDrwer = (value) => {
   return async (dispatch) => {
     return dispatch({
-      type: 'TOOGLE_DRAWER',
+      type: 'TOOGLE_GENERATOR_DRAWER',
       visible: value,
     });
   };

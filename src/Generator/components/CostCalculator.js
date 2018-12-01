@@ -15,6 +15,7 @@ class CostcalCulator extends React.Component {
     super(props);
     this.state = {
       value: 1000,
+      profitPercentage: 5,
     };
   }
 
@@ -22,14 +23,14 @@ class CostcalCulator extends React.Component {
     this.setState({
       [event.target.name]: event.target.value,
     }, () => {
-      const { value } = this.state;
+      const { value, profitPercentage } = this.state;
       const { dispatch } = this.props;
-      dispatch(changeCostValues(value));
+      dispatch(changeCostValues(value, profitPercentage));
     });
   }
 
   render() {
-    const { value } = this.state;
+    const { value, profitPercentage } = this.state;
     return (
       <div>
         <Card
@@ -40,6 +41,11 @@ class CostcalCulator extends React.Component {
               <Col className="gutter-row" span={6}>
                 <div className="gutter-box">
                   <Input placeholder="value" name="value" value={value} onChange={ (e) => this.handleChange(e) } />
+                </div>
+              </Col>
+              <Col className="gutter-row" span={6}>
+                <div className="gutter-box">
+                  <Input placeholder="profit percentage" name="profitPercentage" value={profitPercentage} onChange={ (e) => this.handleChange(e) } />
                 </div>
               </Col>
             </Row>

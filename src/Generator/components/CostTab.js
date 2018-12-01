@@ -25,11 +25,13 @@ class CostTab extends React.Component {
 
   componentWillReceiveProps(newProps) {
     const costList = newProps.costs;
+    const { profitPercentage } = newProps;
+    console.log('profitPercentage', newProps.profitPercentage);
     if (costList.length > 0) {
       const costSum = costList.reduce((a, b) => a.newValue + b.newValue);
       const profit = {};
       profit.name = 'profit';
-      profit.newValue = +((costSum / 100) * 5).toFixed(2);
+      profit.newValue = +((costSum / 100) * parseInt(profitPercentage, 10)).toFixed(2);
       const sumWithProfit = costSum + profit.newValue;
       const roundSumWithProfit = Math.round(sumWithProfit);
       profit.newValue = +(profit.newValue + (roundSumWithProfit - sumWithProfit)).toFixed(2);
@@ -71,6 +73,7 @@ const mapStateToProps = (state) => {
   return {
     messages: state.messages,
     costs: state.generator.costData,
+    profitPercentage: state.generator.profitPercentage,
   };
 };
 

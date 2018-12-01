@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Drawer,
@@ -17,7 +18,7 @@ import { createGenerator } from '../generatorAction';
 
 const TabPane = Tabs.TabPane;
 
-class AddGenerator extends React.Component {
+class EditGenerator extends React.Component {
   constructor(props) {
     super(props);
     this.state = { visible: false };
@@ -47,20 +48,10 @@ class AddGenerator extends React.Component {
   }
 
   render() {
-    const { visible } = this.state;
+    const { visible, basicinfo } = this.props;
+    console.log('123', basicinfo);
     return (
       <div>
-        <Row>
-          <Col span={8}>
-            <h4 className="float-left">Generator List</h4>
-          </Col>
-          <Col span={8} offset={8}>
-            <Button className="float-right" type="primary" onClick={this.showDrawer}>
-              + Add New Generator
-            </Button>
-          </Col>
-        </Row>
-
         <Drawer
           title="Create"
           width={1220}
@@ -112,6 +103,7 @@ class AddGenerator extends React.Component {
 const mapStateToProps = (state) => {
   return {
     messages: state.messages,
+    visible: state.generator.visible,
     materials: state.generator.data,
     costs: state.generator.costData,
     profitPercentage: state.generator.profitPercentage,
@@ -119,4 +111,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(AddGenerator);
+export default withRouter(connect(mapStateToProps)(EditGenerator));

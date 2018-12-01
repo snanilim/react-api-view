@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
   Table,
   Divider,
@@ -6,18 +8,10 @@ import {
   Card,
 } from 'antd';
 import AddGenerator from './AddGenerator';
+import EditGenerator from './EditGenerator';
+import { generators, toogleDrwer, getOneGenerator } from '../generatorAction';
 
 const { Column } = Table;
-
-const data = [];
-for (let i = 0; i < 46; i++) {
-  data.push({
-    key: i,
-    name: `Edward King ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`,
-  });
-}
 
 class Generator extends React.Component {
   constructor(props) {
@@ -28,16 +22,16 @@ class Generator extends React.Component {
     };
   }
 
-  start = () => {
-    this.setState({ loading: true });
-    // ajax request after empty completing
-    setTimeout(() => {
-      this.setState({
-        selectedRowKeys: [],
-        loading: false,
-      });
-    }, 1000);
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(generators());
   }
+
+  showDrawer = (e, id) => {
+    const { dispatch } = this.props;
+    dispatch(toogleDrwer(true));
+    dispatch(getOneGenerator(id));
+  };
 
   onSelectChange = (selectedRowKeys) => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
@@ -45,30 +39,13 @@ class Generator extends React.Component {
   }
 
   render() {
-    const { loading, selectedRowKeys } = this.state;
-    const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange,
-    };
-    const hasSelected = selectedRowKeys.length > 0;
+    const { generators } = this.props;
     return (
       <Card className="ctm-100-vh">
         <AddGenerator />
+        <EditGenerator />
         <div>
-          <div style={{ marginBottom: 16 }}>
-            <Button
-              type="primary"
-              onClick={this.start}
-              disabled={!hasSelected}
-              loading={loading}
-            >
-              Bulk Download
-            </Button>
-            <span style={{ marginLeft: 8 }}>
-              {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
-            </span>
-          </div>
-          <Table rowSelection={rowSelection} dataSource={data}>
+          <Table dataSource={generators}>
             <Column
                 title="Name"
                 dataIndex="name"
@@ -100,7 +77,7 @@ class Generator extends React.Component {
               key="action"
               render={(text, record) => (
                 <span>
-                  <a href="javascript:;">Edit</a>
+                  <a href="javascript:;" onClick={ (e) => this.showDrawer(e, record.id) }>Edit</a>
                   <Divider type="vertical" />
                   <a href="javascript:;">Delete</a>
                 </span>
@@ -112,4 +89,12 @@ class Generator extends React.Component {
     );
   }
 }
-export default Generator;
+
+const mapStateToProps = (state) => {
+  return {
+    messages: state.messages,
+    generators: state.generator.generators,
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(Generator));

@@ -4,9 +4,16 @@ const initialState = {
     materials: [],
     costs: [],
     values: 1000,
+    profitPercentage: 5,
     allData: [],
     allCostData: [],
     costData: [],
+    basicinfo: {
+        productName: '',
+        announceNumber: '',
+        presentValue: '',
+        dateValue: Date,
+    },
 };
 
 const mngCost = () => {
@@ -41,6 +48,41 @@ export default function auth(state = initialState, action) {
         state = Object.assign({}, initialState, state, { hydrated: true });
     }
     switch (action.type) {
+        case 'GENERATOR_SUCCESS':
+            return Object.assign({}, state, {
+                generators: action.data,
+            });
+
+        case 'CHANGE_BASIC_INFO':
+            initialState.basicinfo.productName = action.productName;
+            initialState.basicinfo.announceNumber = action.announceNumber;
+            initialState.basicinfo.presentValue = action.presentValue;
+            initialState.basicinfo.dateValue = action.dateValue;
+
+            return Object.assign({}, state, {
+                basicinfo: initialState.basicinfo,
+            });
+
+        case 'ONE_GENERATOR_SUCCESS':
+            initialState.basicinfo.productName = action.data.basicinfo.productName;
+            initialState.basicinfo.announceNumber = action.data.basicinfo.announceNumber;
+            initialState.basicinfo.presentValue = action.data.basicinfo.presentValue;
+            initialState.basicinfo.dateValue = action.data.basicinfo.dateValue;
+
+            initialState.materials = action.data.materials;
+            const OneValue = mngMaterial();
+
+            initialState.costs = action.data.costs;
+            const OneCostValue = mngCost();
+
+            console.log('initialState.basicinfo', initialState.basicinfo);
+
+            return Object.assign({}, state, {
+                basicinfo: action.data.basicinfo,
+                data: OneValue,
+                costData: OneCostValue,
+            });
+
         case 'GENERATOR_MATERIAL_SUCCESS':
             initialState.materials = action.data;
             const value = mngMaterial();
@@ -74,14 +116,17 @@ export default function auth(state = initialState, action) {
             return Object.assign({}, state, {
                 costData: CostValue,
                 allCostData: action.data,
+                profitPercentage: initialState.profitPercentage,
             });
 
         case 'CHANGE_COST_VALUES':
             initialState.values = action.values;
+            initialState.profitPercentage = action.profitPercentage;
             const CostValuePCS = mngCost();
 
             return Object.assign({}, state, {
                 costData: CostValuePCS,
+                profitPercentage: initialState.profitPercentage,
             });
 
         case 'UPDATE_COSTS':
@@ -90,6 +135,12 @@ export default function auth(state = initialState, action) {
 
             return Object.assign({}, state, {
                 costData: newCost,
+                profitPercentage: initialState.profitPercentage,
+            });
+
+        case 'TOOGLE_GENERATOR_DRAWER':
+            return Object.assign({}, state, {
+              visible: action.visible,
             });
 
         default:
