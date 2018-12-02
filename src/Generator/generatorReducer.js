@@ -26,7 +26,27 @@ const mngCost = () => {
         // item.newValue = parseFloat(newValue);
         return item;
     });
-    return newCost;
+
+    const costList = newCost;
+    const profitPercentage = initialState.profitPercentage;
+    if (costList.length > 0) {
+      let costSum = 0;
+
+      // eslint-disable-next-line no-restricted-syntax
+      for (const item of costList) {
+        costSum += item.newValue;
+      }
+
+      const profit = {};
+      profit.name = 'profit';
+      profit.newValue = +((costSum / 100) * parseInt(profitPercentage, 10)).toFixed(2);
+      const sumWithProfit = costSum + profit.newValue;
+      const roundSumWithProfit = Math.round(sumWithProfit);
+      profit.newValue = +(profit.newValue + (roundSumWithProfit - sumWithProfit)).toFixed(2);
+      costList.push(profit);
+    }
+
+    return costList;
 };
 
 const mngMaterial = () => {
@@ -73,6 +93,7 @@ export default function auth(state = initialState, action) {
             const OneValue = mngMaterial();
 
             initialState.costs = action.data.costs;
+            initialState.profitPercentage = action.data.profitPercentage;
             const OneCostValue = mngCost();
 
             console.log('initialState.basicinfo', initialState.basicinfo);

@@ -10,9 +10,9 @@ import {
   Row,
   Tabs,
 } from 'antd';
-import BasicInfoTab from './BasicInfoTab';
-import MaterialTab from './MaterialTab';
-import CostTab from './CostTab';
+import EditBasicInfoTab from './EditBasicInfoTab';
+import EditMaterialTab from './EditMaterialTab';
+import EditCostTab from './EditCostTab';
 import TablePrint from './TablePrint';
 import { createGenerator } from '../generatorAction';
 
@@ -66,9 +66,9 @@ class EditGenerator extends React.Component {
           }}
         >
           <Tabs defaultActiveKey="1" onChange={this.callback}>
-            <TabPane tab="Basic Info" key="1"><BasicInfoTab /></TabPane>
-            <TabPane tab="Materials" key="2"><MaterialTab /></TabPane>
-            <TabPane tab="Cost" key="3"><CostTab /></TabPane>
+            <TabPane tab="Basic Info" key="1"><EditBasicInfoTab /></TabPane>
+            <TabPane tab="Materials" key="2"><EditMaterialTab /></TabPane>
+            <TabPane tab="Cost" key="3"><EditCostTab /></TabPane>
             <TabPane tab="Full Table" key="4"><TablePrint /></TabPane>
           </Tabs>
           <div

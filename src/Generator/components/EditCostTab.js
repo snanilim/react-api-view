@@ -19,8 +19,8 @@ class CostTab extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(costs());
+    // const { dispatch } = this.props;
+    // dispatch(costs());
   }
 
   // componentWillReceiveProps(newProps) {

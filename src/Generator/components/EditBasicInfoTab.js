@@ -10,6 +10,8 @@ import {
 } from 'antd';
 import { basicInfo } from '../generatorAction';
 
+const dateFormat = 'YYYY/MM/DD';
+
 class BasicInfoTab extends React.Component {
   constructor(props) {
     super(props);
@@ -21,6 +23,20 @@ class BasicInfoTab extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { basicinfo } = this.props;
+    console.log('newPropsqqq', basicinfo);
+    this.setState({
+      productName: basicinfo.productName,
+    });
+  }
+
+  componentWillReceiveProps(newProps) {
+    console.log('newProps', newProps);
+    this.setState({
+      // costs: newProps.costs,
+    });
+  }
 
   onChangeHandler = (event) => {
     this.setState({
@@ -44,22 +60,24 @@ class BasicInfoTab extends React.Component {
   }
 
   render() {
+    const { basicinfo } = this.props;
+    console.log('productName', basicinfo.productName);
     return (
       <div>
         <Row>
           <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-            <Input name="productName" onChange={this.onChangeHandler} placeholder="Product Name" />
+            <Input name="productName" defaultValue={basicinfo.productName} onChange={this.onChangeHandler} placeholder="Product Name" />
           </Col>
           <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-            <Input name="announceNumber" onChange={this.onChangeHandler} placeholder="Announce Number" />
+            <Input name="announceNumber" defaultValue={basicinfo.announceNumber} onChange={this.onChangeHandler} placeholder="Announce Number" />
           </Col>
         </Row>
         <Row>
           <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-            <Input name="presentValue" onChange={this.onChangeHandler} placeholder="Present Value" />
+            <Input name="presentValue" defaultValue={basicinfo.presentValue} onChange={this.onChangeHandler} placeholder="Present Value" />
           </Col>
           <Col xs={24} sm={24} md={12} lg={12} xl={12}>
-            <DatePicker onChange={this.dateChange} />
+            <DatePicker defaultValue={moment('2015/01/01', dateFormat)} onChange={this.dateChange} />
           </Col>
         </Row>
       </div>
