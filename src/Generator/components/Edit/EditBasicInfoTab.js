@@ -8,7 +8,7 @@ import {
   Col,
   DatePicker,
 } from 'antd';
-import { basicInfo } from '../generatorAction';
+import { basicInfo } from '../../generatorAction';
 
 const dateFormat = 'YYYY/MM/DD';
 
@@ -25,16 +25,8 @@ class BasicInfoTab extends React.Component {
 
   componentDidMount() {
     const { basicinfo } = this.props;
-    console.log('newPropsqqq', basicinfo);
     this.setState({
       productName: basicinfo.productName,
-    });
-  }
-
-  componentWillReceiveProps(newProps) {
-    console.log('newProps', newProps);
-    this.setState({
-      // costs: newProps.costs,
     });
   }
 

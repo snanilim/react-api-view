@@ -5,9 +5,9 @@ import {
   Table,
   Column,
 } from 'antd';
-import AddMaterial from './AddMaterial';
-import MaterialcalCulator from './MaterialCalculator';
-import { materials } from '../generatorAction';
+import AddMaterial from '../Common/AddMaterial';
+import MaterialcalCulator from '../MaterialCalculator';
+import { materials } from '../../generatorAction';
 
 
 class MaterialTab extends React.Component {
@@ -19,8 +19,8 @@ class MaterialTab extends React.Component {
   }
 
   componentDidMount() {
-    // const { dispatch } = this.props;
-    // dispatch(materials());
+    const { dispatch } = this.props;
+    dispatch(materials());
   }
 
   render() {
@@ -65,6 +65,7 @@ const mapStateToProps = (state) => {
     materials: state.generator.data,
     kg: state.generator.kg,
     weight: state.generator.weight,
+    pisces: state.generator.pisces,
   };
 };
 

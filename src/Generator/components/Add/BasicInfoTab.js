@@ -8,7 +8,7 @@ import {
   Col,
   DatePicker,
 } from 'antd';
-import { basicInfo } from '../generatorAction';
+import { basicInfo } from '../../generatorAction';
 
 class BasicInfoTab extends React.Component {
   constructor(props) {

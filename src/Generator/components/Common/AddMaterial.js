@@ -7,7 +7,7 @@ import {
   Row,
   Col,
 } from 'antd';
-import { addMaterial } from '../generatorAction';
+import { addMaterial } from '../../generatorAction';
 
 class AddMaterial extends React.Component {
   constructor(props) {
@@ -75,7 +75,7 @@ class AddMaterial extends React.Component {
 
     return (
       <div>
-        <Row>
+        <Row className="mb-3">
           <Col span={8}>
             <h4 className="float-left">Material List</h4>
           </Col>

@@ -4,39 +4,26 @@ import { withRouter } from 'react-router-dom';
 import {
   Table,
   Divider,
-  Button,
   Card,
 } from 'antd';
-import AddGenerator from './AddGenerator';
-import EditGenerator from './EditGenerator';
+import AddGenerator from './Add/AddGenerator';
+import EditGenerator from './Edit/EditGenerator';
 import { generators, toogleDrwer, getOneGenerator } from '../generatorAction';
 
 const { Column } = Table;
 
 class Generator extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedRowKeys: [], // Check here to configure the default column
-      loading: false,
-    };
-  }
-
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(generators());
   }
 
   showDrawer = (e, id) => {
+    e.preventDefault();
     const { dispatch } = this.props;
     dispatch(toogleDrwer(true));
     dispatch(getOneGenerator(id));
   };
-
-  onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    this.setState({ selectedRowKeys });
-  }
 
   render() {
     const { generators } = this.props;
@@ -47,35 +34,24 @@ class Generator extends React.Component {
         <div>
           <Table dataSource={generators}>
             <Column
-                title="Name"
-                dataIndex="name"
-                key="name"
-              />
-            <Column
-              title="Age"
-              dataIndex="age"
-              key="age"
+              title="Product Name"
+              dataIndex="name"
+              key="name"
             />
+
             <Column
-              title="Address"
-              dataIndex="address"
-              key="address"
-            />
-             <Column
-              title="Action"
-              key="action"
-              render={(text, record) => (
+              title="View"
+              key="view"
+              render={record => (
                 <span>
                   <a href="javascript:;">View</a>
-                  <Divider type="vertical" />
-                  <a href="javascript:;">Download</a>
                 </span>
               )}
             />
             <Column
               title="Action"
               key="action"
-              render={(text, record) => (
+              render={record => (
                 <span>
                   <a href="javascript:;" onClick={ (e) => this.showDrawer(e, record.id) }>Edit</a>
                   <Divider type="vertical" />
@@ -92,7 +68,6 @@ class Generator extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    messages: state.messages,
     generators: state.generator.generators,
   };
 };

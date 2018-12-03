@@ -5,9 +5,9 @@ import {
   Table,
   Column,
 } from 'antd';
-import AddCost from './AddCost';
-import CostcalCulator from './CostCalculator';
-import { costs } from '../generatorAction';
+import AddCost from '../AddCost';
+import CostcalCulator from '../Common/CostCalculator';
+import { costs } from '../../generatorAction';
 
 
 class CostTab extends React.Component {

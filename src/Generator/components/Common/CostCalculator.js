@@ -7,7 +7,7 @@ import {
   Col,
   Input,
 } from 'antd';
-import { changeCostValues } from '../generatorAction';
+import { changeCostValues } from '../../generatorAction';
 
 
 class CostcalCulator extends React.Component {
