@@ -81,6 +81,7 @@ const mapStateToProps = (state) => {
     messages: state.messages,
     costs: state.generator.costData,
     profitPercentage: state.generator.profitPercentage,
+    values: state.generator.values,
   };
 };
 

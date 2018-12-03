@@ -63,6 +63,8 @@ const mapStateToProps = (state) => {
   return {
     messages: state.messages,
     materials: state.generator.data,
+    kg: state.generator.kg,
+    weight: state.generator.weight,
   };
 };
 

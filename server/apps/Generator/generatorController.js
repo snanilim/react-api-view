@@ -21,6 +21,27 @@ exports.createGenerator = async (req, res, next) => {
   }
 };
 
+exports.updateGenerator = async (req, res, next) => {
+  const cookies = new Cookies(req.headers.cookie);
+  const { token } = cookies.cookies;
+  const { body: data, params } = req;
+  try {
+    const url = `http://localhost:4000/v1/generator/${params.generatorID}`;
+    const body = JSON.stringify(data);
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
+    const response = await fetch(url, { method: 'PUT', body, headers });
+    console.log('response', response);
+    const resData = await response.json();
+    return resMsg(resData, response.status, res, next);
+  } catch (error) {
+    console.log('error', error);
+    return next(error);
+  }
+};
+
 exports.generators = async (req, res, next) => {
   const cookies = new Cookies(req.headers.cookie);
   const { token } = cookies.cookies;

@@ -14,7 +14,7 @@ class CostcalCulator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 1000,
+      values: 1000,
       profitPercentage: 5,
     };
   }
@@ -23,14 +23,14 @@ class CostcalCulator extends React.Component {
     this.setState({
       [event.target.name]: event.target.value,
     }, () => {
-      const { value, profitPercentage } = this.state;
+      const { values, profitPercentage } = this.state;
       const { dispatch } = this.props;
-      dispatch(changeCostValues(value, profitPercentage));
+      dispatch(changeCostValues(values, profitPercentage));
     });
   }
 
   render() {
-    const { value, profitPercentage } = this.state;
+    const { values, profitPercentage } = this.props;
     return (
       <div>
         <Card
@@ -40,7 +40,7 @@ class CostcalCulator extends React.Component {
             <Row gutter={16}>
               <Col className="gutter-row" span={6}>
                 <div className="gutter-box">
-                  <Input placeholder="value" name="value" value={value} onChange={ (e) => this.handleChange(e) } />
+                  <Input placeholder="value" name="value" value={values} onChange={ (e) => this.handleChange(e) } />
                 </div>
               </Col>
               <Col className="gutter-row" span={6}>
@@ -59,6 +59,8 @@ class CostcalCulator extends React.Component {
 const mapStateToProps = (state) => {
   return {
     messages: state.messages,
+    profitPercentage: state.generator.profitPercentage,
+    values: state.generator.values,
   };
 };
 

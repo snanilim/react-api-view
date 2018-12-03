@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 const cookieValue = cookies.get('token');
 
-export const createGenerator = (materials, costs, profitPercentage, basicinfo) => {
+export const createGenerator = (materials, costs, profitPercentage, values, kg, weight, basicinfo) => {
   return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
     try {
@@ -19,17 +19,55 @@ export const createGenerator = (materials, costs, profitPercentage, basicinfo) =
           materials,
           costs,
           profitPercentage,
+          values,
+          kg,
+          weight,
           basicinfo,
         }),
       });
       // console.log('response', response.data.token.accessToken);
       return dispatch({
-        type: 'CREATE_MATERIAL_SUCCESS',
+        type: 'CREATE_GENERATOR_SUCCESS',
         messages: Array.isArray(response.msg) ? response.msg : [response.msg],
       });
     } catch (error) {
       return dispatch({
-        type: 'CREATE_MATERIAL_FAILURE',
+        type: 'CREATE_GENERATOR_FAILURE',
+        messages: error,
+      });
+    }
+  };
+};
+
+export const updateGenerator = (generatorId, materials, costs, profitPercentage, values, kg, weight, basicinfo) => {
+  return async (dispatch) => {
+    dispatch({ type: 'CLEAR_MESSAGES' });
+    try {
+      const response = await axios({
+        method: 'put',
+        url: `/v1/generator/${generatorId}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${cookieValue}`,
+        },
+        data: JSON.stringify({
+          materials,
+          costs,
+          profitPercentage,
+          values,
+          kg,
+          weight,
+          basicinfo,
+        }),
+      });
+      // console.log('response', response.data.token.accessToken);
+      return dispatch({
+        type: 'UPDATE_GENERATOR_SUCCESS',
+        messages: Array.isArray(response.msg) ? response.msg : [response.msg],
+      });
+    } catch (error) {
+      return dispatch({
+        type: 'UPDATE_GENERATOR_FAILURE',
         messages: error,
       });
     }
@@ -148,10 +186,12 @@ export const basicInfo = (productName, announceNumber, presentValue, dateValue) 
   };
 };
 
-export const changePCS = (pisces) => {
+export const changePCS = (kg, weight, pisces) => {
   return async (dispatch) => {
     return dispatch({
       type: 'CHANGE_PISCES',
+      kg,
+      weight,
       pisces,
     });
   };

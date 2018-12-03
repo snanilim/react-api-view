@@ -14,7 +14,7 @@ import EditBasicInfoTab from './EditBasicInfoTab';
 import EditMaterialTab from './EditMaterialTab';
 import EditCostTab from './EditCostTab';
 import TablePrint from './TablePrint';
-import { createGenerator } from '../generatorAction';
+import { updateGenerator } from '../generatorAction';
 
 const TabPane = Tabs.TabPane;
 
@@ -25,10 +25,10 @@ class EditGenerator extends React.Component {
   }
 
   onSave = () => {
-    const { materials, costs, profitPercentage, basicinfo } = this.props;
+    const { generatorId, materials, costs, profitPercentage, values, kg, weight, basicinfo } = this.props;
     const { dispatch } = this.props;
 
-    dispatch(createGenerator(materials, costs, profitPercentage, basicinfo));
+    dispatch(updateGenerator(generatorId, materials, costs, profitPercentage, values, kg, weight, basicinfo));
   }
 
   showDrawer = () => {
@@ -103,6 +103,7 @@ class EditGenerator extends React.Component {
 const mapStateToProps = (state) => {
   return {
     messages: state.messages,
+    generatorId: state.generator.id,
     visible: state.generator.visible,
     materials: state.generator.data,
     costs: state.generator.costData,

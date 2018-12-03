@@ -24,10 +24,10 @@ class AddGenerator extends React.Component {
   }
 
   onSave = () => {
-    const { materials, costs, profitPercentage, basicinfo } = this.props;
+    const { materials, costs, profitPercentage, values, kg, weight, basicinfo, } = this.props;
     const { dispatch } = this.props;
 
-    dispatch(createGenerator(materials, costs, profitPercentage, basicinfo));
+    dispatch(createGenerator(materials, costs, profitPercentage, values, kg, weight, basicinfo));
   }
 
   showDrawer = () => {
@@ -115,6 +115,9 @@ const mapStateToProps = (state) => {
     materials: state.generator.data,
     costs: state.generator.costData,
     profitPercentage: state.generator.profitPercentage,
+    values: state.generator.values,
+    kg: state.generator.kg,
+    weight: state.generator.weight,
     basicinfo: state.generator.basicinfo,
   };
 };

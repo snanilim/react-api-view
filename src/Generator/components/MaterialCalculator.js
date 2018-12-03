@@ -25,12 +25,13 @@ class MaterialcalCulator extends React.Component {
     }, () => {
       const { kg, weight } = this.state;
       const { dispatch } = this.props;
-      dispatch(changePCS((kg / weight).toFixed(2)));
+      dispatch(changePCS(kg, weight, (kg / weight).toFixed(2)));
     });
   }
 
   render() {
-    const { kg, weight } = this.state;
+    const { kg, weight, pisces } = this.props;
+    console.log('weight', weight);
     return (
       <div>
         <Card
@@ -56,7 +57,7 @@ class MaterialcalCulator extends React.Component {
               </Col>
               <Col className="gutter-row" span={10}>
                 <div className="gutter-box">
-                  <Input placeholder="Pisces" value={(kg / weight).toFixed(2)} />
+                  <Input placeholder="Pisces" value={pisces} />
                 </div>
               </Col>
             </Row>
@@ -70,6 +71,9 @@ class MaterialcalCulator extends React.Component {
 const mapStateToProps = (state) => {
   return {
     messages: state.messages,
+    kg: state.generator.kg,
+    weight: state.generator.weight,
+    pisces: state.generator.pisces,
   };
 };
 

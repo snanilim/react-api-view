@@ -10,7 +10,8 @@ router
 
 router
   .route('/:generatorID')
-  .get(generatorController.getOneGenerator);
+  .get(generatorController.getOneGenerator)
+  .put(generatorController.updateGenerator);
 
 
 module.exports = router;

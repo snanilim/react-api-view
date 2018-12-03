@@ -1,10 +1,14 @@
 const initialState = {
     cost: {},
-    pisces: 1,
     materials: [],
     costs: [],
     values: 1000,
     profitPercentage: 5,
+
+    kg: 1000,
+    weight: 1,
+    pisces: 1,
+
     allData: [],
     allCostData: [],
     costData: [],
@@ -90,18 +94,27 @@ export default function auth(state = initialState, action) {
             initialState.basicinfo.dateValue = action.data.basicinfo.dateValue;
 
             initialState.materials = action.data.materials;
+            initialState.kg = action.data.kg;
+            initialState.weight = action.data.weight;
             const OneValue = mngMaterial();
 
             initialState.costs = action.data.costs;
             initialState.profitPercentage = action.data.profitPercentage;
+            initialState.values = action.data.values;
             const OneCostValue = mngCost();
 
-            console.log('initialState.basicinfo', initialState.basicinfo);
+            console.log('action.data.weight', action.data.weight);
 
             return Object.assign({}, state, {
+                id: action.data.id,
                 basicinfo: action.data.basicinfo,
                 data: OneValue,
                 costData: OneCostValue,
+                profitPercentage: initialState.profitPercentage,
+                values: initialState.values,
+                kg: initialState.kg,
+                weight: initialState.weight,
+                pisces: +(initialState.kg / initialState.weight).toFixed(2),
             });
 
         case 'GENERATOR_MATERIAL_SUCCESS':
@@ -111,14 +124,22 @@ export default function auth(state = initialState, action) {
             return Object.assign({}, state, {
                 data: value,
                 allData: action.data,
+                kg: initialState.kg,
+                weight: initialState.weight,
+                pisces: +(initialState.kg / initialState.weight).toFixed(2),
             });
 
         case 'CHANGE_PISCES':
             initialState.pisces = action.pisces;
+            initialState.kg = action.kg;
+            initialState.weight = action.weight;
             const valuePCS = mngMaterial();
 
             return Object.assign({}, state, {
                 data: valuePCS,
+                kg: initialState.kg,
+                weight: initialState.weight,
+                pisces: +(initialState.kg / initialState.weight).toFixed(2),
             });
 
         case 'ADD_REMOVE_MATERIALS':
@@ -138,6 +159,7 @@ export default function auth(state = initialState, action) {
                 costData: CostValue,
                 allCostData: action.data,
                 profitPercentage: initialState.profitPercentage,
+                values: initialState.values,
             });
 
         case 'CHANGE_COST_VALUES':
@@ -148,6 +170,7 @@ export default function auth(state = initialState, action) {
             return Object.assign({}, state, {
                 costData: CostValuePCS,
                 profitPercentage: initialState.profitPercentage,
+                values: initialState.values,
             });
 
         case 'UPDATE_COSTS':
