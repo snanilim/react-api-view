@@ -3,10 +3,10 @@ const initialState = {
     materials: [],
     costs: [],
     values: 1000,
-    profitPercentage: 500,
+    profitPercentage: 5,
 
     kg: 1000,
-    weight: 100,
+    weight: 11,
 
     allData: [],
     allCostData: [],

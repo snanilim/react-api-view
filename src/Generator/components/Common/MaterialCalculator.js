@@ -19,18 +19,25 @@ class MaterialcalCulator extends React.Component {
     };
   }
 
-  componentWillReceiveProps(newProps) {
-    const { kg, weight } = newProps;
-    console.log('newPropskg', weight);
+  componentDidMount() {
+    const { kg, weight } = this.props;
     this.setState({
       kg,
       weight,
     });
   }
 
-  handleChange(event) {
+  componentWillReceiveProps(newProps) {
+    const { kg, weight } = newProps;
     this.setState({
-      [event.target.name]: event.target.value,
+      kg,
+      weight,
+    });
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: parseFloat(event.target.value),
     }, () => {
       const { kg, weight } = this.state;
       const { dispatch } = this.props;
@@ -40,7 +47,6 @@ class MaterialcalCulator extends React.Component {
 
   render() {
     const { kg, weight, pisces } = this.props;
-    console.log('weight', weight);
     return (
       <div>
         <Card
@@ -50,7 +56,7 @@ class MaterialcalCulator extends React.Component {
             <Row gutter={16}>
               <Col className="gutter-row" span={6}>
                 <div className="gutter-box">
-                  <Input placeholder="kg" name="kg" defaultValue={kg} onChange={ (e) => this.handleChange(e) } />
+                  <Input placeholder="kg" name="kg" defaultValue={kg} onChange={this.handleChange} />
                 </div>
               </Col>
               <Col className="gutter-row" span={1}>
@@ -58,7 +64,7 @@ class MaterialcalCulator extends React.Component {
               </Col>
               <Col className="gutter-row" span={6}>
                 <div className="gutter-box">
-                  <Input placeholder="weight" name="weight" defaultValue={weight} onChange={ (e) => this.handleChange(e) } />
+                  <Input placeholder="weight" name="weight" defaultValue={weight} onChange={this.handleChange} />
                 </div>
               </Col>
               <Col className="gutter-row" span={1}>

@@ -110,6 +110,7 @@ class AddGenerator extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('statematerial', state);
   return {
     messages: state.messages,
     materials: state.generator.data,

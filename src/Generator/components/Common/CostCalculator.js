@@ -19,17 +19,25 @@ class CostcalCulator extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { values, profitPercentage } = this.props;
+    this.setState({
+      values,
+      profitPercentage,
+    });
+  }
+
   componentWillReceiveProps(newProps) {
     const { values, profitPercentage } = newProps;
     this.setState({
-      values: newProps.values,
-      profitPercentage: '123',
+      values,
+      profitPercentage,
     });
   }
 
   handleChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: parseFloat(event.target.value),
     }, () => {
       const { values, profitPercentage } = this.state;
       const { dispatch } = this.props;
