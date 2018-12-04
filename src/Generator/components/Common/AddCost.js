@@ -7,7 +7,7 @@ import {
   Row,
   Col,
 } from 'antd';
-import { addCost } from '../generatorAction';
+import { addCost } from '../../generatorAction';
 
 class AddCost extends React.Component {
   constructor(props) {

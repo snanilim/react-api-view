@@ -186,13 +186,12 @@ export const basicInfo = (productName, announceNumber, presentValue, dateValue) 
   };
 };
 
-export const changePCS = (kg, weight, pisces) => {
+export const changePCS = (kg, weight) => {
   return async (dispatch) => {
     return dispatch({
       type: 'CHANGE_PISCES',
       kg,
       weight,
-      pisces,
     });
   };
 };
@@ -222,6 +221,30 @@ export const addCost = (newCosts) => {
       type: 'UPDATE_COSTS',
       costs: newCosts,
     });
+  };
+};
+
+export const deleteGenerator = (Id) => {
+  return async (dispatch) => {
+    dispatch({ type: 'CLEAR_MESSAGES' });
+    try {
+      const response = await axios({
+        method: 'delete',
+        url: `/v1/generator/${Id}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      return dispatch({
+        type: 'DELETE_GENERATOR_SUCCESS',
+        data: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: 'DELETE_GENERATOR_FAILURE',
+        messages: error,
+      });
+    }
   };
 };
 

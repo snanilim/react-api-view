@@ -21,7 +21,8 @@ class FullTable extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const { materials, costs, basicinfo } = this.props;
+    const { materials, costs, basicinfo } = newProps;
+    console.log('costs', costs);
     this.setState({
       materials,
       costs,

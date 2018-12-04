@@ -13,8 +13,8 @@ import {
 import EditBasicInfoTab from './EditBasicInfoTab';
 import EditMaterialTab from './EditMaterialTab';
 import EditCostTab from './EditCostTab';
-import TablePrint from './TablePrint';
-import { updateGenerator } from '../generatorAction';
+import TablePrint from '../Common/TablePrint';
+import { updateGenerator, toogleDrwer } from '../../generatorAction';
 
 const TabPane = Tabs.TabPane;
 
@@ -25,22 +25,31 @@ class EditGenerator extends React.Component {
   }
 
   onSave = () => {
-    const { generatorId, materials, costs, profitPercentage, values, kg, weight, basicinfo } = this.props;
+    const {
+      generatorId,
+      materials,
+      costs,
+      profitPercentage,
+      values,
+      kg,
+      weight,
+      basicinfo,
+    } = this.props;
     const { dispatch } = this.props;
 
-    dispatch(updateGenerator(generatorId, materials, costs, profitPercentage, values, kg, weight, basicinfo));
+    dispatch(updateGenerator(generatorId,
+      materials,
+      costs,
+      profitPercentage,
+      values,
+      kg,
+      weight,
+      basicinfo));
   }
 
-  showDrawer = () => {
-    this.setState({
-      visible: true,
-    });
-  };
-
   onClose = () => {
-    this.setState({
-      visible: false,
-    });
+    const { dispatch } = this.props;
+    dispatch(toogleDrwer(false));
   };
 
   callback = (key) => {
@@ -108,6 +117,9 @@ const mapStateToProps = (state) => {
     materials: state.generator.data,
     costs: state.generator.costData,
     profitPercentage: state.generator.profitPercentage,
+    values: state.generator.values,
+    kg: state.generator.kg,
+    weight: state.generator.weight,
     basicinfo: state.generator.basicinfo,
   };
 };

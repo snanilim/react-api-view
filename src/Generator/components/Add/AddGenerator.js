@@ -12,8 +12,8 @@ import {
 import BasicInfoTab from './BasicInfoTab';
 import MaterialTab from './MaterialTab';
 import CostTab from './CostTab';
-import TablePrint from './TablePrint';
-import { createGenerator } from '../generatorAction';
+import TablePrint from '../Common/TablePrint';
+import { createGenerator } from '../../generatorAction';
 
 const TabPane = Tabs.TabPane;
 

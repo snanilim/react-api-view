@@ -15,11 +15,19 @@ class CostcalCulator extends React.Component {
     super(props);
     this.state = {
       values: 1000,
-      profitPercentage: 5,
+      profitPercentage: 599,
     };
   }
 
-  handleChange(event) {
+  componentWillReceiveProps(newProps) {
+    const { values, profitPercentage } = newProps;
+    this.setState({
+      values: newProps.values,
+      profitPercentage: '123',
+    });
+  }
+
+  handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     }, () => {
@@ -40,12 +48,12 @@ class CostcalCulator extends React.Component {
             <Row gutter={16}>
               <Col className="gutter-row" span={6}>
                 <div className="gutter-box">
-                  <Input placeholder="value" name="value" value={values} onChange={ (e) => this.handleChange(e) } />
+                  <Input placeholder="values" name="values" defaultValue={values} onChange={this.handleChange} />
                 </div>
               </Col>
               <Col className="gutter-row" span={6}>
                 <div className="gutter-box">
-                  <Input placeholder="profit percentage" name="profitPercentage" value={profitPercentage} onChange={ (e) => this.handleChange(e) } />
+                  <Input placeholder="profit percentage" name="profitPercentage" defaultValue={profitPercentage} onChange={this.handleChange} />
                 </div>
               </Col>
             </Row>

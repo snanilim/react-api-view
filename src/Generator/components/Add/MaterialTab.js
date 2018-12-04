@@ -6,7 +6,7 @@ import {
   Column,
 } from 'antd';
 import AddMaterial from '../Common/AddMaterial';
-import MaterialcalCulator from '../MaterialCalculator';
+import MaterialcalCulator from '../Common/MaterialCalculator';
 import { materials } from '../../generatorAction';
 
 

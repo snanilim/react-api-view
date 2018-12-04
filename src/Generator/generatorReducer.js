@@ -3,11 +3,10 @@ const initialState = {
     materials: [],
     costs: [],
     values: 1000,
-    profitPercentage: 5,
+    profitPercentage: 500,
 
     kg: 1000,
-    weight: 1,
-    pisces: 1,
+    weight: 100,
 
     allData: [],
     allCostData: [],
@@ -49,18 +48,20 @@ const mngCost = () => {
       profit.newValue = +(profit.newValue + (roundSumWithProfit - sumWithProfit)).toFixed(2);
       costList.push(profit);
     }
-
+    console.log('costList', costList);
     return costList;
 };
 
 const mngMaterial = () => {
-    const materials = initialState.materials;
+    const pisces = +(initialState.kg / initialState.weight).toFixed(2);
+    const { materials } = initialState;
+
     const newMaterial = materials
     .filter(item => item.view === true)
     .map((item) => {
-        item.newWeight = (item.weight / initialState.pisces).toFixed(4);
-        item.wastage = ((item.newWeight / 100) * 25).toFixed(4);
-        item.newValue = (item.value / initialState.pisces).toFixed(4);
+        item.newWeight = +(item.weight / pisces).toFixed(2);
+        item.wastage = +((item.newWeight / 100) * 25).toFixed(2);
+        item.newValue = +(item.value / pisces).toFixed(2);
         console.log('item', item);
         return item;
     });
@@ -83,6 +84,7 @@ export default function auth(state = initialState, action) {
             initialState.basicinfo.presentValue = action.presentValue;
             initialState.basicinfo.dateValue = action.dateValue;
 
+            console.log('initialState.basicinfo', action.announceNumber);
             return Object.assign({}, state, {
                 basicinfo: initialState.basicinfo,
             });
@@ -130,7 +132,6 @@ export default function auth(state = initialState, action) {
             });
 
         case 'CHANGE_PISCES':
-            initialState.pisces = action.pisces;
             initialState.kg = action.kg;
             initialState.weight = action.weight;
             const valuePCS = mngMaterial();
@@ -166,6 +167,8 @@ export default function auth(state = initialState, action) {
             initialState.values = action.values;
             initialState.profitPercentage = action.profitPercentage;
             const CostValuePCS = mngCost();
+
+            console.log('CostValuePCS', CostValuePCS);
 
             return Object.assign({}, state, {
                 costData: CostValuePCS,

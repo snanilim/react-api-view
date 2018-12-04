@@ -7,7 +7,7 @@ import {
   Col,
   Input,
 } from 'antd';
-import { changePCS } from '../generatorAction';
+import { changePCS } from '../../generatorAction';
 
 
 class MaterialcalCulator extends React.Component {
@@ -15,8 +15,17 @@ class MaterialcalCulator extends React.Component {
     super(props);
     this.state = {
       kg: 1000,
-      weight: 1,
+      weight: 199,
     };
+  }
+
+  componentWillReceiveProps(newProps) {
+    const { kg, weight } = newProps;
+    console.log('newPropskg', weight);
+    this.setState({
+      kg,
+      weight,
+    });
   }
 
   handleChange(event) {
@@ -25,7 +34,7 @@ class MaterialcalCulator extends React.Component {
     }, () => {
       const { kg, weight } = this.state;
       const { dispatch } = this.props;
-      dispatch(changePCS(kg, weight, (kg / weight).toFixed(2)));
+      dispatch(changePCS(kg, weight));
     });
   }
 
@@ -41,7 +50,7 @@ class MaterialcalCulator extends React.Component {
             <Row gutter={16}>
               <Col className="gutter-row" span={6}>
                 <div className="gutter-box">
-                  <Input placeholder="kg" name="kg" value={kg} onChange={ (e) => this.handleChange(e) } />
+                  <Input placeholder="kg" name="kg" defaultValue={kg} onChange={ (e) => this.handleChange(e) } />
                 </div>
               </Col>
               <Col className="gutter-row" span={1}>
@@ -49,7 +58,7 @@ class MaterialcalCulator extends React.Component {
               </Col>
               <Col className="gutter-row" span={6}>
                 <div className="gutter-box">
-                  <Input placeholder="weight" name="weight" value={weight} onChange={ (e) => this.handleChange(e) } />
+                  <Input placeholder="weight" name="weight" defaultValue={weight} onChange={ (e) => this.handleChange(e) } />
                 </div>
               </Col>
               <Col className="gutter-row" span={1}>

@@ -8,7 +8,12 @@ import {
 } from 'antd';
 import AddGenerator from './Add/AddGenerator';
 import EditGenerator from './Edit/EditGenerator';
-import { generators, toogleDrwer, getOneGenerator } from '../generatorAction';
+import {
+  generators,
+  toogleDrwer,
+  getOneGenerator,
+  deleteGenerator,
+} from '../generatorAction';
 
 const { Column } = Table;
 
@@ -23,6 +28,11 @@ class Generator extends React.Component {
     const { dispatch } = this.props;
     dispatch(toogleDrwer(true));
     dispatch(getOneGenerator(id));
+  };
+
+  deleteGenerator = (e, id) => {
+    const { dispatch } = this.props;
+    dispatch(deleteGenerator(id));
   };
 
   render() {
@@ -55,7 +65,7 @@ class Generator extends React.Component {
                 <span>
                   <a href="javascript:;" onClick={ (e) => this.showDrawer(e, record.id) }>Edit</a>
                   <Divider type="vertical" />
-                  <a href="javascript:;">Delete</a>
+                  <a href="javascript:;" onClick={ (e) => this.deleteGenerator(e, record.id) }>Delete</a>
                 </span>
               )}
             />

@@ -23,18 +23,23 @@ class BasicInfoTab extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const { basicinfo } = this.props;
+  componentWillReceiveProps(newProps) {
+    const { basicinfo } = newProps;
     this.setState({
       productName: basicinfo.productName,
+      announceNumber: basicinfo.announceNumber,
+      presentValue: basicinfo.presentValue,
+      dateValue: basicinfo.dateValue,
     });
   }
 
   onChangeHandler = (event) => {
+    console.log('123---------', { [event.target.name]: event.target.value });
     this.setState({
       [event.target.name]: event.target.value,
     }, () => {
       const { productName, announceNumber, presentValue, dateValue } = this.state;
+      console.log('announceNumber', announceNumber);
       const { dispatch } = this.props;
       dispatch(basicInfo(productName, announceNumber, presentValue, dateValue));
     });

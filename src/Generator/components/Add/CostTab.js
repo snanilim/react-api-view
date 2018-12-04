@@ -5,7 +5,7 @@ import {
   Table,
   Column,
 } from 'antd';
-import AddCost from '../AddCost';
+import AddCost from '../Common/AddCost';
 import CostcalCulator from '../Common/CostCalculator';
 import { costs } from '../../generatorAction';
 

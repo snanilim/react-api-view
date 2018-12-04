@@ -11,7 +11,8 @@ router
 router
   .route('/:generatorID')
   .get(generatorController.getOneGenerator)
-  .put(generatorController.updateGenerator);
+  .put(generatorController.updateGenerator)
+  .delete(generatorController.deleteGenerator);
 
 
 module.exports = router;

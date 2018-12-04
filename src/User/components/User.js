@@ -10,7 +10,12 @@ import {
 } from 'antd';
 import AddUser from './AddUser';
 import EditUser from './EditUser';
-import { users, toogleDrwer, getOneUser, deleteUser } from '../userAction';
+import {
+  users,
+  toogleDrwer,
+  getOneUser,
+  deleteUser,
+} from '../userAction';
 
 class User extends React.Component {
   static propTypes = {
