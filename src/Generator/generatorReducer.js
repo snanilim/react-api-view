@@ -68,7 +68,30 @@ const mngMaterial = () => {
     return newMaterial;
 };
 
-export default function auth(state = initialState, action) {
+const calculateAllData = () => {
+    const { materials, allData } = initialState;
+    const newAllData = allData
+    .map((item) => {
+        item.view = false;
+        return item;
+    });
+
+    return Object.assign(newAllData, materials);
+};
+
+const calculateAllCostData = () => {
+    const { costs, allCostData } = initialState;
+    console.log('allCostData', costs);
+    const newAllCostData = allCostData
+    .map((item) => {
+        item.view = false;
+        return item;
+    });
+
+    return Object.assign(newAllCostData, costs);
+};
+
+export default function generator(state = initialState, action) {
     if (!state.hydrated) {
         state = Object.assign({}, initialState, state, { hydrated: true });
     }
@@ -105,6 +128,12 @@ export default function auth(state = initialState, action) {
             initialState.values = action.data.values;
             const OneCostValue = mngCost();
 
+            initialState.allData = action.getMaterials;
+            const returnNewAllData = calculateAllData();
+            console.log('returnNewAllData', returnNewAllData);
+            initialState.allCostData = action.getCosts;
+            const returnNewAllCostData = calculateAllCostData();
+
             console.log('action.data.weight', action.data.weight);
 
             return Object.assign({}, state, {
@@ -117,6 +146,8 @@ export default function auth(state = initialState, action) {
                 kg: initialState.kg,
                 weight: initialState.weight,
                 pisces: +(initialState.kg / initialState.weight).toFixed(2),
+                allData: returnNewAllData,
+                allCostData: returnNewAllCostData,
             });
 
         case 'GENERATOR_MATERIAL_SUCCESS':
@@ -129,6 +160,11 @@ export default function auth(state = initialState, action) {
                 kg: initialState.kg,
                 weight: initialState.weight,
                 pisces: +(initialState.kg / initialState.weight).toFixed(2),
+            });
+
+        case 'GET_ALL_MATERIAL_SUCCESS':
+            return Object.assign({}, state, {
+                allData: action.data,
             });
 
         case 'CHANGE_PISCES':

@@ -18,6 +18,13 @@ class AddCost extends React.Component {
     };
   }
 
+  componentDidMount() {
+    console.log('newPropscost----', this.props.costs);
+    this.setState({
+      costs: this.props.costs,
+    });
+  }
+
   componentWillReceiveProps(newProps) {
     console.log('newProps', newProps);
     this.setState({

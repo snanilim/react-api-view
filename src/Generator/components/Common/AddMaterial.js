@@ -18,8 +18,15 @@ class AddMaterial extends React.Component {
     };
   }
 
+  componentDidMount() {
+    console.log('newPropsaaaaa----', this.props.materials);
+    this.setState({
+      materials: this.props.materials,
+    });
+  }
+
   componentWillReceiveProps(newProps) {
-    console.log('newProps', newProps);
+    console.log('newPropsaaaaa', newProps);
     this.setState({
       materials: newProps.materials,
     });

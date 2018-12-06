@@ -99,6 +99,38 @@ export const materials = () => {
   };
 };
 
+const getAllMaterials = async () => {
+  try {
+    const response = await axios({
+      method: 'get',
+      url: '/v1/material',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${cookieValue}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getAllCosts = async () => {
+  try {
+    const response = await axios({
+      method: 'get',
+      url: '/v1/cost',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${cookieValue}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const generators = () => {
   return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
@@ -161,9 +193,14 @@ export const getOneGenerator = (Id) => {
           Authorization: `Bearer ${cookieValue}`,
         },
       });
+      const getMaterials = await getAllMaterials();
+      const getCosts = await getAllCosts();
+      console.log('getMaterials', getMaterials);
       return dispatch({
         type: 'ONE_GENERATOR_SUCCESS',
         data: response.data,
+        getMaterials,
+        getCosts,
       });
     } catch (error) {
       return dispatch({

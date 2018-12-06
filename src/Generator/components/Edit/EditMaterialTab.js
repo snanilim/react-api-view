@@ -59,6 +59,7 @@ const mapStateToProps = (state) => {
     materials: state.generator.data,
     kg: state.generator.kg,
     weight: state.generator.weight,
+    allData: state.generator.allData,
   };
 };
 
