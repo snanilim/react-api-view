@@ -25,20 +25,21 @@ export const login = (email, password, props) => {
         headers: { 'Content-Type': 'application/json' },
         data: JSON.stringify({ email, password }),
       });
-      console.log('response', response.data.token.accessToken);
+      console.log('response', response);
       await cookieSet(response.data);
       await setAuthTokenToHeader(response.data);
       dispatch({
         type: 'LOGIN_SUCCESS',
         token: response.token,
         user: response.user,
-        messages: Array.isArray(response.msg) ? response.msg : [response.msg],
       });
       return props.history.push('/dashboard');
     } catch (error) {
+      console.log('error', error);
+      const { data } = error.response;
       return dispatch({
         type: 'LOGIN_FAILURE',
-        messages: error,
+        messages: Array.isArray(data.message) ? data.message : [data.message],
       });
     }
   };

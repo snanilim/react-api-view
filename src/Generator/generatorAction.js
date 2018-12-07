@@ -195,7 +195,7 @@ export const getOneGenerator = (Id) => {
       });
       const getMaterials = await getAllMaterials();
       const getCosts = await getAllCosts();
-      console.log('getMaterials', getMaterials);
+      console.log('getCosts', getCosts);
       return dispatch({
         type: 'ONE_GENERATOR_SUCCESS',
         data: response.data,

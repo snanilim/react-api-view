@@ -11,8 +11,8 @@ const AuthLayout = ({ children = null }) => {
     <div>
       <Layout className="ctm-100-vh">
         <Row>
-          <Col lg={18} className="ctm-100-vh ctm-overflow-hide">
-            <img src="/img/fire.jpg" className="img-fluid" alt="Responsive bg-19" /> 
+          <Col lg={18} className="ctm-100-vh ctm-overflow-hide bg-white">
+            <img src="/img/bg-11.jpg" style={{ bottom: 0 }} className="img-fluid position-absolute" alt="Responsive" /> 
           </Col>
           <Col lg={6}>
             {children}

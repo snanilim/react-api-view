@@ -11,12 +11,6 @@
 .ctm-h-50{
     height: 50px;
 }
-.ant-menu-item > a {
-    display: inline-block;
-    color: rgba(0, 0, 0, 0.65);
-    position: relative;
-    top: 3px;
-}
 table ul {
     list-style-type: none;
     padding: 0 !important;

@@ -42,6 +42,7 @@ const mngCost = () => {
 
       const profit = {};
       profit.name = 'profit';
+      profit.id = 'profitid';
       profit.newValue = +((costSum / 100) * parseInt(profitPercentage, 10)).toFixed(2);
       const sumWithProfit = costSum + profit.newValue;
       const roundSumWithProfit = Math.round(sumWithProfit);
@@ -81,6 +82,7 @@ const calculateAllData = () => {
 
 const calculateAllCostData = () => {
     const { costs, allCostData } = initialState;
+    costs.pop();
     console.log('allCostData', costs);
     const newAllCostData = allCostData
     .map((item) => {
@@ -132,6 +134,7 @@ export default function generator(state = initialState, action) {
             const returnNewAllData = calculateAllData();
             console.log('returnNewAllData', returnNewAllData);
             initialState.allCostData = action.getCosts;
+
             const returnNewAllCostData = calculateAllCostData();
 
             console.log('action.data.weight', action.data.weight);
