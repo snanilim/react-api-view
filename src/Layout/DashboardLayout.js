@@ -23,10 +23,11 @@ class DashboardLayout extends React.Component {
         <Layout className="minvh-100">
           <Sidebar />
           <Layout className="minvh-100">
-            <Header {...users} />
-            <div className="container-fluid">
-              <div className="row">
-                <div className="col-12 minvh-100">
+            
+            <div className="">
+              <div className="row ml-1">
+                <div className="col-12 minvh-100 pl-0">
+                  <Header {...users} />
                     {children}
                 </div>
               </div>

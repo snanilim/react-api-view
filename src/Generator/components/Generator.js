@@ -8,9 +8,11 @@ import {
 } from 'antd';
 import AddGenerator from './Add/AddGenerator';
 import EditGenerator from './Edit/EditGenerator';
+import ModalView from './Common/ModalView';
 import {
   generators,
   toogleDrwer,
+  toogleModal,
   getOneGenerator,
   deleteGenerator,
 } from '../generatorAction';
@@ -30,6 +32,13 @@ class Generator extends React.Component {
     dispatch(getOneGenerator(id));
   };
 
+  showModal = (e, id) => {
+    e.preventDefault();
+    const { dispatch } = this.props;
+    dispatch(toogleModal(true));
+    dispatch(getOneGenerator(id));
+  };
+
   deleteGenerator = (e, id) => {
     const { dispatch } = this.props;
     dispatch(deleteGenerator(id));
@@ -41,11 +50,12 @@ class Generator extends React.Component {
       <Card className="ctm-100-vh">
         <AddGenerator />
         <EditGenerator />
+        <ModalView />
         <div>
           <Table dataSource={generators}>
             <Column
               title="Product Name"
-              dataIndex="name"
+              dataIndex="basicinfo.productName"
               key="name"
             />
 
@@ -54,7 +64,7 @@ class Generator extends React.Component {
               key="view"
               render={record => (
                 <span>
-                  <a href="javascript:;">View</a>
+                  <a href="javascript:;" onClick={ (e) => this.showModal(e, record.id) }>View</a>
                 </span>
               )}
             />

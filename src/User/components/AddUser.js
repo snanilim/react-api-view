@@ -33,6 +33,7 @@ class DrawerForm extends React.Component {
           values.password,
           values.role,
           values.status,
+          this.props,
         ));
       }
     });

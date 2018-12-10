@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 const cookieValue = cookies.get('token');
 
-export const createUser = (name, email, address, password, role, status) => {
+export const createUser = (name, email, address, password, role, status, props) => {
   return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
     try {
@@ -24,10 +24,11 @@ export const createUser = (name, email, address, password, role, status) => {
         }),
       });
       // console.log('response', response.data.token.accessToken);
-      return dispatch({
+      dispatch({
         type: 'CREATE_USER_SUCCESS',
         messages: Array.isArray(response.msg) ? response.msg : [response.msg],
       });
+      return props.history.push('/material');
     } catch (error) {
       return dispatch({
         type: 'CREATE_USER_FAILURE',

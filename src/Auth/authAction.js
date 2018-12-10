@@ -25,13 +25,13 @@ export const login = (email, password, props) => {
         headers: { 'Content-Type': 'application/json' },
         data: JSON.stringify({ email, password }),
       });
-      console.log('response', response);
+      console.log('response', response.user);
       await cookieSet(response.data);
       await setAuthTokenToHeader(response.data);
       dispatch({
         type: 'LOGIN_SUCCESS',
-        token: response.token,
-        user: response.user,
+        token: response.data.token,
+        user: response.data.user,
       });
       return props.history.push('/dashboard');
     } catch (error) {
@@ -77,9 +77,9 @@ export function signup(name, email, password, props) {
   };
 }
 
-export function logout() {
+export function logout(props) {
   cookies.remove('token');
-    <Redirect to="/"/>
+  props.history.push('/login');
     return {
       type: 'LOGOUT_SUCCESS',
     };

@@ -9,7 +9,13 @@ import {
   Card,
 } from 'antd';
 import AddCost from './AddCost';
-import { costs } from '../costAction';
+import EditCost from './EditCost';
+import {
+  costs,
+  toogleDrwer,
+  getOneCost,
+  deleteCost,
+} from '../costAction';
 
 class Cost extends React.Component {
   static propTypes = {
@@ -27,11 +33,23 @@ class Cost extends React.Component {
     dispatch(costs());
   }
 
+  showDrawer = (e, id) => {
+    const { dispatch } = this.props;
+    dispatch(toogleDrwer(true));
+    dispatch(getOneCost(id));
+  };
+
+  deleteCost = (e, id) => {
+    const { dispatch } = this.props;
+    dispatch(deleteCost(id));
+  };
+
   render() {
     const { costs } = this.props;
     return (
       <Card className="ctm-100-vh">
         <AddCost />
+        <EditCost />
         <div>
           <Table dataSource={costs}>
             <Column
@@ -51,7 +69,7 @@ class Cost extends React.Component {
                 <span>
                   <a href="javascript:;" onClick={ (e) => this.showDrawer(e, record.id) }>Edit</a>
                   <Divider type="vertical" />
-                  <a href="javascript:;">Delete</a>
+                  <a href="javascript:;" onClick={ (e) => this.deleteCost(e, record.id) }>Delete</a>
                 </span>
               )}
             />

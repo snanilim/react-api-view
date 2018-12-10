@@ -10,7 +10,9 @@ router
 
 router
   .route('/:materialID')
-  .get(materialController.getOneMaterial);
+  .get(materialController.getOneMaterial)
+  .put(materialController.updateMaterial)
+  .delete(materialController.deleteMaterial);
 
 
 module.exports = router;

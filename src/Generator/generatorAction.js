@@ -293,3 +293,12 @@ export const toogleDrwer = (value) => {
     });
   };
 };
+
+export const toogleModal = (value) => {
+  return async (dispatch) => {
+    return dispatch({
+      type: 'TOOGLE_GENERATOR_MODAL',
+      visible: value,
+    });
+  };
+};

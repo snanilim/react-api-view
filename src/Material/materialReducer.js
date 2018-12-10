@@ -1,6 +1,6 @@
 const initialState = {
   material: {},
-  oneUser: {},
+  oneMaterial: {},
 };
 
 export default function auth(state = initialState, action) {
@@ -12,7 +12,7 @@ export default function auth(state = initialState, action) {
       return Object.assign({}, state, {
         data: action.data,
       });
-    case 'TOOGLE_DRAWER':
+    case 'TOOGLE_MATERIAL_DRAWER':
       return Object.assign({}, state, {
         visible: action.visible,
       });

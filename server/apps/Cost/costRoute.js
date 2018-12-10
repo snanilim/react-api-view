@@ -10,7 +10,9 @@ router
 
 router
   .route('/:costID')
-  .get(costController.getOneCost);
+  .get(costController.getOneCost)
+  .put(costController.updateCost)
+  .delete(costController.deleteCost);
 
 
 module.exports = router;

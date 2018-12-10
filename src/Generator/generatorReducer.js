@@ -229,6 +229,11 @@ export default function generator(state = initialState, action) {
               visible: action.visible,
             });
 
+        case 'TOOGLE_GENERATOR_MODAL':
+            return Object.assign({}, state, {
+              modalVisible: action.visible,
+            });
+
         default:
         return state;
     }

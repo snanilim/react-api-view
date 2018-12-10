@@ -1,6 +1,6 @@
 const initialState = {
   cost: {},
-  oneUser: {},
+  oneCost: {},
 };
 
 export default function auth(state = initialState, action) {
@@ -12,13 +12,13 @@ export default function auth(state = initialState, action) {
       return Object.assign({}, state, {
         data: action.data,
       });
-    case 'TOOGLE_DRAWER':
+    case 'TOOGLE_COST_DRAWER':
       return Object.assign({}, state, {
         visible: action.visible,
       });
     case 'ONE_COST_SUCCESS':
       return Object.assign({}, state, {
-        oneMaterial: action.data,
+        oneCost: action.data,
       });
     default:
       return state;

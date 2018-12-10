@@ -35,6 +35,36 @@ export const createMaterial = (name, weight, value) => {
   };
 };
 
+export const updateMaterial = (materialId, name, weight, value) => {
+  return async (dispatch) => {
+    dispatch({ type: 'CLEAR_MESSAGES' });
+    try {
+      const response = await axios({
+        method: 'put',
+        url: `/v1/material/${materialId}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: JSON.stringify({
+          name,
+          weight,
+          value,
+        }),
+      });
+      // console.log('response', response.data.token.accessToken);
+      return dispatch({
+        type: 'UPDATE_MATERIAL_SUCCESS',
+        messages: Array.isArray(response.msg) ? response.msg : [response.msg],
+      });
+    } catch (error) {
+      return dispatch({
+        type: 'UPDATE_MATERIAL_FAILURE',
+        messages: error,
+      });
+    }
+  };
+};
+
 export const materials = () => {
   return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
@@ -85,10 +115,34 @@ export const getOneMaterial = (materialId) => {
   };
 };
 
+export const deleteMaterial = (materialId) => {
+  return async (dispatch) => {
+    dispatch({ type: 'CLEAR_MESSAGES' });
+    try {
+      const response = await axios({
+        method: 'delete',
+        url: `/v1/material/${materialId}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      return dispatch({
+        type: 'DELETE_MATERIAL_SUCCESS',
+        data: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: 'DELETE_MATERIAL_FAILURE',
+        messages: error,
+      });
+    }
+  };
+};
+
 export const toogleDrwer = (value) => {
   return async (dispatch) => {
     return dispatch({
-      type: 'TOOGLE_DRAWER',
+      type: 'TOOGLE_MATERIAL_DRAWER',
       visible: value,
     });
   };

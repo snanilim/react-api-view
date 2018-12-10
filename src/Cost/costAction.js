@@ -34,6 +34,35 @@ export const createCost = (name, value) => {
   };
 };
 
+export const updateCost = (costId, name, value) => {
+  return async (dispatch) => {
+    dispatch({ type: 'CLEAR_MESSAGES' });
+    try {
+      const response = await axios({
+        method: 'put',
+        url: `/v1/cost/${costId}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: JSON.stringify({
+          name,
+          value,
+        }),
+      });
+      // console.log('response', response.data.token.accessToken);
+      return dispatch({
+        type: 'UPDATE_COST_SUCCESS',
+        messages: Array.isArray(response.msg) ? response.msg : [response.msg],
+      });
+    } catch (error) {
+      return dispatch({
+        type: 'UPDATE_COST_FAILURE',
+        messages: error,
+      });
+    }
+  };
+};
+
 export const costs = () => {
   return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
@@ -87,8 +116,32 @@ export const getOneCost = (costId) => {
 export const toogleDrwer = (value) => {
   return async (dispatch) => {
     return dispatch({
-      type: 'TOOGLE_DRAWER',
+      type: 'TOOGLE_COST_DRAWER',
       visible: value,
     });
+  };
+};
+
+export const deleteCost = (costId) => {
+  return async (dispatch) => {
+    dispatch({ type: 'CLEAR_MESSAGES' });
+    try {
+      const response = await axios({
+        method: 'delete',
+        url: `/v1/cost/${costId}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      return dispatch({
+        type: 'DELETE_COST_SUCCESS',
+        data: response.data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: 'DELETE_COST_FAILURE',
+        messages: error,
+      });
+    }
   };
 };

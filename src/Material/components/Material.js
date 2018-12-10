@@ -9,7 +9,13 @@ import {
   Card,
 } from 'antd';
 import AddMaterial from './AddMaterial';
-import { materials } from '../materialAction';
+import EditMaterial from './EditMaterial';
+import {
+  materials,
+  toogleDrwer,
+  getOneMaterial,
+  deleteMaterial,
+} from '../materialAction';
 
 class Material extends React.Component {
   static propTypes = {
@@ -27,11 +33,23 @@ class Material extends React.Component {
     dispatch(materials());
   }
 
+  showDrawer = (e, id) => {
+    const { dispatch } = this.props;
+    dispatch(toogleDrwer(true));
+    dispatch(getOneMaterial(id));
+  };
+
+  deleteMaterial = (e, id) => {
+    const { dispatch } = this.props;
+    dispatch(deleteMaterial(id));
+  };
+
   render() {
     const { materials } = this.props;
     return (
       <Card className="ctm-100-vh">
         <AddMaterial />
+        <EditMaterial />
         <div>
           <Table dataSource={materials}>
             <Column
@@ -56,7 +74,7 @@ class Material extends React.Component {
                 <span>
                   <a href="javascript:;" onClick={ (e) => this.showDrawer(e, record.id) }>Edit</a>
                   <Divider type="vertical" />
-                  <a href="javascript:;">Delete</a>
+                  <a href="javascript:;" onClick={ (e) => this.deleteMaterial(e, record.id) }>Delete</a>
                 </span>
               )}
             />
