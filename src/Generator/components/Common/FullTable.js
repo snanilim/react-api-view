@@ -49,9 +49,9 @@ class FullTable extends React.Component {
 
     // eslint-disable-next-line no-restricted-syntax
     for (const item of materials) {
-      materialWeightSum += parseFloat(item.newWeight, 10);
-      materialWastageSum += parseFloat(item.wastage, 10);
-      materialValueSum += parseFloat(item.newValue, 10);
+      materialWeightSum += parseFloat(item.newWeight);
+      materialWastageSum += parseFloat(item.wastage);
+      materialValueSum += parseFloat(item.newValue);
 
       materialName.push(
         <ul className="form-check">
@@ -78,7 +78,7 @@ class FullTable extends React.Component {
 
     // eslint-disable-next-line no-restricted-syntax
     for (const item of costs) {
-      costValueSum += parseFloat(item.newValue, 10);
+      costValueSum += parseFloat(item.newValue);
 
       costName.push(
         <ul className="form-check">
@@ -96,7 +96,7 @@ class FullTable extends React.Component {
     const wholesaleValueSum = raisedValueSum + ((raisedValueSum / 100) * 15);
 
     return (
-      <div>
+      <div className="table-view">
         <div className="row">
           <div className="col-4 col-sm-4">
             <p>১। নিবন্ধিত ব্যক্তির নাম:  ঢাকা সিরামিকস্ এন্ড স্যানিটারী ওয়্যারস্ লি:</p>
@@ -125,7 +125,7 @@ class FullTable extends React.Component {
         <table className="table table-bordered">
           <thead>
             <tr>
-              <td>ক্রমিক সংখ্যা</td>
+              <td style={{'width': '2px'}}>ক্রমিক সংখ্যা</td>
               <td>পণ্যের  সামজ্ঞ্যস্যপূর্ণ নামকরণ (H.S Code)</td>
               <td>Last</td>
               <td>Handle</td>
@@ -201,10 +201,10 @@ class FullTable extends React.Component {
               <td>16</td>
             </tr>
             <tr>
-              <td>1</td>
               <td></td>
+              <td>69.10</td>
               <td></td>
-              <td>@</td>
+              <td>Each Pcs</td>
               <td>{materialName}</td>
               <td>{materialWeight}</td>
               <td>{materialWastage}</td>
@@ -225,17 +225,17 @@ class FullTable extends React.Component {
               <td></td>
               <td></td>
               <td></td>
-              <td>{materialWeightSum}</td>
-              <td>{materialWastageSum}</td>
-              <td>{materialValueSum}</td>
+              <td>{materialWeightSum.toFixed(2)}</td>
+              <td>{materialWastageSum.toFixed(2)}</td>
+              <td>{materialValueSum.toFixed(2)}</td>
               <td></td>
-              <td>{costValueSum}</td>
+              <td>{costValueSum.toFixed(2)}</td>
               <td>{basicinfo.presentValue}</td>
-              <td>{raisedValueSum}</td>
+              <td>{raisedValueSum.toFixed(2)}</td>
               <td></td>
               <td>{basicinfo.presentValue}</td>
-              <td>{raisedValueSum}</td>
-              <td>{wholesaleValueSum}</td>
+              <td>{raisedValueSum.toFixed(2)}</td>
+              <td>{wholesaleValueSum.toFixed(2)}</td>
               <td></td>
             </tr>
           </tbody>

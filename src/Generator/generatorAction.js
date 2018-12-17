@@ -26,10 +26,11 @@ export const createGenerator = (materials, costs, profitPercentage, values, kg, 
         }),
       });
       // console.log('response', response.data.token.accessToken);
-      return dispatch({
+      dispatch({
         type: 'CREATE_GENERATOR_SUCCESS',
         messages: Array.isArray(response.msg) ? response.msg : [response.msg],
       });
+      return window.location.reload();
     } catch (error) {
       return dispatch({
         type: 'CREATE_GENERATOR_FAILURE',
@@ -61,10 +62,11 @@ export const updateGenerator = (generatorId, materials, costs, profitPercentage,
         }),
       });
       // console.log('response', response.data.token.accessToken);
-      return dispatch({
+      dispatch({
         type: 'UPDATE_GENERATOR_SUCCESS',
         messages: Array.isArray(response.msg) ? response.msg : [response.msg],
       });
+      return window.location.reload();
     } catch (error) {
       return dispatch({
         type: 'UPDATE_GENERATOR_FAILURE',
@@ -272,10 +274,11 @@ export const deleteGenerator = (Id) => {
           'Content-Type': 'application/json',
         },
       });
-      return dispatch({
+      dispatch({
         type: 'DELETE_GENERATOR_SUCCESS',
         data: response.data,
       });
+      return window.location.reload();
     } catch (error) {
       return dispatch({
         type: 'DELETE_GENERATOR_FAILURE',

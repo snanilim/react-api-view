@@ -21,10 +21,11 @@ export const createCost = (name, value) => {
         }),
       });
       // console.log('response', response.data.token.accessToken);
-      return dispatch({
+      dispatch({
         type: 'CREATE_COST_SUCCESS',
         messages: Array.isArray(response.msg) ? response.msg : [response.msg],
       });
+      return window.location.reload();
     } catch (error) {
       return dispatch({
         type: 'CREATE_COST_FAILURE',
@@ -50,10 +51,11 @@ export const updateCost = (costId, name, value) => {
         }),
       });
       // console.log('response', response.data.token.accessToken);
-      return dispatch({
+      dispatch({
         type: 'UPDATE_COST_SUCCESS',
         messages: Array.isArray(response.msg) ? response.msg : [response.msg],
       });
+      return window.location.reload();
     } catch (error) {
       return dispatch({
         type: 'UPDATE_COST_FAILURE',
@@ -133,10 +135,11 @@ export const deleteCost = (costId) => {
           'Content-Type': 'application/json',
         },
       });
-      return dispatch({
+      dispatch({
         type: 'DELETE_COST_SUCCESS',
         data: response.data,
       });
+      return window.location.reload();
     } catch (error) {
       return dispatch({
         type: 'DELETE_COST_FAILURE',

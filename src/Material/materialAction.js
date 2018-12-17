@@ -22,10 +22,11 @@ export const createMaterial = (name, weight, value) => {
         }),
       });
       // console.log('response', response.data.token.accessToken);
-      return dispatch({
+      dispatch({
         type: 'CREATE_MATERIAL_SUCCESS',
         messages: Array.isArray(response.msg) ? response.msg : [response.msg],
       });
+      return window.location.reload();
     } catch (error) {
       return dispatch({
         type: 'CREATE_MATERIAL_FAILURE',
@@ -52,10 +53,11 @@ export const updateMaterial = (materialId, name, weight, value) => {
         }),
       });
       // console.log('response', response.data.token.accessToken);
-      return dispatch({
+      dispatch({
         type: 'UPDATE_MATERIAL_SUCCESS',
         messages: Array.isArray(response.msg) ? response.msg : [response.msg],
       });
+      return window.location.reload();
     } catch (error) {
       return dispatch({
         type: 'UPDATE_MATERIAL_FAILURE',
@@ -126,10 +128,11 @@ export const deleteMaterial = (materialId) => {
           'Content-Type': 'application/json',
         },
       });
-      return dispatch({
+      dispatch({
         type: 'DELETE_MATERIAL_SUCCESS',
         data: response.data,
       });
+      return window.location.reload();
     } catch (error) {
       return dispatch({
         type: 'DELETE_MATERIAL_FAILURE',

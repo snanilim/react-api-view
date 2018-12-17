@@ -1,5 +1,7 @@
 import axios from 'axios';
+import React from 'react';
 import Cookies from 'universal-cookie';
+import { Redirect } from 'react-router-dom';
 
 const cookies = new Cookies();
 const cookieValue = cookies.get('token');
@@ -28,7 +30,7 @@ export const createUser = (name, email, address, password, role, status, props) 
         type: 'CREATE_USER_SUCCESS',
         messages: Array.isArray(response.msg) ? response.msg : [response.msg],
       });
-      return props.history.push('/material');
+      return window.location.reload();
     } catch (error) {
       return dispatch({
         type: 'CREATE_USER_FAILURE',
@@ -58,10 +60,11 @@ export const updateUser = (userId, name, email, address, role, status) => {
         }),
       });
       // console.log('response', response.data.token.accessToken);
-      return dispatch({
+      dispatch({
         type: 'UPDATE_USER_SUCCESS',
         messages: Array.isArray(response.msg) ? response.msg : [response.msg],
       });
+      return window.location.reload();
     } catch (error) {
       return dispatch({
         type: 'UPDATE_USER_FAILURE',
@@ -130,10 +133,11 @@ export const deleteUser = (userId) => {
           'Content-Type': 'application/json',
         },
       });
-      return dispatch({
+      dispatch({
         type: 'DELETE_USER_SUCCESS',
         data: response.data,
       });
+      return window.location.reload();
     } catch (error) {
       return dispatch({
         type: 'DELETE_USER_FAILURE',
