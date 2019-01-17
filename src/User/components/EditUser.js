@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
   Drawer,
   Form,
@@ -9,45 +11,42 @@ import {
   Input,
   Select,
 } from 'antd';
+import { toogleDrwer, updateUser } from '../userAction';
 
 const { Option } = Select;
 
 class DrawerForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { visible: false };
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { form, dispatch, user} = this.props;
+    form.validateFields((err, values) => {
+      console.log('values', values);
+      if (!err) {
+        dispatch(updateUser(
+          user.id,
+          values.name,
+          values.email,
+          values.address,
+          values.role,
+          values.status,
+        ));
+      }
+    });
   }
 
-  showDrawer = () => {
-    this.setState({
-      visible: true,
-    });
-  };
-
   onClose = () => {
-    this.setState({
-      visible: false,
-    });
+    const { dispatch } = this.props;
+    dispatch(toogleDrwer(false));
   };
 
   render() {
-    const { form } = this.props;
-    const { visible } = this.state;
+    const { form, user } = this.props;
+    const { visible } = this.props;
     return (
       <div>
-        <Row>
-          <Col span={8}>
-            <h4 className="float-left">Generator List</h4>
-          </Col>
-          <Col span={8} offset={8}>
-            <Button className="float-right" type="primary" onClick={this.showDrawer}>
-              + Add New Generator
-            </Button>
-          </Col>
-        </Row>
-
         <Drawer
-          title="Create"
+          title="Edit"
           width={720}
           placement="right"
           onClose={this.onClose}
@@ -65,16 +64,24 @@ class DrawerForm extends React.Component {
               <Col span={12}>
                 <Form.Item label="Name">
                   {form.getFieldDecorator('name', {
+                    initialValue: user.name,
                     rules: [{ required: true, message: 'please enter user name' }],
-                  })(<Input placeholder="please enter user name" />)}
+                  })(<Input value="asd" placeholder="please enter user name" />)}
                 </Form.Item>
               </Col>
 
               <Col span={12}>
                 <Form.Item label="Email">
                   {form.getFieldDecorator('email', {
-                    rules: [{ required: true, message: 'please enter user email' }],
-                  })(<Input type="mail" placeholder="please enter user email" />)}
+                      initialValue: user.email,
+                      rules: [{
+                        type: 'email', message: 'The input is not valid E-mail!',
+                      }, {
+                        required: true, message: 'Please input user E-mail!',
+                      }],
+                    })(
+                      <Input placeholder="please enter user email" />,
+                  )}
                 </Form.Item>
               </Col>
             </Row>
@@ -83,12 +90,14 @@ class DrawerForm extends React.Component {
               <Col span={12}>
                 <Form.Item label="Address">
                   {form.getFieldDecorator('address', {
+                    initialValue: user.address,
                   })(<Input placeholder="please enter user name" />)}
                 </Form.Item>
               </Col>
               <Col span={12}>
                 <Form.Item label="Role">
-                  {form.getFieldDecorator('owner', {
+                  {form.getFieldDecorator('role', {
+                    initialValue: user.role,
                     rules: [{ required: true, message: 'Please select an role' }],
                   })(
                     <Select placeholder="Please select an role">
@@ -102,20 +111,14 @@ class DrawerForm extends React.Component {
 
             <Row gutter={16}>
               <Col span={12}>
-                <Form.Item label="Password">
-                  {form.getFieldDecorator('password', {
-                    rules: [{ required: true, message: 'Please select an password' }],
-                  })(<Input type="password" placeholder="please enter user password" />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
                 <Form.Item label="Status">
                   {form.getFieldDecorator('status', {
+                    initialValue: user.status,
                     rules: [{ required: true, message: 'Please choose the status' }],
                   })(
                     <Select placeholder="Please choose the status">
-                      <Option value="active">Active</Option>
-                      <Option value="disable">Disable</Option>
+                      <Option value={1}>Active</Option>
+                      <Option value={0}>Disable</Option>
                     </Select>,
                   )}
                 </Form.Item>
@@ -143,7 +146,7 @@ class DrawerForm extends React.Component {
             >
               Cancel
             </Button>
-            <Button onClick={this.onClose} type="primary">Submit</Button>
+            <Button onClick={this.handleSubmit} type="primary">Submit</Button>
           </div>
         </Drawer>
       </div>
@@ -151,9 +154,21 @@ class DrawerForm extends React.Component {
   }
 }
 
-DrawerForm.propTypes = {
-  form: PropTypes.isRequired,
+const mapStateToProps = (state) => {
+  console.log('state', state);
+  return {
+    messages: state.messages,
+    user: state.user.oneUser,
+    visible: state.user.visible,
+  };
 };
 
-const AddGenerator = Form.create()(DrawerForm);
-export default AddGenerator;
+DrawerForm.propTypes = {
+  form: PropTypes.isRequired,
+  dispatch: PropTypes.isRequired,
+  visible: PropTypes.isRequired,
+  user: PropTypes.isRequired,
+};
+
+const EditUser = Form.create()(DrawerForm);
+export default withRouter(connect(mapStateToProps)(EditUser));

@@ -1,32 +1,37 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
+import { Alert } from 'antd';
 
 class Messages extends React.Component {
+
+  onClose = (e) => {
+    this.props.dispatch({type: "CLEAR_MESSAGES"})
+  };
 
   render() {
     return this.props.messages.success ? (
 
       <div role="alert" className="animated bounceInDown message alert alert-success">
-        <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={()=>{this.props.dispatch({type: "CLEAR_MESSAGES"})}}>
+        {/* <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={()=>{}> */}
           <span aria-hidden="true">&times;</span>
-        </button>
+        {/* </button> */}
         <ul>
           {this.props.messages.success.map((message, index) => <div key={index}>{message.msg}</div>)}
         </ul>
       </div>
 
     ) : this.props.messages.error ? (
-
-      <div role="alert" className="animated bounceInDown message alert alert-danger">
-        <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={()=>{this.props.dispatch({type: "CLEAR_MESSAGES"})}}>
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <ul>
-            {this.props.messages.error.map((message, index) => <li key={index}>{message.msg}</li>)}
-        </ul>
+      <div>
+        <Alert
+          message="Error"
+          description={this.props.messages.error.map((message, index) => <li key={index}>{message}</li>)}
+          type="error"
+          closable
+          onClose={this.onClose}
+        />
       </div>
-
+      
     ) : this.props.messages.info ? (
 
       <div role="alert" className="animated bounceInDown message alert alert-info">
@@ -44,7 +49,7 @@ class Messages extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    messages: state.messages
+    messages: state.messages,
   };
 };
 

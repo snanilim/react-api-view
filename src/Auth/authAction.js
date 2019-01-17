@@ -3,32 +3,43 @@ import moment from 'moment';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { setAuthTokenToHeader } from '../Routes/isAuthenticated';
 
 const cookies = new Cookies();
 
+const cookieSet = (response) => {
+  if (response.token.accessToken) {
+    cookies.set('token', response.token.accessToken, { expires: moment().add(1, 'hour').toDate() });
+  }
+  return true;
+};
+
 export const login = (email, password, props) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({ type: 'CLEAR_MESSAGES' });
+
     try {
-      const response = axios({
+      const response = await axios({
         method: 'post',
-        url: '/login',
+        url: '/v1/auth/login',
         headers: { 'Content-Type': 'application/json' },
         data: JSON.stringify({ email, password }),
       });
-
+      console.log('response', response.user);
+      await cookieSet(response.data);
+      await setAuthTokenToHeader(response.data);
       dispatch({
         type: 'LOGIN_SUCCESS',
-        token: response.token,
-        user: response.user,
-        messages: Array.isArray(response.msg) ? response.msg : [response.msg],
+        token: response.data.token,
+        user: response.data.user,
       });
-      cookies.set('token', response.token, { expires: moment().add(1, 'hour').toDate() });
-      props.history.push('/dashboard');
+      return props.history.push('/dashboard');
     } catch (error) {
-      dispatch({
+      console.log('error', error);
+      const { data } = error.response;
+      return dispatch({
         type: 'LOGIN_FAILURE',
-        messages: error,
+        messages: Array.isArray(data.message) ? data.message : [data.message],
       });
     }
   };
@@ -66,9 +77,9 @@ export function signup(name, email, password, props) {
   };
 }
 
-export function logout() {
+export function logout(props) {
   cookies.remove('token');
-    <Redirect to="/"/>
+  props.history.push('/login');
     return {
       type: 'LOGOUT_SUCCESS',
     };

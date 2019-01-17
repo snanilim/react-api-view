@@ -1,86 +1,95 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
   Table,
   Divider,
-  Tag,
   Card,
 } from 'antd';
-import AddGenerator from './AddGenerator';
+import AddGenerator from './Add/AddGenerator';
+import EditGenerator from './Edit/EditGenerator';
+import ModalView from './Common/ModalView';
+import {
+  generators,
+  toogleDrwer,
+  toogleModal,
+  getOneGenerator,
+  deleteGenerator,
+} from '../generatorAction';
 
-const columns = [{
-  title: 'Name',
-  dataIndex: 'name',
-  key: 'name',
-  render: text => <a href="javascript:;">{text}</a>,
-}, {
-  title: 'Role',
-  dataIndex: 'role',
-  key: 'role',
-}, {
-  title: 'Address',
-  dataIndex: 'address',
-  key: 'address',
-}, {
-  title: 'Status',
-  key: 'status',
-  dataIndex: 'status',
-}, {
-  title: 'Action',
-  key: 'action',
-  render: (text, record) => (
-    <span>
-      <a href="javascript:;">Edit</a>
-      <Divider type="vertical" />
-      <a href="javascript:;">Delete</a>
-    </span>
-  ),
-}];
-
-const data = [{
-  key: '1',
-  name: 'John Brown',
-  role: 'Admin',
-  address: 'New York No. 1 Lake Park',
-  status: 'Active',
-}, {
-  key: '2',
-  name: 'MR Brown',
-  role: 'User',
-  address: 'New York No. 1 Lake Park',
-  status: 'Active',
-}, {
-  key: '3',
-  name: 'HR Hasan',
-  role: 'Admin',
-  address: 'New York No. 1 Lake Park',
-  status: 'Active',
-}, {
-  key: '4',
-  name: 'MD Rana',
-  role: 'Admin',
-  address: 'New York No. 1 Lake Park',
-  status: 'Active',
-}, {
-  key: '5',
-  name: 'MR Brown',
-  role: 'User',
-  address: 'New York No. 1 Lake Park',
-  status: 'Disable',
-}];
+const { Column } = Table;
 
 class Generator extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { visible: false };
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(generators());
   }
 
+  showDrawer = (e, id) => {
+    e.preventDefault();
+    const { dispatch } = this.props;
+    dispatch(toogleDrwer(true));
+    dispatch(getOneGenerator(id));
+  };
+
+  showModal = (e, id) => {
+    e.preventDefault();
+    const { dispatch } = this.props;
+    dispatch(toogleModal(true));
+    dispatch(getOneGenerator(id));
+  };
+
+  deleteGenerator = (e, id) => {
+    const { dispatch } = this.props;
+    dispatch(deleteGenerator(id));
+  };
+
   render() {
+    const { generators } = this.props;
     return (
       <Card className="ctm-100-vh">
         <AddGenerator />
-        <Table columns={columns} dataSource={data} />
+        <EditGenerator />
+        <ModalView />
+        <div>
+          <Table dataSource={generators}>
+            <Column
+              title="Product Name"
+              dataIndex="basicinfo.productName"
+              key="name"
+            />
+
+            <Column
+              title="View"
+              key="view"
+              render={record => (
+                <span>
+                  <a href="javascript:;" onClick={ (e) => this.showModal(e, record.id) }>View</a>
+                </span>
+              )}
+            />
+            <Column
+              title="Action"
+              key="action"
+              render={record => (
+                <span>
+                  <a href="javascript:;" onClick={ (e) => this.showDrawer(e, record.id) }>Edit</a>
+                  <Divider type="vertical" />
+                  <a href="javascript:;" onClick={ (e) => this.deleteGenerator(e, record.id) }>Delete</a>
+                </span>
+              )}
+            />
+          </Table>
+        </div>
       </Card>
     );
   }
 }
-export default Generator;
+
+const mapStateToProps = (state) => {
+  return {
+    generators: state.generator.generators,
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(Generator));

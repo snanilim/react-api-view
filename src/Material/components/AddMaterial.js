@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
   Drawer,
   Form,
@@ -7,15 +9,29 @@ import {
   Col,
   Row,
   Input,
-  Select,
+  InputNumber,
 } from 'antd';
-
-const { Option } = Select;
+import { createMaterial } from '../materialAction';
 
 class DrawerForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = { visible: false };
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { form, dispatch } = this.props;
+    form.validateFields((err, values) => {
+      console.log(values);
+      if (!err) {
+        dispatch(createMaterial(
+          values.name,
+          values.weight,
+          values.value,
+        ));
+      }
+    });
   }
 
   showDrawer = () => {
@@ -37,11 +53,11 @@ class DrawerForm extends React.Component {
       <div>
         <Row>
           <Col span={8}>
-            <h4 className="float-left">User List</h4>
+            <h4 className="float-left">Material List</h4>
           </Col>
           <Col span={8} offset={8}>
             <Button className="float-right" type="primary" onClick={this.showDrawer}>
-              + Add New User
+              + Add New Material
             </Button>
           </Col>
         </Row>
@@ -71,53 +87,18 @@ class DrawerForm extends React.Component {
               </Col>
 
               <Col span={12}>
-                <Form.Item label="Email">
-                  {form.getFieldDecorator('email', {
-                    rules: [{ required: true, message: 'please enter user email' }],
-                  })(<Input type="mail" placeholder="please enter user email" />)}
+                <Form.Item label="Weight">
+                  {form.getFieldDecorator('weight', {
+                    rules: [{ required: true, message: 'please enter weight' }],
+                  })(<InputNumber type="number" placeholder="please enter weight" />)}
                 </Form.Item>
               </Col>
-            </Row>
 
-            <Row gutter={16}>
               <Col span={12}>
-                <Form.Item label="Address">
-                  {form.getFieldDecorator('address', {
-                  })(<Input placeholder="please enter user name" />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="Role">
-                  {form.getFieldDecorator('owner', {
-                    rules: [{ required: true, message: 'Please select an role' }],
-                  })(
-                    <Select placeholder="Please select an role">
-                      <Option value="admin">Admin</Option>
-                      <Option value="user">User</Option>
-                    </Select>,
-                  )}
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Row gutter={16}>
-              <Col span={12}>
-                <Form.Item label="Password">
-                  {form.getFieldDecorator('password', {
-                    rules: [{ required: true, message: 'Please select an password' }],
-                  })(<Input type="password" placeholder="please enter user password" />)}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="Status">
-                  {form.getFieldDecorator('status', {
-                    rules: [{ required: true, message: 'Please choose the status' }],
-                  })(
-                    <Select placeholder="Please choose the status">
-                      <Option value="active">Active</Option>
-                      <Option value="disable">Disable</Option>
-                    </Select>,
-                  )}
+                <Form.Item label="Value">
+                  {form.getFieldDecorator('value', {
+                    rules: [{ required: true, message: 'please enter value' }],
+                  })(<InputNumber type="number" placeholder="please enter value" />)}
                 </Form.Item>
               </Col>
             </Row>
@@ -143,7 +124,7 @@ class DrawerForm extends React.Component {
             >
               Cancel
             </Button>
-            <Button onClick={this.onClose} type="primary">Submit</Button>
+            <Button onClick={this.handleSubmit} type="primary">Submit</Button>
           </div>
         </Drawer>
       </div>
@@ -151,9 +132,17 @@ class DrawerForm extends React.Component {
   }
 }
 
-DrawerForm.propTypes = {
-  form: PropTypes.isRequired,
+const mapStateToProps = (state) => {
+  return {
+    messages: state.messages,
+    user: state.auth,
+  };
 };
 
-const AddUser = Form.create()(DrawerForm);
-export default AddUser;
+DrawerForm.propTypes = {
+  form: PropTypes.isRequired,
+  dispatch: PropTypes.isRequired,
+};
+
+const AddMaterial = Form.create()(DrawerForm);
+export default withRouter(connect(mapStateToProps)(AddMaterial));

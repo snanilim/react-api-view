@@ -12,6 +12,7 @@ import {
   Card,
 } from 'antd';
 import { login } from '../authAction';
+import Messages from '../../Others/Messages';
 
 const FormItem = Form.Item;
 
@@ -32,12 +33,15 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    const { form } = this.props;
+    const { form, messages } = this.props;
+    console.log('messages', messages);
     return (
       <div>
         <Card className="ctm-100-vh border-0">
           <h2 className="text-center"> Admin Panel </h2>
           <h4> Login </h4>
+          <Messages messages={messages} />
+          {/* <a href='/api/download/'> Test Download </a> */}
 
           <Form onSubmit={this.handleSubmit} className="login-form">
 
@@ -63,20 +67,6 @@ class LoginForm extends React.Component {
             <Button type="primary" htmlType="submit" className="login-form-button ant-btn-block ctm-h-50">
               Log in
             </Button>
-
-            <FormItem>
-              {form.getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true,
-              })(
-                <Checkbox>Remember me</Checkbox>,
-              )}
-              <a className="login-form-forgot float-right" href="/">Forgot password</a>
-              <Divider>
-                or
-                <Link to="/signup"> SignUp </Link>
-              </Divider>
-            </FormItem>
 
           </Form>
 

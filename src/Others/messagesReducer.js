@@ -11,7 +11,7 @@ export default function messages(state = {}, action) {
     case 'UNLINK_FAILURE':
     case 'LINK_FAILURE':
       return {
-        error: action.messages
+        error: action.messages,
       };
     case 'UPDATE_PROFILE_SUCCESS':
     case 'CHANGE_PASSWORD_SUCCESS':
@@ -20,13 +20,13 @@ export default function messages(state = {}, action) {
     case 'SIGNUP_SUCCESS':
     case 'LOGIN_SUCCESS':
       return {
-        success: action.messages
+        success: action.messages,
       };
     case 'FORGOT_PASSWORD_SUCCESS':
     case 'DELETE_ACCOUNT_SUCCESS':
     case 'UNLINK_SUCCESS':
       return {
-        info: action.messages
+        info: action.messages,
       };
     case 'CLEAR_MESSAGES':
       return {};

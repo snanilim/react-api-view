@@ -4,9 +4,11 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
+const config = require('config');
 
 const resError = require('../helper/resError');
 const winston = require('./winston');
+const route = require('../routes/routes');
 
 const app = express();
 
@@ -26,12 +28,28 @@ app.use(cors());
 // app.use('/', express.static(path.join(__dirname, '..', 'dist')));
 // app.use('/dist', express.static(path.join(__dirname, '..', 'dist')));
 
+// app.get('/api/download/', (req, res, next) => {
+//   console.log('call');
+//   return res.download('mypdf.pdf', (err) => {
+//     if (err) {
+//       console.log(err);
+//       return res.status(404).json({
+//         error: {
+//           message: "File not found"
+//         },
+//       });
+//     }
+//     console.log("File is downloaded.");
+//   });
+// });
+
+
+app.use(`/${config.get('version')}`, route);
 
 app.use((req, res) => {
-  const route = path.join(__dirname, '..', '..', 'public', 'index.html');
-  res.sendFile(route);
+  const view = path.join(__dirname, '..', '..', 'public', 'index.html');
+  res.sendFile(view);
 });
-
 
 app.use(resError.notFound);
 app.use(resError.errorHandler);
